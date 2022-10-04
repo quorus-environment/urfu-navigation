@@ -1,7 +1,3 @@
-
-
 export function Main() {
-    return(
-<></>
-    )
+  return <></>
 }
