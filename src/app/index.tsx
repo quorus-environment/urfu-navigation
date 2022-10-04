@@ -1,4 +1,4 @@
-import {IritRtf} from "../pages/universities/irit-rtf";
+import { IritRtf } from "../pages/universities/irit-rtf"
 
 /**
  * Основная компонента приложения
@@ -6,5 +6,5 @@ import {IritRtf} from "../pages/universities/irit-rtf";
  * @mock: Поставил ирит ртф для проверки канваса для себя
  * */
 export function App(): JSX.Element {
-    return <IritRtf />
+  return <IritRtf />
 }
