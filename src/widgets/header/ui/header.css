@@ -29,10 +29,6 @@
     align-items: center;
 }
 
-.search::placeholder{
-    font-weight: 400;
-}
-
 .lens{
     width: 21px;
     height: 21px;

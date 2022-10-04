@@ -7,7 +7,6 @@ import './app.css'
 
 /**
  * Основная компонента приложения
- * todo: менюшка
  * */
 export const App: React.FC = () => {
   return (

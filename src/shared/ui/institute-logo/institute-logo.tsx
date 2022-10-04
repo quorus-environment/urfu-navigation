@@ -7,6 +7,10 @@ type TInstituteLogoProps = {
   onClick?: VoidFunction
 }
 
+/*
+ * Компонента принимает ссылку на лого института(photo) и его название(title)
+ * ЯВляется кнопкой для каждого института
+ * **/
 export const InstituteLogo: React.FC<TInstituteLogoProps> = ({ photo, title, onClick }) => {
   return (
     <div className='institute-logo' onClick={onClick}>
