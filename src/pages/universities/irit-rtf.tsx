@@ -3,6 +3,7 @@ import { Layer, Stage } from "react-konva"
 import { Auditorium } from "../../entities/auditorium/ui/auditorium"
 import { TAuditorium } from "../../entities/auditorium/model/interface"
 import { Side } from "../../shared/model/geometry"
+import { Graph } from "../../entities/graph/ui/graph"
 
 const auditoriumsConfig: TAuditorium[] = [
   {
@@ -77,6 +78,7 @@ export const IritRtf: React.FC = () => {
             entry={entry}
           />
         ))}
+        <Graph points={[350, 475]} direction={Side.RIGHT} height={600} />
       </Layer>
     </Stage>
   )
