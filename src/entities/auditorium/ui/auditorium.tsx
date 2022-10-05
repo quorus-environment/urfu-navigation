@@ -2,6 +2,7 @@ import React, { useMemo } from "react"
 import { Circle, Group, Rect, Text } from "react-konva"
 import { TAuditorium } from "../model/interface"
 import { Side, TCoords } from "../../../shared/model/geometry"
+import { Graph } from "../../graph/ui/graph"
 
 /**
  * компонент аудитории: пока это просто квадратик с названием и входом, дальше будем расширять до
@@ -28,13 +29,13 @@ export const Auditorium: React.FC<TAuditorium> = ({
   const entryCoords: TCoords = useMemo(() => {
     switch (entry) {
       case Side.TOP:
-        return { x: coords.x + width / 2, y: coords.y + height }
-      case Side.BOTTOM:
         return { x: coords.x + width / 2, y: coords.y }
-      case Side.RIGHT:
-        return { x: coords.x + width, y: coords.y + height / 2 }
+      case Side.BOTTOM:
+        return { x: coords.x + width / 2, y: coords.y + height }
       case Side.LEFT:
         return { x: coords.x, y: coords.y + height / 2 }
+      case Side.RIGHT:
+        return { x: coords.x + width, y: coords.y + height / 2 }
     }
   }, [])
 
@@ -58,12 +59,13 @@ export const Auditorium: React.FC<TAuditorium> = ({
         fontSize={16}
         align={"center"}
       />
+      <Graph points={[entryCoords.x, entryCoords.y]} direction={entry} />
       <Circle
         width={10}
         height={10}
         fill={"red"}
-        x={coords.x + entryCoords.x}
-        y={coords.y + entryCoords.y}
+        x={entryCoords.x}
+        y={entryCoords.y}
       />
     </Group>
   )

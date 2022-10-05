@@ -2,7 +2,6 @@ import React from "react"
 import { Layer, Stage } from "react-konva"
 import { Auditorium } from "../../entities/auditorium/ui/auditorium"
 import { TAuditorium } from "../../entities/auditorium/model/interface"
-import { Graph } from "../../entities/graph/ui/graph"
 import { Side } from "../../shared/model/geometry"
 
 const auditoriumsConfig: TAuditorium[] = [
@@ -10,28 +9,28 @@ const auditoriumsConfig: TAuditorium[] = [
     name: "РИ-101",
     height: 200,
     width: 150,
-    coords: { x: 350, y: 245 },
+    coords: { x: 350, y: 250 },
     entry: Side.BOTTOM,
   },
   {
     name: "РИ-102",
     height: 200,
     width: 150,
-    coords: { x: 500, y: 245 },
+    coords: { x: 500, y: 250 },
     entry: Side.BOTTOM,
   },
   {
     name: "РИ-103",
     height: 200,
     width: 150,
-    coords: { x: 650, y: 245 },
+    coords: { x: 650, y: 250 },
     entry: Side.BOTTOM,
   },
   {
     name: "РИ-104",
     height: 200,
     width: 150,
-    coords: { x: 800, y: 245 },
+    coords: { x: 800, y: 250 },
     entry: Side.BOTTOM,
   },
   {
@@ -78,7 +77,6 @@ export const IritRtf: React.FC = () => {
             entry={entry}
           />
         ))}
-        <Graph points={[425, 445, 425, 470]} />
       </Layer>
     </Stage>
   )
