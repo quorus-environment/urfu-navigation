@@ -1,6 +1,7 @@
 import React, { useMemo } from "react"
 import { Circle, Group, Rect, Text } from "react-konva"
 import { TAuditorium } from "../model/interface"
+import { Side, TCoords } from "../../../shared/model/geometry"
 
 /**
  * компонент аудитории: пока это просто квадратик с названием и входом, дальше будем расширять до
@@ -18,10 +19,23 @@ export const Auditorium: React.FC<TAuditorium> = ({
   width,
   height,
 }) => {
-  const TextCoords = useMemo(() => {
+  const textCoords: TCoords = useMemo(() => {
     // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается половина от сторон,
     // чтобы x и y подстроились под размеры текста
     return { x: coords.x + width / 2 - 50, y: coords.y + height / 2 - 8 }
+  }, [])
+
+  const entryCoords: TCoords = useMemo(() => {
+    switch (entry) {
+      case Side.TOP:
+        return { x: coords.x + width / 2, y: coords.y + height }
+      case Side.BOTTOM:
+        return { x: coords.x + width / 2, y: coords.y }
+      case Side.RIGHT:
+        return { x: coords.x + width, y: coords.y + height / 2 }
+      case Side.LEFT:
+        return { x: coords.x, y: coords.y + height / 2 }
+    }
   }, [])
 
   return (
@@ -39,8 +53,8 @@ export const Auditorium: React.FC<TAuditorium> = ({
         text={name}
         height={16}
         width={100}
-        x={TextCoords.x}
-        y={TextCoords.y}
+        x={textCoords.x}
+        y={textCoords.y}
         fontSize={16}
         align={"center"}
       />
@@ -48,8 +62,8 @@ export const Auditorium: React.FC<TAuditorium> = ({
         width={10}
         height={10}
         fill={"red"}
-        x={coords.x + entry.x}
-        y={coords.y + entry.y}
+        x={coords.x + entryCoords.x}
+        y={coords.y + entryCoords.y}
       />
     </Group>
   )
