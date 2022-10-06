@@ -4,7 +4,6 @@ import { Header } from "../widgets/header/ui/header"
 import { Main } from "../pages/main/main"
 import { IritRtf } from "../pages/universities/irit-rtf"
 import "./app.css"
-
 /**
  * Основная компонента приложения
  * */

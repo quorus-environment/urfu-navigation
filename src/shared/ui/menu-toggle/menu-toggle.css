@@ -1,0 +1,10 @@
+.line{
+    background-color: #9D9B98;
+    width: 16px;
+    height: 3px;
+    border-radius: 20px;
+    margin: 0px 0px 2.5px 0px;
+}
+.line:last-child{
+    margin: 0px;
+}
