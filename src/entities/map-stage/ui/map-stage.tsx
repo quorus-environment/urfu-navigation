@@ -31,7 +31,7 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
     }
 
     // Обновляем текущий скейл
-    const newScale = event.evt.deltaY < 0 ? oldScale * 1.04 : oldScale * 0.96
+    const newScale = event.evt.deltaY < 0 ? oldScale * 1.05 : oldScale * 0.95
     stageRef?.current?.scale({ x: newScale, y: newScale })
 
     // Получаем новое положение курсора
