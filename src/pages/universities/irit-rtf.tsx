@@ -68,7 +68,7 @@ const auditoriumsConfig: TAuditorium[] = [
 export const IritRtf: React.FC = () => {
   return (
     <MapStage>
-      <Layer>
+      <Layer height={window.innerHeight - 60}>
         {auditoriumsConfig.map(({ name, coords, entry, height, width }) => (
           <Auditorium
             key={name}

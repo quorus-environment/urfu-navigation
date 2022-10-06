@@ -2,6 +2,7 @@ import React, { createContext, useCallback, useRef, useState } from "react"
 import { Stage } from "react-konva"
 import Konva from "konva"
 import KonvaEventObject = Konva.KonvaEventObject
+import { mapConfig } from "../config"
 
 type TMapStageProps = {
   children: JSX.Element
@@ -34,22 +35,20 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
       x: 0,
       y: 0,
     }
-    const mousePointTo = {
-      x: (pointerX - stage.x()) / oldScale,
-      y: (pointerY - stage.y()) / oldScale,
-    }
 
     // Обновляем текущий скейл
-    const newScale = event.evt.deltaY < 0 ? oldScale * 1.05 : oldScale * 0.95
+    const newScale =
+      event.evt.deltaY < 0
+        ? oldScale * mapConfig.zoomRatio
+        : oldScale / mapConfig.zoomRatio
     stageRef?.current?.scale({ x: newScale, y: newScale })
 
     // Получаем новое положение курсора
     const newPos = {
-      x: pointerX - mousePointTo.x * newScale,
-      y: pointerY - mousePointTo.y * newScale,
+      x: pointerX - ((pointerX - stage.x()) / oldScale) * newScale,
+      y: pointerY - ((pointerY - stage.y()) / oldScale) * newScale,
     }
     stageRef?.current?.position(newPos)
-    stageRef?.current?.batchDraw()
   }, [])
 
   return (
@@ -61,7 +60,7 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
         draggable
         onDragStart={() => setDragging(true)}
         onDragEnd={() => setDragging(false)}
-        height={window.innerHeight}
+        height={window.innerHeight - 60}
         onWheel={onWheel}
       >
         {children}
