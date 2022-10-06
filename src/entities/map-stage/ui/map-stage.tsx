@@ -1,24 +1,16 @@
-import React, { createContext, useCallback, useRef, useState } from "react"
+import React, { useCallback, useRef, useState } from "react"
 import { Stage } from "react-konva"
 import Konva from "konva"
 import KonvaEventObject = Konva.KonvaEventObject
 import { mapConfig } from "../config"
+import { ChosenProvider } from "../../../shared/providers/chosenContext/ui/chosen-provider"
 
 type TMapStageProps = {
   children: JSX.Element
 }
 
-export const ChosenContext = createContext<{
-  chosenId: string | null
-  setChosenId: React.Dispatch<React.SetStateAction<string | null>>
-}>({
-  chosenId: null,
-  setChosenId: () => void 0,
-})
-
 export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
   const [isDragging, setDragging] = useState(false)
-  const [chosenId, setChosenId] = useState<string | null>(null)
   const stageRef = useRef<Konva.Stage>(null)
 
   const onWheel = useCallback((event: KonvaEventObject<WheelEvent>) => {
@@ -52,7 +44,7 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
   }, [])
 
   return (
-    <ChosenContext.Provider value={{ chosenId, setChosenId }}>
+    <ChosenProvider>
       <Stage
         ref={stageRef}
         width={window.innerWidth}
@@ -65,6 +57,6 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
       >
         {children}
       </Stage>
-    </ChosenContext.Provider>
+    </ChosenProvider>
   )
 }

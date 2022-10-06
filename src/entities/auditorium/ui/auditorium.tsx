@@ -1,9 +1,10 @@
-import React, { useContext, useMemo } from "react"
+import React, { useCallback, useContext, useMemo } from "react"
 import { Circle, Group, Rect, Text } from "react-konva"
 import { TAuditorium } from "../model/interface"
 import { Side, TCoords } from "../../../shared/model/geometry"
 import { Graph } from "../../graph/ui/graph"
-import { ChosenContext } from "../../map-stage/ui/map-stage"
+import { GraphDestination } from "../../graph/model/interface"
+import { ChosenContext } from "../../../shared/providers/chosenContext/ui/chosen-provider"
 
 /**
  * компонент аудитории: пока это просто квадратик с названием и входом, дальше будем расширять до
@@ -21,13 +22,16 @@ export const Auditorium: React.FC<TAuditorium> = ({
   width,
   height,
 }) => {
-  const { chosenId, setChosenId } = useContext(ChosenContext)
+  // Получаем выбранные элементы
+  const { startId, endId, setEndId } = useContext(ChosenContext)
+
+  // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается половина от сторон,
+  // чтобы x и y подстроились под размеры текста
   const textCoords: TCoords = useMemo(() => {
-    // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается половина от сторон,
-    // чтобы x и y подстроились под размеры текста
     return { x: coords.x + width / 2 - 50, y: coords.y + height / 2 - 8 }
   }, [])
 
+  // Вычисляем координаты входа
   const entryCoords: TCoords = useMemo(() => {
     switch (entry) {
       case Side.TOP:
@@ -41,20 +45,32 @@ export const Auditorium: React.FC<TAuditorium> = ({
     }
   }, [])
 
+  // Колбек при нажатии
+  const onClick = useCallback(() => {
+    setEndId(name)
+  }, [])
+
   return (
     <Group
-      onClick={() => setChosenId(name)}
-      globalCompositeOperation={
-        chosenId === name ? undefined : "destination-over"
-      }
+      onClick={onClick}
+      globalCompositeOperation={endId === name ? undefined : "destination-over"}
     >
+      <Circle
+        globalCompositeOperation={"source-over"}
+        width={10}
+        height={10}
+        fill={"red"}
+        x={entryCoords.x}
+        y={entryCoords.y}
+      />
       <Rect
         width={width}
         x={coords.x}
         y={coords.y}
         height={height}
-        stroke={chosenId === name ? "red" : "black"}
-        strokeWidth={chosenId === name ? 5 : 3}
+        fill={endId === name ? "#ffff0030" : undefined}
+        stroke={"black"}
+        strokeWidth={3}
         strokeEnabled
       />
       <Text
@@ -66,13 +82,22 @@ export const Auditorium: React.FC<TAuditorium> = ({
         fontSize={16}
         align={"center"}
       />
-      <Graph points={[entryCoords.x, entryCoords.y]} direction={entry} />
-      <Circle
-        width={10}
-        height={10}
-        fill={"red"}
-        x={entryCoords.x}
-        y={entryCoords.y}
+      {startId === name && (
+        <Text
+          text={"Вы здесь"}
+          height={16}
+          width={100}
+          fill={"red"}
+          x={textCoords.x}
+          y={textCoords.y + 16}
+          fontSize={11}
+          align={"center"}
+        />
+      )}
+      <Graph
+        destination={GraphDestination.AUDITORIUM}
+        points={[entryCoords.x, entryCoords.y]}
+        direction={entry}
       />
     </Group>
   )

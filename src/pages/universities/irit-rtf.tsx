@@ -5,6 +5,7 @@ import { TAuditorium } from "../../entities/auditorium/model/interface"
 import { Side } from "../../shared/model/geometry"
 import { Graph } from "../../entities/graph/ui/graph"
 import { MapStage } from "../../entities/map-stage/ui/map-stage"
+import { GraphDestination } from "../../entities/graph/model/interface"
 
 const auditoriumsConfig: TAuditorium[] = [
   {
@@ -79,7 +80,12 @@ export const IritRtf: React.FC = () => {
             entry={entry}
           />
         ))}
-        <Graph points={[350, 475]} direction={Side.RIGHT} height={600} />
+        <Graph
+          destination={GraphDestination.CORRIDOR}
+          points={[350, 475]}
+          direction={Side.RIGHT}
+          height={600}
+        />
       </Layer>
     </MapStage>
   )

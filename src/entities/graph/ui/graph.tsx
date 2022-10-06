@@ -3,7 +3,13 @@ import React, { useMemo } from "react"
 import { TGraph } from "../model/interface"
 import { Side, TCoords } from "../../../shared/model/geometry"
 
-export const Graph: React.FC<TGraph> = ({ points, direction, height = 25 }) => {
+export const Graph: React.FC<TGraph> = ({
+  points,
+  direction,
+  height = 25,
+  isFilled = false,
+}) => {
+  // Вторая точка графа по ее направлению и высоте
   const resultPoint: TCoords = useMemo(() => {
     switch (direction) {
       case Side.TOP:
@@ -16,18 +22,21 @@ export const Graph: React.FC<TGraph> = ({ points, direction, height = 25 }) => {
         return { x: points[0] + height, y: points[1] }
     }
   }, [])
+
+  const color = useMemo(() => (isFilled ? "red" : undefined), [isFilled])
+
   return (
     <Group globalCompositeOperation={"destination-over"}>
-      <Circle width={7} height={7} fill={"black"} x={points[0]} y={points[1]} />
+      <Circle width={7} height={7} fill={color} x={points[0]} y={points[1]} />
       <Line
         strokeWidth={3}
-        stroke={"black"}
+        stroke={color}
         points={[...points, resultPoint.x, resultPoint.y]}
       />
       <Circle
         width={7}
         height={7}
-        fill={"black"}
+        fill={color}
         x={resultPoint.x}
         y={resultPoint.y}
       />
