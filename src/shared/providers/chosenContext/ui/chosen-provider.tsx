@@ -9,7 +9,7 @@ export const ChosenContext = createContext<TChosenContext>({
 })
 
 export const ChosenProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [chosenId, setChosenId] = useState<string | null>(null)
+  const [chosenId, setChosenId] = useState<string | null>("РИ-101")
   const [chosenSecondId, setChosenSecondId] = useState<string | null>(null)
 
   return (

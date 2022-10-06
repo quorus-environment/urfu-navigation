@@ -25,8 +25,9 @@ export const Auditorium: React.FC<TAuditorium> = ({
   // Получаем выбранные элементы
   const { startId, endId, setEndId } = useContext(ChosenContext)
 
-  // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается половина от сторон,
-  // чтобы x и y подстроились под размеры текста
+  // Координаты тектса (по центру)
+  // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается
+  // половина от сторон, чтобы x и y подстроились под размеры текста
   const textCoords: TCoords = useMemo(() => {
     return { x: coords.x + width / 2 - 50, y: coords.y + height / 2 - 8 }
   }, [])
@@ -47,16 +48,12 @@ export const Auditorium: React.FC<TAuditorium> = ({
 
   // Колбек при нажатии
   const onClick = useCallback(() => {
-    setEndId(name)
+    name !== startId && setEndId(name)
   }, [])
 
   return (
-    <Group
-      onClick={onClick}
-      globalCompositeOperation={endId === name ? undefined : "destination-over"}
-    >
+    <Group onClick={onClick} globalCompositeOperation={"destination-over"}>
       <Circle
-        globalCompositeOperation={"source-over"}
         width={10}
         height={10}
         fill={"red"}
@@ -68,7 +65,13 @@ export const Auditorium: React.FC<TAuditorium> = ({
         x={coords.x}
         y={coords.y}
         height={height}
-        fill={endId === name ? "#ffff0030" : undefined}
+        fill={
+          startId === name
+            ? "#ff000010"
+            : endId === name
+            ? "#ffff0030"
+            : undefined
+        }
         stroke={"black"}
         strokeWidth={3}
         strokeEnabled
@@ -77,6 +80,8 @@ export const Auditorium: React.FC<TAuditorium> = ({
         text={name}
         height={16}
         width={100}
+        fontFamily={"Montserrat"}
+        fontStyle={"bold"}
         x={textCoords.x}
         y={textCoords.y}
         fontSize={16}
@@ -88,6 +93,20 @@ export const Auditorium: React.FC<TAuditorium> = ({
           height={16}
           width={100}
           fill={"red"}
+          fontFamily={"Montserrat"}
+          x={textCoords.x}
+          y={textCoords.y + 16}
+          fontSize={11}
+          align={"center"}
+        />
+      )}
+      {endId === name && (
+        <Text
+          text={"Конечная точка"}
+          height={16}
+          width={100}
+          fill={"gray"}
+          fontFamily={"Montserrat"}
           x={textCoords.x}
           y={textCoords.y + 16}
           fontSize={11}
