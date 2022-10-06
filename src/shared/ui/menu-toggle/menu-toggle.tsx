@@ -1,5 +1,6 @@
 import React, { FC } from "react"
-import "./MenuToggle.css"
+import "./menu-toggle.css"
+import { menuToggleColor } from "../ui-constants/ui-constants"
 
 interface MenuToggleProps {
   color?: string
@@ -7,7 +8,7 @@ interface MenuToggleProps {
 }
 
 export const MenuToggle: FC<MenuToggleProps> = ({
-  color = "#9D9B98",
+  color = menuToggleColor,
   size = 16,
 }) => {
   return (
