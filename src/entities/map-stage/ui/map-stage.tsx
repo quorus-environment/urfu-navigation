@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react"
+import React, { createContext, useCallback, useRef, useState } from "react"
 import { Stage } from "react-konva"
 import Konva from "konva"
 import KonvaEventObject = Konva.KonvaEventObject
@@ -7,8 +7,17 @@ type TMapStageProps = {
   children: JSX.Element
 }
 
+export const ChosenContext = createContext<{
+  chosenId: string | null
+  setChosenId: React.Dispatch<React.SetStateAction<string | null>>
+}>({
+  chosenId: null,
+  setChosenId: () => void 0,
+})
+
 export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
   const [isDragging, setDragging] = useState(false)
+  const [chosenId, setChosenId] = useState<string | null>(null)
   const stageRef = useRef<Konva.Stage>(null)
 
   const onWheel = useCallback((event: KonvaEventObject<WheelEvent>) => {
@@ -44,17 +53,19 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
   }, [])
 
   return (
-    <Stage
-      ref={stageRef}
-      width={window.innerWidth}
-      style={{ cursor: isDragging ? "grabbing" : "default" }}
-      draggable
-      onDragStart={() => setDragging(true)}
-      onDragEnd={() => setDragging(false)}
-      height={window.innerHeight}
-      onWheel={onWheel}
-    >
-      {children}
-    </Stage>
+    <ChosenContext.Provider value={{ chosenId, setChosenId }}>
+      <Stage
+        ref={stageRef}
+        width={window.innerWidth}
+        style={{ cursor: isDragging ? "grabbing" : "default" }}
+        draggable
+        onDragStart={() => setDragging(true)}
+        onDragEnd={() => setDragging(false)}
+        height={window.innerHeight}
+        onWheel={onWheel}
+      >
+        {children}
+      </Stage>
+    </ChosenContext.Provider>
   )
 }

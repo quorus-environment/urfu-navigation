@@ -17,7 +17,7 @@ export const Graph: React.FC<TGraph> = ({ points, direction, height = 25 }) => {
     }
   }, [])
   return (
-    <Group>
+    <Group globalCompositeOperation={"destination-over"}>
       <Circle width={7} height={7} fill={"black"} x={points[0]} y={points[1]} />
       <Line
         strokeWidth={3}

@@ -1,8 +1,9 @@
-import React, { useMemo } from "react"
+import React, { useContext, useMemo } from "react"
 import { Circle, Group, Rect, Text } from "react-konva"
 import { TAuditorium } from "../model/interface"
 import { Side, TCoords } from "../../../shared/model/geometry"
 import { Graph } from "../../graph/ui/graph"
+import { ChosenContext } from "../../map-stage/ui/map-stage"
 
 /**
  * компонент аудитории: пока это просто квадратик с названием и входом, дальше будем расширять до
@@ -20,6 +21,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
   width,
   height,
 }) => {
+  const { chosenId, setChosenId } = useContext(ChosenContext)
   const textCoords: TCoords = useMemo(() => {
     // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается половина от сторон,
     // чтобы x и y подстроились под размеры текста
@@ -40,14 +42,19 @@ export const Auditorium: React.FC<TAuditorium> = ({
   }, [])
 
   return (
-    <Group onClick={() => console.log(name)}>
+    <Group
+      onClick={() => setChosenId(name)}
+      globalCompositeOperation={
+        chosenId === name ? undefined : "destination-over"
+      }
+    >
       <Rect
         width={width}
         x={coords.x}
         y={coords.y}
         height={height}
-        stroke={"black"}
-        strokeWidth={3}
+        stroke={chosenId === name ? "red" : "black"}
+        strokeWidth={chosenId === name ? 5 : 3}
         strokeEnabled
       />
       <Text
