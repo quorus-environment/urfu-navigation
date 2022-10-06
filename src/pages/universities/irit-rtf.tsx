@@ -1,9 +1,10 @@
 import React from "react"
-import { Layer, Stage } from "react-konva"
+import { Layer } from "react-konva"
 import { Auditorium } from "../../entities/auditorium/ui/auditorium"
 import { TAuditorium } from "../../entities/auditorium/model/interface"
 import { Side } from "../../shared/model/geometry"
 import { Graph } from "../../entities/graph/ui/graph"
+import { MapStage } from "../../entities/map-stage/ui/map-stage"
 
 const auditoriumsConfig: TAuditorium[] = [
   {
@@ -66,7 +67,7 @@ const auditoriumsConfig: TAuditorium[] = [
 
 export const IritRtf: React.FC = () => {
   return (
-    <Stage width={window.innerWidth} height={window.innerHeight}>
+    <MapStage>
       <Layer>
         {auditoriumsConfig.map(({ name, coords, entry, height, width }) => (
           <Auditorium
@@ -80,6 +81,6 @@ export const IritRtf: React.FC = () => {
         ))}
         <Graph points={[350, 475]} direction={Side.RIGHT} height={600} />
       </Layer>
-    </Stage>
+    </MapStage>
   )
 }
