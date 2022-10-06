@@ -1,5 +1,5 @@
 import React, { FC, useMemo } from "react"
-import "./Institute.css"
+import "./institute.css"
 
 interface InstituteProps {
   size?: number
