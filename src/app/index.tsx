@@ -12,9 +12,9 @@ export const App: React.FC = () => {
     <div className="app">
       <Header />
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path='/' element={<Main />} />
         <Route path="/irit-rtf" element={<IritRtf />} />
       </Routes>
-    </div>
+    </div> 
   )
 }
