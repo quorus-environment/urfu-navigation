@@ -21,7 +21,7 @@ export const Graph: React.FC<TGraph> = ({
       case Side.RIGHT:
         return { x: points[0] + height, y: points[1] }
     }
-  }, [])
+  }, [direction, points, height])
 
   const color = useMemo(() => (isFilled ? "red" : undefined), [isFilled])
 

@@ -7,6 +7,7 @@ import { GraphDestination } from "../../graph/model/interface"
 import { ChosenContext } from "../../../shared/providers/chosenContext/ui/chosen-provider"
 import { AuditoriumTitle } from "./auditorium-title"
 import { useEntryCoords } from "../lib/use-entry-coords"
+import { Colors } from "../../../shared/constants"
 
 /**
  * компонент аудитории: пока это просто квадратик с названием и входом, дальше будем расширять до
@@ -32,7 +33,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
   // половина от сторон, чтобы x и y подстроились под размеры текста
   const textCoords: TCoords = useMemo(() => {
     return { x: coords.x + width / 2 - 50, y: coords.y + height / 2 - 8 }
-  }, [coords, width])
+  }, [coords, width, height])
 
   // Вычисляем координаты входа
   const entryCoords = useEntryCoords(entry, coords, width, height)
@@ -75,9 +76,9 @@ export const Auditorium: React.FC<TAuditorium> = ({
         height={height}
         fill={
           startId === name
-            ? "#ff000010"
+            ? Colors.LightRed
             : endId === name
-            ? "#ffff0030"
+            ? Colors.LightYellow
             : undefined
         }
         stroke={"black"}
