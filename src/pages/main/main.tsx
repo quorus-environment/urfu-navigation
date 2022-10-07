@@ -1,11 +1,14 @@
-import Map from "./../../shared/assets/map.jpeg"
 import "./main.css"
 import { InstituteLogo } from "../../shared/ui/institute-logo/institute-logo"
+import { MainMap } from "../../widgets/map/ui/map"
 
 export function Main() {
   return (
     <section className="main">
-      <img className="main__map" src={Map} alt="карта" />
+      <div className="main__map">
+        <h2>Корпуса</h2>
+        <MainMap />
+      </div>
       <div>
         <h2>Институты</h2>
         <div className="main__institutes">
