@@ -1,4 +1,6 @@
 // Настройки аудитории
+import { Side } from "../../../shared/model/geometry"
+
 export type TAuditorium = {
   name: string
   height: number
@@ -7,8 +9,5 @@ export type TAuditorium = {
     x: number
     y: number
   }
-  entry: {
-    x: number
-    y: number
-  }
+  entry: Side
 }
