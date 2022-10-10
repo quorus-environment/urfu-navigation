@@ -1565,13 +1565,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@pbe/react-yandex-maps@^1.1.8":
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/@pbe/react-yandex-maps/-/react-yandex-maps-1.1.8.tgz#90b6273c28445a40a287c409db49242bac81ebcb"
-  integrity sha512-jrcZCbDa18ss1SnX/ipAYpKWV2j+/ENmiQ5ulgGXSn0OssRTTNR8Bfilozt1nsRvxba5aRYz6lC4zYdZYSthdg==
-  dependencies:
-    "@types/yandex-maps" "2.1.21"
-
 "@pkgr/utils@^2.3.1":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@pkgr/utils/-/utils-2.3.1.tgz#0a9b06ffddee364d6642b3cd562ca76f55b34a03"
@@ -2145,11 +2138,6 @@
   integrity sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==
   dependencies:
     "@types/node" "*"
-
-"@types/yandex-maps@2.1.21":
-  version "2.1.21"
-  resolved "https://registry.yarnpkg.com/@types/yandex-maps/-/yandex-maps-2.1.21.tgz#d3801ddbd2541412a8a8693edb168c6702b407a1"
-  integrity sha512-rRLCmIODrnzmo7MIGfFRPwPN7ITyAIupUdbeGSC0KqUIvlR7YrY4v8Do7798/WhO4v63B1hCvI+ECwCB4k26AA==
 
 "@types/yargs-parser@*":
   version "21.0.0"
