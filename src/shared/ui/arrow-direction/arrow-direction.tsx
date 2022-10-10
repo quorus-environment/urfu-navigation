@@ -9,7 +9,7 @@ interface arrowDirectionProps {
 }
 
 export const ArrowDirection: FC<arrowDirectionProps> = ({
-  size,
+  size = 30,
   direction = Side.TOP,
 }) => {
   const deg = useMemo(() => checkDirection(direction), [direction])
