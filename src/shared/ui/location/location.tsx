@@ -1,15 +1,11 @@
 import React, { FC } from "react"
-import { locationColor } from "../ui-constants/ui-constants"
 
 interface LocationProps {
   color?: string
   size?: number
 }
 
-export const Location: FC<LocationProps> = ({
-  color = locationColor,
-  size,
-}) => {
+export const Location: FC<LocationProps> = ({ color = "#9D9B98", size }) => {
   return (
     <svg
       width={size ? size : 14}
