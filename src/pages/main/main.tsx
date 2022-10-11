@@ -1,10 +1,8 @@
 import "./main.css"
-import { InstituteLogo } from "../../shared/ui/institute-logo/institute-logo"
 import { MainMap } from "../../widgets/map/ui/map"
-import { useNavigate } from "react-router-dom"
+import { Institutes } from "./institutes-grid/institutes-grid"
 
 export function Main() {
-  const open = useNavigate()
   return (
     <section className="main">
       <div className="main__map">
@@ -13,15 +11,7 @@ export function Main() {
       </div>
       <div>
         <h2>Институты</h2>
-        <div className="main__institutes">
-          <InstituteLogo
-            title="ИРИТ-РТФ"
-            photo="https://sun9-north.userapi.com/sun9-83/s/v1/ig2/uFw_vF_yE-VDBVXBKEmP_dcDuVie_5VHGGqYV0ENCR644e9spnCTh8lN6OEtDfjS4qdH_iCWqyLIlOKAxQq8o48J.jpg?size=900x900&quality=96&type=album"
-            onClick={() => {
-              open("/irit-rtf")
-            }}
-          />
-        </div>
+        <Institutes />
       </div>
     </section>
   )
