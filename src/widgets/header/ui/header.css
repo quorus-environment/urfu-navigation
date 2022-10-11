@@ -1,3 +1,7 @@
+li{
+    list-style: none;
+}
+
 .header{
     height: 60px;
     width: 100%;
@@ -27,9 +31,37 @@
     display: flex;
     gap: 11px;
     align-items: center;
+    position: relative;
 }
 
 .lens{
     width: 21px;
     height: 21px;
+}
+
+.auto-complite{
+    position: absolute;
+    left: 0;
+    top:  50px;
+    background-color: #F4F4F2;
+    z-index: 100;
+    width: 100%;
+    display: block;
+    border-radius: 15px;
+    padding: 10px;
+    max-height: 200px;
+    height: auto;
+    overflow: auto;
+}
+.auto-complite::-webkit-scrollbar {
+    width: 0;
+}
+.auto-complite__item{
+    padding:10px;
+}
+
+.auto-complite__item:hover{
+    background-color: #9D9B98;
+    cursor: pointer;
+    border-radius: 15px;
 }
