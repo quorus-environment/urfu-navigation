@@ -1,6 +1,7 @@
 import { InstituteLogo } from "../../../shared/ui/institute-logo/institute-logo"
 import { useEffect, useState } from "react"
 import axios, { AxiosResponse } from "axios"
+import "./institutes-grid.css";
 
 type Institute = {
   instid: string
@@ -12,7 +13,7 @@ export function Institutes() {
   const [institutes, setInstitutes] = useState<Institute[]>([])
   useEffect(() => {
     axios
-      .get("http://localhost:8080")
+      .get("http://89.108.81.160:8080")
       .then((resp: AxiosResponse<Institute[]>) => {
         setInstitutes(resp.data)
       })
