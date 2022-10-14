@@ -3,7 +3,7 @@ import { Stage } from "react-konva"
 import Konva from "konva"
 import KonvaEventObject = Konva.KonvaEventObject
 import { mapConfig } from "../config"
-import { ChosenProvider } from "../../../shared/providers/chosenContext/ui/chosen-provider"
+import { ChosenProvider } from "../../../shared/providers/chosen-context/ui/chosen-provider"
 
 type TMapStageProps = {
   children: JSX.Element
