@@ -3,9 +3,8 @@ import { Layer } from "react-konva"
 import { Auditorium } from "../../entities/auditorium/ui/auditorium"
 import { TAuditorium } from "../../entities/auditorium/model/interface"
 import { Side } from "../../shared/model/geometry"
-import { Graph } from "../../entities/graph/ui/graph"
 import { MapStage } from "../../entities/map-stage/ui/map-stage"
-import { GraphDestination } from "../../entities/graph/model/interface"
+import { GraphProvider } from "../../shared/providers/graph-context/ui/graph-provider"
 
 const auditoriumsConfig: TAuditorium[] = [
   {
@@ -69,24 +68,26 @@ const auditoriumsConfig: TAuditorium[] = [
 export const IritRtf: React.FC = () => {
   return (
     <MapStage>
-      <Layer height={window.innerHeight - 60}>
-        {auditoriumsConfig.map(({ name, coords, entry, height, width }) => (
-          <Auditorium
-            key={name}
-            name={name}
-            height={height}
-            width={width}
-            coords={coords}
-            entry={entry}
-          />
-        ))}
-        <Graph
-          destination={GraphDestination.CORRIDOR}
-          points={[350, 475]}
-          direction={Side.RIGHT}
-          height={600}
-        />
-      </Layer>
+      <GraphProvider>
+        <Layer height={window.innerHeight - 60}>
+          {auditoriumsConfig.map(({ name, coords, entry, height, width }) => (
+            <Auditorium
+              key={name}
+              name={name}
+              height={height}
+              width={width}
+              coords={coords}
+              entry={entry}
+            />
+          ))}
+          {/* <Graph */}
+          {/*   destination={GraphDestination.CORRIDOR} */}
+          {/*   points={[350, 475]} */}
+          {/*   direction={Side.RIGHT} */}
+          {/*   height={600} */}
+          {/* /> */}
+        </Layer>
+      </GraphProvider>
     </MapStage>
   )
 }

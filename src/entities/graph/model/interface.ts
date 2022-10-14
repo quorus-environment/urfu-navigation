@@ -3,9 +3,9 @@ import { Side } from "../../../shared/model/geometry"
 export type TGraph = {
   points: [number, number]
   direction: Side
-  isFilled?: boolean
+  height: number
   destination: GraphDestination
-  height?: number
+  isFilled?: boolean
   neighbors?: TGraph[]
 }
 

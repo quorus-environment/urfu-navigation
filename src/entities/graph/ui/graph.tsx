@@ -3,35 +3,39 @@ import React, { useMemo } from "react"
 import { TGraph } from "../model/interface"
 import { Side, TCoords } from "../../../shared/model/geometry"
 
-export const Graph: React.FC<TGraph> = ({
-  points,
-  direction,
-  height = 25,
-  isFilled = false,
-}) => {
+export const Graph: React.FC<{ graph: TGraph }> = ({ graph }) => {
   // Вторая точка графа по ее направлению и высоте
   const resultPoint: TCoords = useMemo(() => {
-    switch (direction) {
+    switch (graph.direction) {
       case Side.TOP:
-        return { x: points[0], y: points[1] - height }
+        return { x: graph.points[0], y: graph.points[1] - graph.height }
       case Side.BOTTOM:
-        return { x: points[0], y: points[1] + height }
+        return { x: graph.points[0], y: graph.points[1] + graph.height }
       case Side.LEFT:
-        return { x: points[0] - height, y: points[1] }
+        return { x: graph.points[0] - graph.height, y: graph.points[1] }
       case Side.RIGHT:
-        return { x: points[0] + height, y: points[1] }
+        return { x: graph.points[0] + graph.height, y: graph.points[1] }
     }
-  }, [direction, points, height])
+  }, [graph])
 
-  const color = useMemo(() => (isFilled ? "red" : undefined), [isFilled])
+  const color = useMemo(
+    () => (graph.isFilled ? "red" : undefined),
+    [graph.isFilled],
+  )
 
   return (
     <Group globalCompositeOperation={"destination-over"}>
-      <Circle width={7} height={7} fill={color} x={points[0]} y={points[1]} />
+      <Circle
+        width={7}
+        height={7}
+        fill={color}
+        x={graph.points[0]}
+        y={graph.points[1]}
+      />
       <Line
         strokeWidth={3}
         stroke={color}
-        points={[...points, resultPoint.x, resultPoint.y]}
+        points={[...graph.points, resultPoint.x, resultPoint.y]}
       />
       <Circle
         width={7}

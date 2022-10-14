@@ -8,6 +8,8 @@ import { ChosenContext } from "../../../shared/providers/chosen-context/ui/chose
 import { AuditoriumTitle } from "./auditorium-title"
 import { useEntryCoords } from "../lib/use-entry-coords"
 import { Colors } from "../../../shared/constants"
+import { usePointsDeclaration } from "../lib/use-points-declaration"
+import { useGraph } from "../../graph/lib/use-graph"
 
 /**
  * компонент аудитории: пока это просто квадратик с названием и входом, дальше будем расширять до
@@ -28,7 +30,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
   // Получаем выбранные элементы
   const { startId, endId, setEndId } = useContext(ChosenContext)
 
-  // Координаты тектса (по центру)
+  // Координаты текста (по центру)
   // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается
   // половина от сторон, чтобы x и y подстроились под размеры текста
   const textCoords: TCoords = useMemo(() => {
@@ -38,27 +40,19 @@ export const Auditorium: React.FC<TAuditorium> = ({
   // Вычисляем координаты входа
   const entryCoords = useEntryCoords(entry, coords, width, height)
 
-  // Колбек при нажатии
   const onClick = useCallback(() => {
     name !== startId && setEndId(name)
   }, [name, startId, setEndId])
 
-  // Получаем описание в зависимости от того начальная или конечная эта ауд.
-  const description = useMemo(() => {
-    if (startId === name) {
-      return {
-        description: "Вы здесь",
-        descriptionColor: "red",
-      }
-    }
-    if (endId === name) {
-      return {
-        description: "Конечная точка",
-        descriptionColor: "gray",
-      }
-    }
-    return null
-  }, [startId, endId, name])
+  // Описание начальной и конечной точки
+  const description = usePointsDeclaration(name)
+
+  const { graph } = useGraph(
+    GraphDestination.AUDITORIUM,
+    [entryCoords.x, entryCoords.y],
+    entry,
+    height,
+  )
 
   return (
     <Group onClick={onClick} globalCompositeOperation={"destination-over"}>
@@ -92,11 +86,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
         description={description?.description}
         descriptionColor={description?.descriptionColor}
       />
-      <Graph
-        destination={GraphDestination.AUDITORIUM}
-        points={[entryCoords.x, entryCoords.y]}
-        direction={entry}
-      />
+      <Graph graph={graph} />
     </Group>
   )
 }
