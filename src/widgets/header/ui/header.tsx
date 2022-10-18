@@ -66,10 +66,13 @@ const auditoriumsConfig: TAuditorium[] = [
 const auditoriumsNames = auditoriumsConfig.map((el) => el.name)
 export function Header() {
   const [inputValue, setInputValue] = useState("")
+
   const filtered = auditoriumsNames.filter((auditorium) =>
     auditorium.toLowerCase().includes(inputValue.toLowerCase()),
   )
+
   const [isOpenedBar, setOpenedBar] = useState(true)
+
   const listItem = filtered.map((name) => (
     <li
       key=""

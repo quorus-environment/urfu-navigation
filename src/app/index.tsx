@@ -1,5 +1,4 @@
 import React from "react"
-// import { arrowDirection } from "../shared/ui/arrow-direction/arrow-direction"
 import { Routes, Route } from "react-router-dom"
 import { Header } from "../widgets/header/ui/header"
 import { Main } from "../pages/main/main"
