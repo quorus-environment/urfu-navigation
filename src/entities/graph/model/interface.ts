@@ -1,7 +1,8 @@
 import { Side } from "../../../shared/model/geometry"
 
 export type TGraph = {
-  points: [number, number]
+  id: string
+  points: [number, number, number, number]
   direction: Side
   height: number
   destination: GraphDestination

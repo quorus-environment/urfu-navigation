@@ -4,7 +4,9 @@ import { TGraphContext } from "../model/interface"
 
 export const GraphContext = createContext<TGraphContext>({
   graph: [] as TGraph[],
+  coloredGraph: [] as string[],
   setGraphRegistry: () => void 0,
+  setColoredGraph: () => void 0,
 })
 
 /**
@@ -14,12 +16,15 @@ export const GraphContext = createContext<TGraphContext>({
  * */
 export const GraphProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [graphRegistry, setGraphRegistry] = useState<TGraph[]>([])
+  const [coloredGraph, setColoredGraph] = useState<string[]>([])
 
   return (
     <GraphContext.Provider
       value={{
         graph: graphRegistry,
         setGraphRegistry,
+        coloredGraph,
+        setColoredGraph,
       }}
     >
       {children}

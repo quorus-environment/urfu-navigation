@@ -9,7 +9,7 @@ import { AuditoriumTitle } from "./auditorium-title"
 import { useEntryCoords } from "../lib/use-entry-coords"
 import { Colors } from "../../../shared/constants"
 import { usePointsDeclaration } from "../lib/use-points-declaration"
-import { useGraph } from "../../graph/lib/use-graph"
+import { checkIfPointInGraph, useGraph } from "../../graph/lib/use-graph"
 import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
 
 /**
@@ -46,13 +46,19 @@ export const Auditorium: React.FC<TAuditorium> = ({
   const entryCoords = useEntryCoords(entry, coords, width, height)
 
   const onClick = useCallback(() => {
+    graphReg?.[0]?.points &&
+      console.log(
+        "result: ",
+        checkIfPointInGraph(graphReg[0].points, [425, 455]),
+      )
     name !== startId && setEndId(name)
-  }, [name, startId, setEndId])
+  }, [graphReg, name, startId, setEndId])
 
   // Описание начальной и конечной точки
   const description = usePointsDeclaration(name)
 
   const { graph } = useGraph(
+    name,
     GraphDestination.AUDITORIUM,
     [entryCoords.x, entryCoords.y],
     entry,
