@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from "react"
+import React, { useCallback, useContext, useEffect, useMemo } from "react"
 import { Circle, Group, Rect } from "react-konva"
 import { TAuditorium } from "../model/interface"
 import { TCoords } from "../../../shared/model/geometry"
@@ -10,6 +10,7 @@ import { useEntryCoords } from "../lib/use-entry-coords"
 import { Colors } from "../../../shared/constants"
 import { usePointsDeclaration } from "../lib/use-points-declaration"
 import { useGraph } from "../../graph/lib/use-graph"
+import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
 
 /**
  * компонент аудитории: пока это просто квадратик с названием и входом, дальше будем расширять до
@@ -29,6 +30,10 @@ export const Auditorium: React.FC<TAuditorium> = ({
 }) => {
   // Получаем выбранные элементы
   const { startId, endId, setEndId } = useContext(ChosenContext)
+  const { graph: graphReg } = useGraphContext()
+  useEffect(() => {
+    console.log(graphReg)
+  }, [graphReg])
 
   // Координаты текста (по центру)
   // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается
@@ -51,15 +56,14 @@ export const Auditorium: React.FC<TAuditorium> = ({
     GraphDestination.AUDITORIUM,
     [entryCoords.x, entryCoords.y],
     entry,
-    height,
   )
 
   return (
-    <Group onClick={onClick} globalCompositeOperation={"destination-over"}>
+    <Group onClick={onClick} globalCompositeOperation="destination-over">
       <Circle
         width={10}
         height={10}
-        fill={"red"}
+        fill="red"
         x={entryCoords.x}
         y={entryCoords.y}
       />
@@ -75,7 +79,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
             ? Colors.LightYellow
             : undefined
         }
-        stroke={"black"}
+        stroke="black"
         strokeWidth={3}
         strokeEnabled
       />

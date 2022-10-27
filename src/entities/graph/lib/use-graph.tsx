@@ -1,7 +1,6 @@
 import { GraphDestination, TGraph } from "../model/interface"
-import { useEffect, useMemo } from "react"
+import { useMemo } from "react"
 import { Side } from "../../../shared/model/geometry"
-import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
 
 /**
  * Возвращает и регистрирует граф по основным свойствам
@@ -13,10 +12,9 @@ export const useGraph = (
   points: [number, number],
   direction: Side,
   height = 25,
-  isFilled = false,
+  isFilled = true,
   neighbors: TGraph[] = [],
 ) => {
-  const { registerGraph } = useGraphContext()
   const graph: TGraph = useMemo(
     () => ({
       destination,
@@ -26,11 +24,8 @@ export const useGraph = (
       neighbors,
       isFilled,
     }),
-    [],
+    [destination, direction, height, isFilled, neighbors, points],
   )
-  useEffect(() => {
-    registerGraph(graph)
-  }, [graph])
 
   return { graph }
 }

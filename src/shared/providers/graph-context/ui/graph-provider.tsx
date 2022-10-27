@@ -1,15 +1,10 @@
-import React, {
-  createContext,
-  PropsWithChildren,
-  useCallback,
-  useState,
-} from "react"
+import React, { createContext, PropsWithChildren, useState } from "react"
 import { TGraph } from "../../../../entities/graph/model/interface"
 import { TGraphContext } from "../model/interface"
 
 export const GraphContext = createContext<TGraphContext>({
-  graph: [],
-  registerGraph: () => void 0,
+  graph: [] as TGraph[],
+  setGraphRegistry: () => void 0,
 })
 
 /**
@@ -19,15 +14,12 @@ export const GraphContext = createContext<TGraphContext>({
  * */
 export const GraphProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [graphRegistry, setGraphRegistry] = useState<TGraph[]>([])
-  const registerGraph = useCallback((graph: TGraph) => {
-    setGraphRegistry([...graphRegistry, graph])
-  }, [])
 
   return (
     <GraphContext.Provider
       value={{
         graph: graphRegistry,
-        registerGraph,
+        setGraphRegistry,
       }}
     >
       {children}
