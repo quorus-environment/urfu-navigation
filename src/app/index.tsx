@@ -6,6 +6,7 @@ import { IritRtf } from "../pages/universities/irit-rtf"
 import "./app.css"
 /**
  * Основная компонента приложения
+ *
  * */
 export const App: React.FC = () => {
   return (
