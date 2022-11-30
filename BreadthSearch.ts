@@ -27,78 +27,27 @@ export enum Side {
 }
 
 
-let routes: Map<string, string> = new Map<string, string>();
-let queue: Queue<number> = new Queue<number>();
+class LinkedList<T> {
+  value: T;
+  head: LinkedList<T>;
+  // head: ListNode<T> | null;
+  size: number;
+  constructor(value: T, head: LinkedList<T> = null) {
+    this.head = head;
+    this.value = value;
+    this.size = head?.size +1 ?? 1;
+  }
 
-function isString(element: string | undefined): element is string {
-  return typeof element === 'string';
-}
-
-function GetResultRoute(startPointID: string, endPointID: string): Array<string> {
-  let currentId = endPointID;
-  const resultRoute = [currentId];
-  while (currentId !== startPointID) {
-    let idContainer: string | undefined = routes.get(currentId)
-    if (isString(idContainer)) {
-      currentId = idContainer;
+  public* GetEnumerator(){
+    yield this.value;
+    let pathItem = this.head;
+    while (pathItem != null) {
+      yield pathItem.value;
+      pathItem = pathItem.head;
     }
-    resultRoute.unshift(currentId);
   }
-  return resultRoute;
 }
 
-
-
-function BreadthSearch(graph: Array<TGraph>, startPointID: string, endPointID: string): Array<string> {
-  if (queue.length === 0) {
-    return [];
-  }
-  let currentIndex = queue.dequeue();
-  let currentPlace = graph[currentIndex];
-  console.log(currentPlace.id);
-  console.log(currentPlace.isFilled);
-  if (/*currentPlace.isFilled*/ graph[currentIndex].isFilled) {
-    BreadthSearch(graph, startPointID, endPointID)
-  }
-  console.log(currentPlace.id);
-  console.log(currentPlace.isFilled);
-
-  console.log(graph[currentIndex].id);
-  console.log(graph[currentIndex].isFilled);
-
-  graph[currentIndex].isFilled = true;
-  // currentPlace.isFilled = true;
-
-
-  console.log(currentPlace.isFilled);
-  if (currentPlace.id === endPointID) {
-    console.log(routes);
-    return GetResultRoute(startPointID, endPointID);
-  }
-  currentPlace.neighbors?.forEach(currentGraph => {
-    const neighbourIndex = graph.findIndex(element => element.id === currentGraph.id);
-    console.log(neighbourIndex);
-    // ri_101, ri_102, ri_103, ri_105, ri_106, ri_107, cor_1, cor_2
-    const neighbour = graph[neighbourIndex];
-    if (!neighbour.isFilled) {
-      routes.set(neighbour.id, currentPlace.id);
-      queue.enqueue(neighbourIndex);
-    }
-  });
-  return BreadthSearch(graph, startPointID, endPointID);
-}
-
-function Initialization(graph: Array<TGraph>, startPointID: string, endPointID: string): string[] | null {
-  routes = new Map<string, string>();
-  queue = new Queue<number>();
-  if (startPointID === endPointID) {
-    return null;
-  }
-  queue.enqueue(graph.findIndex(item =>
-    item.id === startPointID));
-  console.log(queue.length)
-  return BreadthSearch(graph, startPointID, endPointID);
-}
 
 let ri_101: TGraph = {
   id: "РИ-101",
@@ -174,20 +123,51 @@ let cor_1: TGraph = {
 
 
 
-cor_1.neighbors = [ri_101, ri_102, ri_105, ri_106, cor_2];
-cor_2.neighbors = [ri_102, ri_103, ri_106, ri_107, cor_1];
-ri_101.neighbors = [ri_105, cor_1];
-ri_102.neighbors = [ri_106, cor_1, cor_2];
-ri_103.neighbors = [ri_107, cor_2];
-ri_105.neighbors = [ri_101, cor_1];
-ri_106.neighbors = [ri_102, cor_1, cor_2];
-ri_107.neighbors = [ri_103, cor_2];
-let meinGraph: TGraph[] = [ri_101, ri_102, ri_103, ri_105, ri_106, ri_107, cor_1, cor_2];
+cor_1.neighbors = [cor_2, ri_101, ri_102, ri_105, ri_106];
+cor_2.neighbors = [cor_1, ri_102, ri_103, ri_106, ri_107];
+ri_101.neighbors = [cor_1, ri_105];
+ri_102.neighbors = [cor_2, cor_1, ri_106];
+ri_103.neighbors = [cor_2, ri_107];
+ri_105.neighbors = [cor_1, ri_101];
+ri_106.neighbors = [cor_2, cor_1, ri_102];
+ri_107.neighbors = [cor_2, ri_103];
+let mainGraph: TGraph[] = [cor_2, cor_1, ri_101, ri_102, ri_103, ri_105, ri_106, ri_107];
 
-// console.log(cor_1.neighbors);
-console.log(Initialization(meinGraph, "РИ-101", "РИ-102"));
 
-// console.log(Initialization(graph, "РИ-101", "РИ-107"))
+const check = findPaths(ri_101, ri_107);
+console.log(check.next());
+
+
+
+
+
+
+
+
+function* findPaths(startGraph: TGraph, endGraph: TGraph): any {
+  let queue = new Queue<TGraph>();
+  queue.enqueue(startGraph);
+  let visited = new Set();
+  visited.add(startGraph);
+  let tracks = new Map<string, LinkedList<string>>;
+  const initLL = new LinkedList<string>(startGraph.id);
+  tracks.set(startGraph.id, initLL);
+  while (queue.length != 0) {
+    let graph = queue.dequeue();
+    for (let i = 0; i < graph.neighbors.length; i++){
+      var neighbor = graph.neighbors[i];
+      if (visited.has(neighbor.id))
+        continue
+      queue.enqueue(neighbor);
+      visited.add(neighbor.id);
+      const currentLL = new LinkedList<string>(neighbor.id, tracks.get(graph.id));
+      tracks.set(neighbor.id, currentLL)
+    }
+  }
+
+  if (tracks.has(endGraph.id))
+    yield tracks.get(endGraph.id);
+}
 
 
 
