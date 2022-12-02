@@ -30,21 +30,11 @@ export enum Side {
 class LinkedList<T> {
   value: T;
   head: LinkedList<T>;
-  // head: ListNode<T> | null;
   size: number;
   constructor(value: T, head: LinkedList<T> = null) {
     this.head = head;
     this.value = value;
-    this.size = head?.size +1 ?? 1;
-  }
-
-  public* GetEnumerator(){
-    yield this.value;
-    let pathItem = this.head;
-    while (pathItem != null) {
-      yield pathItem.value;
-      pathItem = pathItem.head;
-    }
+    this.size = head?.size + 1 ?? 1;
   }
 }
 
@@ -133,18 +123,10 @@ ri_106.neighbors = [cor_2, cor_1, ri_102];
 ri_107.neighbors = [cor_2, ri_103];
 let mainGraph: TGraph[] = [cor_2, cor_1, ri_101, ri_102, ri_103, ri_105, ri_106, ri_107];
 
-
-const check = findPaths(ri_101, ri_107);
-console.log(check.next());
+console.log(expandLinkedList(ri_101, ri_107));
 
 
-
-
-
-
-
-
-function* findPaths(startGraph: TGraph, endGraph: TGraph): any {
+function* findPaths(startGraph: TGraph, endGraph: TGraph): Generator<LinkedList<string>> {
   let queue = new Queue<TGraph>();
   queue.enqueue(startGraph);
   let visited = new Set();
@@ -155,7 +137,7 @@ function* findPaths(startGraph: TGraph, endGraph: TGraph): any {
   while (queue.length != 0) {
     let graph = queue.dequeue();
     for (let i = 0; i < graph.neighbors.length; i++){
-      var neighbor = graph.neighbors[i];
+      let neighbor = graph.neighbors[i];
       if (visited.has(neighbor.id))
         continue
       queue.enqueue(neighbor);
@@ -171,7 +153,18 @@ function* findPaths(startGraph: TGraph, endGraph: TGraph): any {
 
 
 
-
+function expandLinkedList(startGraph: TGraph, endGraph: TGraph): string[] {
+  const pathLinkedList = findPaths(startGraph, endGraph);
+  const iterationResult = pathLinkedList.next();
+  let currentPathPoint = iterationResult.value;
+  let path: string[] = [];
+  while (currentPathPoint !== null){
+    path.push(currentPathPoint.value)
+    currentPathPoint = currentPathPoint.head;
+  }
+  // console.log(result.reverse())
+  return path.reverse();
+}
 
 
 
