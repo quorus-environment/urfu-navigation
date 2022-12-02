@@ -1,5 +1,7 @@
 import { Queue } from "queue-typescript";
-// import { Side, TGraph, GraphDestination } from "./graph/graph";
+import { GraphDestination } from "./src/entities/graph/model/interface"
+import { Side } from "./src/shared/model/geometry"
+import { LinkedList } from "./src/shared/model/linked-list"
 
 
 export type TGraph = {
@@ -12,34 +14,9 @@ export type TGraph = {
   neighbors?: TGraph[]
 }
 
-export enum GraphDestination {
-  CORRIDOR = "corridor",
-  AUDITORIUM = "auditorium",
-  TURN_OVER = "turnover",
-  LADDER = "ladder",
-}
-
-export enum Side {
-  LEFT = "left",
-  TOP = "top",
-  RIGHT = "right",
-  BOTTOM = "bottom",
-}
 
 
-class LinkedList<T> {
-  value: T;
-  head: LinkedList<T>;
-  size: number;
-  constructor(value: T, head: LinkedList<T> = null) {
-    this.head = head;
-    this.value = value;
-    this.size = head?.size + 1 ?? 1;
-  }
-}
-
-
-let ri_101: TGraph = {
+const ri101: TGraph = {
   id: "РИ-101",
   points: [425, 450],
   direction: Side.BOTTOM,
@@ -48,7 +25,7 @@ let ri_101: TGraph = {
   height: 25
 }
 
-let ri_102: TGraph = {
+const ri102: TGraph = {
   id: "РИ-102",
   points: [575, 450],
   direction: Side.BOTTOM,
@@ -57,7 +34,7 @@ let ri_102: TGraph = {
   height: 25
 }
 
-let ri_103: TGraph = {
+const ri103: TGraph = {
   id: "РИ-103",
   points: [725, 450],
   direction: Side.BOTTOM,
@@ -66,7 +43,7 @@ let ri_103: TGraph = {
   height: 25
 }
 
-let ri_105: TGraph = {
+const ri105: TGraph = {
   id: "РИ-105",
   points: [425, 500],
   direction: Side.TOP,
@@ -75,7 +52,7 @@ let ri_105: TGraph = {
   height: 25
 }
 
-let ri_106: TGraph = {
+const ri106: TGraph = {
   id: "РИ-106",
   points: [575, 500],
   direction: Side.TOP,
@@ -84,7 +61,7 @@ let ri_106: TGraph = {
   height: 25
 }
 
-let ri_107: TGraph = {
+const ri107: TGraph = {
   id: "РИ-107",
   points: [725, 500],
   direction: Side.TOP,
@@ -93,8 +70,8 @@ let ri_107: TGraph = {
   height: 25
 }
 
-let cor_2: TGraph = {
-  id: "cor_2",
+const cor2: TGraph = {
+  id: "cor2",
   points: [575, 475],
   direction: Side.RIGHT,
   isFilled: false,
@@ -102,8 +79,8 @@ let cor_2: TGraph = {
   height: 150,
 }
 
-let cor_1: TGraph = {
-  id: "cor_1",
+const cor1: TGraph = {
+  id: "cor1",
   points: [425, 475],
   direction: Side.RIGHT,
   isFilled: false,
@@ -113,32 +90,31 @@ let cor_1: TGraph = {
 
 
 
-cor_1.neighbors = [cor_2, ri_101, ri_102, ri_105, ri_106];
-cor_2.neighbors = [cor_1, ri_102, ri_103, ri_106, ri_107];
-ri_101.neighbors = [cor_1, ri_105];
-ri_102.neighbors = [cor_2, cor_1, ri_106];
-ri_103.neighbors = [cor_2, ri_107];
-ri_105.neighbors = [cor_1, ri_101];
-ri_106.neighbors = [cor_2, cor_1, ri_102];
-ri_107.neighbors = [cor_2, ri_103];
-let mainGraph: TGraph[] = [cor_2, cor_1, ri_101, ri_102, ri_103, ri_105, ri_106, ri_107];
+cor1.neighbors = [cor2, ri101, ri102, ri105, ri106];
+cor2.neighbors = [cor1, ri102, ri103, ri106, ri107];
+ri101.neighbors = [cor1, ri105];
+ri102.neighbors = [cor2, cor1, ri106];
+ri103.neighbors = [cor2, ri107];
+ri105.neighbors = [cor1, ri101];
+ri106.neighbors = [cor2, cor1, ri102];
+ri107.neighbors = [cor2, ri103];
 
-console.log(expandLinkedList(ri_101, ri_107));
+console.log(findPaths(ri101, ri107));
 
 
-function* findPaths(startGraph: TGraph, endGraph: TGraph): Generator<LinkedList<string>> {
-  let queue = new Queue<TGraph>();
+function* createLinkedListPath(startGraph: TGraph, endGraph: TGraph): Generator<LinkedList<string> | undefined> {
+  const queue = new Queue<TGraph>();
   queue.enqueue(startGraph);
-  let visited = new Set();
+  const visited = new Set();
   visited.add(startGraph);
-  let tracks = new Map<string, LinkedList<string>>;
+  const tracks = new Map<string, LinkedList<string>>;
   const initLL = new LinkedList<string>(startGraph.id);
   tracks.set(startGraph.id, initLL);
   while (queue.length != 0) {
-    let graph = queue.dequeue();
-    for (let i = 0; i < graph.neighbors.length; i++){
-      let neighbor = graph.neighbors[i];
-      if (visited.has(neighbor.id))
+    const graph = queue.dequeue();
+    for (let i = 0; i < (graph.neighbors?.length || 0); i++){
+      const neighbor = graph.neighbors?.[i];
+      if (!neighbor || visited.has(neighbor.id))
         continue
       queue.enqueue(neighbor);
       visited.add(neighbor.id);
@@ -153,16 +129,15 @@ function* findPaths(startGraph: TGraph, endGraph: TGraph): Generator<LinkedList<
 
 
 
-function expandLinkedList(startGraph: TGraph, endGraph: TGraph): string[] {
-  const pathLinkedList = findPaths(startGraph, endGraph);
+function findPaths (startGraph: TGraph, endGraph: TGraph): string[] {
+  const pathLinkedList = createLinkedListPath(startGraph, endGraph);
   const iterationResult = pathLinkedList.next();
   let currentPathPoint = iterationResult.value;
-  let path: string[] = [];
+  const path: string[] = [];
   while (currentPathPoint !== null){
     path.push(currentPathPoint.value)
     currentPathPoint = currentPathPoint.head;
   }
-  // console.log(result.reverse())
   return path.reverse();
 }
 
