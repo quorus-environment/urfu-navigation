@@ -26,7 +26,7 @@
         ],
     "rules": {
         "react/react-in-jsx-scope": "off",
-        "camelcase": "error",
+        "camelcase": "warn",
         "spaced-comment": "error",
         "quotes": ["error", "double"],
         "no-duplicate-imports": "error"
