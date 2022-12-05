@@ -11,6 +11,7 @@ import { Colors } from "../../../shared/constants"
 import { usePointsDeclaration } from "../lib/use-points-declaration"
 import { useGraph } from "../../graph/lib/use-graph"
 import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
+import { findPaths } from "../../../find-path"
 
 /**
  * компонент аудитории: пока это просто квадратик с названием и входом, дальше будем расширять до
@@ -20,6 +21,8 @@ import { useGraphContext } from "../../../shared/providers/graph-context/lib/use
  * @param name - Название аудитории
  * @param height - Высота
  * @param width - Ширина
+ * @param section - Секция
+ * @param floor - Этаж
  * */
 export const Auditorium: React.FC<TAuditorium> = ({
   name,
@@ -27,10 +30,12 @@ export const Auditorium: React.FC<TAuditorium> = ({
   entry,
   width,
   height,
+  section,
+  floor,
 }) => {
   // Получаем выбранные элементы
   const { startId, endId, setEndId } = useContext(ChosenContext)
-  const { setColoredGraph } = useGraphContext()
+  const { setColoredGraph, graph } = useGraphContext()
 
   // Координаты текста (по центру)
   // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается
@@ -43,19 +48,28 @@ export const Auditorium: React.FC<TAuditorium> = ({
   const entryCoords = useEntryCoords(entry, coords, width, height)
 
   const onClick = useCallback(() => {
-    setColoredGraph(["РИ-101", "cor_1"])
+    if (!startId) {
+      return
+    }
+    const path = findPaths(startId, name, graph)
+    console.log(startId, name, graph)
+    console.log(path)
+    setEndId(name)
+    setColoredGraph(path)
     name !== startId && setEndId(name)
-  }, [setColoredGraph, name, startId, setEndId])
+  }, [graph, startId, setColoredGraph, name, setEndId])
 
   // Описание начальной и конечной точки
   const description = usePointsDeclaration(name)
 
-  const { graph } = useGraph(
+  const { graph: auditoriumGraph } = useGraph(
     name,
     GraphDestination.AUDITORIUM,
     [entryCoords.x, entryCoords.y],
     entry,
     25,
+    section,
+    floor,
   )
 
   return (
@@ -90,7 +104,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
         description={description?.description}
         descriptionColor={description?.descriptionColor}
       />
-      <Graph graph={graph} />
+      <Graph graph={auditoriumGraph} />
     </Group>
   )
 }

@@ -2,7 +2,9 @@ import { GraphDestination, TGraph } from "../../graph/model/interface"
 import { getEntryPoints, getResultPoint } from "../../graph/lib/use-graph"
 import { TAuditorium } from "../model/interface"
 
-export const graphFromAuditorium = (auditoriumsConfig: TAuditorium[]) => {
+export const getGraphsFromAuditoriums = (
+  auditoriumsConfig: TAuditorium[],
+): TGraph[] => {
   return auditoriumsConfig.reduce((graph: TGraph[], config) => {
     const points = getEntryPoints(
       config.entry,
@@ -17,10 +19,12 @@ export const graphFromAuditorium = (auditoriumsConfig: TAuditorium[]) => {
         id: config.name,
         destination: GraphDestination.AUDITORIUM,
         height: 25,
-        neighbors: [],
+        neighbors: config.neighbors,
         direction: config.entry,
         points: [points.x, points.y, resPoints.x, resPoints.y],
-      } as TGraph,
+        section: config.section,
+        floor: config.floor,
+      },
     ]
   }, [])
 }

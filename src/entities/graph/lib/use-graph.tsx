@@ -75,7 +75,9 @@ export const useGraph = (
   points: [number, number],
   direction: Side,
   height = 25,
-  neighbors: TGraph[] = [],
+  section: number,
+  floor: number,
+  neighbors: string[] = [],
 ) => {
   const { coloredGraph } = useGraphContext()
   const resultPoint: TCoords = useMemo(() => {
@@ -94,10 +96,13 @@ export const useGraph = (
       neighbors,
       isFilled,
       id: id,
+      section,
+      floor,
     }),
     [
       destination,
       direction,
+      floor,
       height,
       id,
       isFilled,
@@ -105,6 +110,7 @@ export const useGraph = (
       points,
       resultPoint.x,
       resultPoint.y,
+      section,
     ],
   )
 
