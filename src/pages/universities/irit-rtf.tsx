@@ -1,16 +1,11 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Layer } from "react-konva"
 import { Auditorium } from "../../entities/auditorium/ui/auditorium"
 import { TAuditorium } from "../../entities/auditorium/model/interface"
 import { Side } from "../../shared/model/geometry"
 import { MapStage } from "../../entities/map-stage/ui/map-stage"
 import { GraphDestination, TGraph } from "../../entities/graph/model/interface"
-import { useGraphContext } from "../../shared/providers/graph-context/lib/use-graph-context"
 import { Graph } from "../../entities/graph/ui/graph"
-import {
-  getEntryPoints,
-  getResultPoint,
-} from "../../entities/graph/lib/use-graph"
 
 const auditoriumsConfig: TAuditorium[] = [
   {
@@ -92,35 +87,6 @@ const neighborsGraph: TGraph[] = [
 ]
 
 export const IritRtf: React.FC = () => {
-  const { setGraphRegistry, coloredGraph } = useGraphContext()
-  useEffect(() => {
-    const graphsFromAuditoriums = auditoriumsConfig.reduce(
-      (graph: TGraph[], config) => {
-        const points = getEntryPoints(
-          config.entry,
-          config.coords,
-          config.width,
-          config.height,
-        )
-        const resPoints = getResultPoint(config.entry, [points.x, points.y], 25)
-        const isFilled = coloredGraph.includes(config.name)
-        return [
-          ...graph,
-          {
-            id: config.name,
-            destination: GraphDestination.AUDITORIUM,
-            height: 25,
-            isFilled: isFilled,
-            neighbors: [],
-            direction: config.entry,
-            points: [points.x, points.y, resPoints.x, resPoints.y],
-          } as TGraph,
-        ]
-      },
-      [],
-    )
-    setGraphRegistry([...graphsFromAuditoriums, ...neighborsGraph])
-  }, [coloredGraph, setGraphRegistry])
   return (
     <MapStage>
       <Layer height={window.innerHeight - 60}>

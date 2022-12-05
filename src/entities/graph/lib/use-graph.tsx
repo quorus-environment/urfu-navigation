@@ -1,6 +1,7 @@
 import { GraphDestination, TGraph } from "../model/interface"
 import { useMemo } from "react"
 import { Side, TCoords } from "../../../shared/model/geometry"
+import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
 
 export const checkIfPointInGraph = (
   graphPoints: [number, number, number, number],
@@ -74,12 +75,16 @@ export const useGraph = (
   points: [number, number],
   direction: Side,
   height = 25,
-  isFilled = true,
   neighbors: TGraph[] = [],
 ) => {
+  const { coloredGraph } = useGraphContext()
   const resultPoint: TCoords = useMemo(() => {
     return getResultPoint(direction, points, height)
   }, [direction, height, points])
+
+  const isFilled = useMemo(() => {
+    return !!coloredGraph.find((graphId) => graphId === id)
+  }, [coloredGraph, id])
   const graph: TGraph = useMemo(
     () => ({
       destination,

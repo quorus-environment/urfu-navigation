@@ -9,7 +9,7 @@ import { AuditoriumTitle } from "./auditorium-title"
 import { useEntryCoords } from "../lib/use-entry-coords"
 import { Colors } from "../../../shared/constants"
 import { usePointsDeclaration } from "../lib/use-points-declaration"
-import { checkIfPointInGraph, useGraph } from "../../graph/lib/use-graph"
+import { useGraph } from "../../graph/lib/use-graph"
 import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
 
 /**
@@ -30,7 +30,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
 }) => {
   // Получаем выбранные элементы
   const { startId, endId, setEndId } = useContext(ChosenContext)
-  const { graph: graphReg } = useGraphContext()
+  const { setColoredGraph } = useGraphContext()
 
   // Координаты текста (по центру)
   // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается
@@ -43,13 +43,9 @@ export const Auditorium: React.FC<TAuditorium> = ({
   const entryCoords = useEntryCoords(entry, coords, width, height)
 
   const onClick = useCallback(() => {
-    graphReg?.[0]?.points &&
-      console.log(
-        "result: ",
-        checkIfPointInGraph(graphReg[0].points, [425, 455]),
-      )
+    setColoredGraph(["РИ-101", "cor_1"])
     name !== startId && setEndId(name)
-  }, [graphReg, name, startId, setEndId])
+  }, [setColoredGraph, name, startId, setEndId])
 
   // Описание начальной и конечной точки
   const description = usePointsDeclaration(name)
@@ -60,7 +56,6 @@ export const Auditorium: React.FC<TAuditorium> = ({
     [entryCoords.x, entryCoords.y],
     entry,
     25,
-    false,
   )
 
   return (
