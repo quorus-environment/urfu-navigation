@@ -51,10 +51,12 @@ export const Auditorium: React.FC<TAuditorium> = ({
     if (!startId) {
       return
     }
-    const path = findPaths(startId, name, graph)
-    setEndId(name)
-    setColoredGraph(path)
-    name !== startId && setEndId(name)
+    if (name !== startId) {
+      const path = findPaths(startId, name, graph)
+      setColoredGraph(path)
+
+      setEndId(name)
+    }
   }, [graph, startId, setColoredGraph, name, setEndId])
 
   // Описание начальной и конечной точки

@@ -17,4 +17,5 @@ export enum GraphDestination {
   AUDITORIUM = "auditorium",
   TURN_OVER = "turnover",
   LADDER = "ladder",
+  SECTION = "section-corridor",
 }
