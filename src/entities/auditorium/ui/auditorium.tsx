@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo } from "react"
+import React, { useCallback, useContext, useMemo } from "react"
 import { Circle, Group, Rect } from "react-konva"
 import { TAuditorium } from "../model/interface"
 import { TCoords } from "../../../shared/model/geometry"
@@ -31,9 +31,6 @@ export const Auditorium: React.FC<TAuditorium> = ({
   // Получаем выбранные элементы
   const { startId, endId, setEndId } = useContext(ChosenContext)
   const { graph: graphReg } = useGraphContext()
-  useEffect(() => {
-    console.log(graphReg)
-  }, [graphReg])
 
   // Координаты текста (по центру)
   // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается
@@ -62,6 +59,8 @@ export const Auditorium: React.FC<TAuditorium> = ({
     GraphDestination.AUDITORIUM,
     [entryCoords.x, entryCoords.y],
     entry,
+    25,
+    false,
   )
 
   return (
