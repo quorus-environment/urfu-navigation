@@ -12,7 +12,6 @@ function* createLinkedListPath(
   const visited = new Set() // Сет для посещеных графов
   const startGraph = graphRegistry.find((gr) => gr.id === startGraphId)
   const endGraph = graphRegistry.find((gr) => gr.id === endGraphId)
-  console.log(startGraph, endGraph)
   if (!startGraph) {
     return undefined
   }
