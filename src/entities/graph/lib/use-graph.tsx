@@ -75,7 +75,7 @@ export const useGraph = (
   points: [number, number],
   direction: Side,
   height = 25,
-  section: number,
+  section: string,
   floor: number,
   neighbors: string[] = [],
 ) => {

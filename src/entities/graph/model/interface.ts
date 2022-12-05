@@ -5,11 +5,12 @@ export type TGraph = {
   points: [number, number, number, number]
   direction: Side
   height: number
-  section: number
+  section: string
   floor: number
   destination: GraphDestination
   isFilled?: boolean
   neighbors?: string[]
+  linkedSection?: string
 }
 
 export enum GraphDestination {

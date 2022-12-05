@@ -1,4 +1,5 @@
 import "jest"
+import { TGraph } from "./entities/graph/model/interface"
 test("huy", () => {
   expect(
     (function () {
@@ -6,3 +7,7 @@ test("huy", () => {
     })(),
   ).toBe(2)
 })
+export type section = {
+  sectionName: string
+  graph: TGraph[]
+}

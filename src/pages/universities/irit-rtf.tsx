@@ -18,7 +18,7 @@ const auditoriumsConfig: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["cor_1", "РИ-105"],
     floor: 1,
-    section: 1,
+    section: "1",
   },
   {
     name: "РИ-102",
@@ -28,7 +28,7 @@ const auditoriumsConfig: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["cor_1", "РИ-106", "cor_2"],
     floor: 1,
-    section: 1,
+    section: "1",
   },
   {
     name: "РИ-103",
@@ -38,7 +38,7 @@ const auditoriumsConfig: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["cor_2", "РИ-107", "cor_3"],
     floor: 1,
-    section: 1,
+    section: "1",
   },
   {
     name: "РИ-105",
@@ -48,7 +48,7 @@ const auditoriumsConfig: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["cor_1", "РИ-101"],
     floor: 1,
-    section: 1,
+    section: "1",
   },
   {
     name: "РИ-106",
@@ -58,7 +58,7 @@ const auditoriumsConfig: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["cor_1", "РИ-102", "cor_2"],
     floor: 1,
-    section: 1,
+    section: "1",
   },
   {
     name: "РИ-107",
@@ -68,7 +68,7 @@ const auditoriumsConfig: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["cor_2", "РИ-103", "cor_3"],
     floor: 1,
-    section: 1,
+    section: "1",
   },
   {
     name: "РИ-108",
@@ -78,7 +78,7 @@ const auditoriumsConfig: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["cor_3"],
     floor: 1,
-    section: 1,
+    section: "1",
   },
 ]
 
@@ -90,7 +90,7 @@ const neighborsGraph: TGraph[] = [
     neighbors: ["РИ-102", "РИ-101", "РИ-105", "РИ-106", "cor_2"],
     direction: Side.RIGHT,
     points: [425, 475, 575, 475],
-    section: 1,
+    section: "1",
     floor: 1,
   },
   {
@@ -100,7 +100,7 @@ const neighborsGraph: TGraph[] = [
     neighbors: ["РИ-103", "РИ-102", "РИ-107", "РИ-106", "cor_1", "cor_3"],
     direction: Side.RIGHT,
     points: [575, 475, 725, 475],
-    section: 1,
+    section: "1",
     floor: 1,
   },
   {
@@ -110,7 +110,7 @@ const neighborsGraph: TGraph[] = [
     neighbors: ["РИ-108", "РИ-103", "РИ-107"],
     direction: Side.RIGHT,
     points: [725, 475, 875, 475],
-    section: 1,
+    section: "1",
     floor: 1,
   },
 ]
