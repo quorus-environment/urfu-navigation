@@ -11,7 +11,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["cor_1", "РИ-105"],
     floor: 1,
-    section: "1",
+    section: "sec1",
   },
   {
     name: "РИ-102",
@@ -21,7 +21,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["cor_1", "РИ-106", "cor_2"],
     floor: 1,
-    section: "1",
+    section: "sec1",
   },
   {
     name: "РИ-103",
@@ -31,7 +31,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["cor_2", "РИ-107", "cor_3"],
     floor: 1,
-    section: "1",
+    section: "sec1",
   },
   {
     name: "РИ-105",
@@ -41,7 +41,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["cor_1", "РИ-101"],
     floor: 1,
-    section: "1",
+    section: "sec1",
   },
   {
     name: "РИ-106",
@@ -51,7 +51,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["cor_1", "РИ-102", "cor_2"],
     floor: 1,
-    section: "1",
+    section: "sec1",
   },
   {
     name: "РИ-107",
@@ -61,7 +61,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["cor_2", "РИ-103", "cor_3"],
     floor: 1,
-    section: "1",
+    section: "sec1",
   },
   {
     name: "РИ-108",
@@ -71,11 +71,56 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["cor_3"],
     floor: 1,
-    section: "1",
+    section: "sec1",
+  },
+
+  // Кабинеты для тестов алгоритма поиска
+  {
+    name: "РИ-109",
+    height: 0,
+    width: 0,
+    coords: { x: 0, y: 0 },
+    entry: Side.TOP,
+    neighbors: ["РИ-111", "turnover1to2"],
+    floor: 1,
+    section: "sec2",
+  },
+  {
+    name: "РИ-111",
+    height: 0,
+    width: 0,
+    coords: { x: 0, y: 0 },
+    entry: Side.TOP,
+    neighbors: ["РИ-109", "turnover1to2"],
+    floor: 1,
+    section: "sec2",
   },
 ]
 
 export const neighborsGraph: TGraph[] = [
+  {
+    id: "turnover1to2",
+    destination: GraphDestination.TURN_OVER,
+    height: 150,
+    neighbors: ["РИ-108", "cor_1"],
+    direction: Side.RIGHT,
+    points: [425, 475, 575, 475],
+    section: "sec1",
+    floor: 1,
+    linkedSection: "sec2",
+  },
+
+  {
+    id: "turnover2to1",
+    destination: GraphDestination.TURN_OVER,
+    height: 150,
+    neighbors: ["РИ-109", "РИ-111"],
+    direction: Side.RIGHT,
+    points: [425, 475, 575, 475],
+    section: "sec2",
+    floor: 1,
+    linkedSection: "sec1",
+  },
   {
     id: "cor_1",
     destination: GraphDestination.CORRIDOR,
@@ -83,7 +128,7 @@ export const neighborsGraph: TGraph[] = [
     neighbors: ["РИ-102", "РИ-101", "РИ-105", "РИ-106", "cor_2"],
     direction: Side.RIGHT,
     points: [425, 475, 575, 475],
-    section: "1",
+    section: "sec1",
     floor: 1,
   },
   {
@@ -93,7 +138,7 @@ export const neighborsGraph: TGraph[] = [
     neighbors: ["РИ-103", "РИ-102", "РИ-107", "РИ-106", "cor_1", "cor_3"],
     direction: Side.RIGHT,
     points: [575, 475, 725, 475],
-    section: "1",
+    section: "sec1",
     floor: 1,
   },
   {
@@ -103,7 +148,7 @@ export const neighborsGraph: TGraph[] = [
     neighbors: ["РИ-108", "РИ-103", "РИ-107"],
     direction: Side.RIGHT,
     points: [725, 475, 875, 475],
-    section: "1",
+    section: "sec1",
     floor: 1,
   },
 ]
