@@ -152,3 +152,27 @@ export const neighborsGraph: TGraph[] = [
     floor: 1,
   },
 ]
+
+// Массив графов секций
+export const sectionsGraph: TGraph[] = [
+  {
+    id: "sec1",
+    destination: GraphDestination.SECTION,
+    height: 0,
+    neighbors: ["sec2"],
+    direction: Side.RIGHT,
+    points: [0, 0, 0, 0],
+    section: "sec1",
+    floor: 1,
+  },
+  {
+    id: "sec2",
+    destination: GraphDestination.SECTION,
+    height: 0,
+    neighbors: ["sec1"],
+    direction: Side.RIGHT,
+    points: [0, 0, 0, 0],
+    section: "sec2",
+    floor: 1,
+  },
+]
