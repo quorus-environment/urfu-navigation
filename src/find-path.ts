@@ -2,7 +2,7 @@ import { Queue } from "queue-typescript"
 import { TGraph } from "./entities/graph/model/interface"
 import { LinkedList } from "./shared/model/linked-list"
 
-// Поиск в ширину от графа startGraph до графа endGraph
+// Поиск в ширину от графа с ID startGraphId до графа с ID endGraphId
 function* createLinkedListPath(
   startGraphId: string,
   endGraphId: string,
@@ -42,7 +42,7 @@ function* createLinkedListPath(
   }
 }
 
-// Разворачиваем связанный лист в массив айдишников
+// Поиск пути внутри одной секции
 function findPathsInSection(
   startGraphId: string,
   endGraphId: string,
@@ -56,29 +56,35 @@ function findPathsInSection(
   return unwrapLinkedList(pathLinkedList)
 }
 
+// Поиск пути от startGraphId до endGraphId
 export function findPaths(
   startGraphId: string,
   endGraphId: string,
   graphRegistry: TGraph[],
 ): string[] {
+  // Создаем входной и искомый графы
   const startGraph = graphRegistry.find((gr) => gr.id === startGraphId)
   const endGraph = graphRegistry.find((gr) => gr.id === endGraphId)
   const resultPath: string[] = []
+  // Будет поиск по этажам
   if (startGraph.floor !== endGraph.floor) {
     return []
   }
   let sectionPathLL: Generator<LinkedList<string> | undefined, any, unknown>
+  // Поиск по секциям
   if (startGraph.section !== endGraph.section) {
     sectionPathLL = createLinkedListPath(
       startGraph.section,
       endGraph.section,
       graphRegistry,
     )
+    // Список секций, через которые нужно пройти включая начальную и конечную
     const sectionPath = unwrapLinkedList(sectionPathLL)
     let lastTurnOverId = ""
     for (let i = 0; i < sectionPath.length - 1; i++) {
       const sectionId = sectionPath[i]
       const nextSectionId = sectionPath[i + 1]
+      // Ищем turnover, который соединяем текущую секцию с следующей
       const turnoverToNextSection = graphRegistry.find(
         (gr) => gr.linkedSection === nextSectionId,
       )
@@ -87,24 +93,28 @@ export function findPaths(
         turnoverToNextSection.id,
         graphRegistry,
       )
-      const pathToTurnover = unwrapLinkedList(pathToTurnoverLL)
-      resultPath.push(...pathToTurnover)
+      // Ищем путь до этого turnover и добавляем в итоговый путь
+      resultPath.push(...unwrapLinkedList(pathToTurnoverLL))
       const turnoverInNewSection = graphRegistry.find(
         (gr) => gr.linkedSection === sectionId,
       )
+      // Записываем последний turnover, который станет точкой старта
       lastTurnOverId = turnoverInNewSection.id
     }
+    // Записываем путь в последней секции
     resultPath.push(
       ...findPathsInSection(lastTurnOverId, endGraphId, graphRegistry),
     )
     return resultPath
   }
+  // Поиск пути в случае, если графы находятся в одной секции
   resultPath.push(
     ...findPathsInSection(startGraphId, endGraphId, graphRegistry),
   )
   return resultPath
 }
 
+// Разворачиваем связанный лист в массив айдишников
 function unwrapLinkedList(
   linkedListPath: Generator<LinkedList<string> | undefined, any, unknown>,
 ): string[] {
