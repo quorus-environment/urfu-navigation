@@ -1,10 +1,9 @@
 import "./ordinarySearch.css"
 import Lens from "../assets/Vector.svg"
-import { TAuditorium } from "../../entities/auditorium/model/interface"
 import { Side } from "../model/geometry"
 import { useState } from "react"
 
-const auditoriumsConfig: TAuditorium[] = [
+const auditoriumsConfig: any[] = [
   // для теста здесь
   {
     name: "РИ-101",
