@@ -22,12 +22,12 @@ export const AuditoriumTitle: React.FC<TAuditoriumTitleProps> = ({
         text={title}
         height={16}
         width={100}
-        fontFamily={"Montserrat"}
-        fontStyle={"bold"}
+        fontFamily="Montserrat"
+        fontStyle="bold"
         x={x}
         y={y}
         fontSize={16}
-        align={"center"}
+        align="center"
       />
       {description && (
         <Text
@@ -35,11 +35,11 @@ export const AuditoriumTitle: React.FC<TAuditoriumTitleProps> = ({
           height={16}
           width={100}
           fill={descriptionColor}
-          fontFamily={"Montserrat"}
+          fontFamily="Montserrat"
           x={x}
           y={y + 16}
           fontSize={11}
-          align={"center"}
+          align="center"
         />
       )}
     </>
