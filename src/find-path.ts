@@ -1,4 +1,3 @@
-import { Queue } from "queue-typescript"
 import { TGraph } from "./entities/graph/model/interface"
 import { LinkedList } from "./shared/model/linked-list"
 
@@ -8,32 +7,34 @@ function* createLinkedListPath(
   endGraphId: string,
   graphRegistry: TGraph[],
 ): Generator<LinkedList<string> | undefined> {
-  const queue = new Queue<TGraph>()
+  const queue: TGraph[] = []
   const visited = new Set() // Сет для посещеных графов
   const startGraph = graphRegistry.find((gr) => gr.id === startGraphId)
   const endGraph = graphRegistry.find((gr) => gr.id === endGraphId)
   if (!startGraph) {
     return undefined
   }
-  queue.enqueue(startGraph)
+  queue.push(startGraph)
   visited.add(startGraph)
   const tracks = new Map<string, LinkedList<string>>() // Словарь, связывающий айдишник со связанным списком
   const initLL = new LinkedList<string>(startGraphId) // Создаем голову связанного списка
   tracks.set(startGraph.id, initLL)
   while (queue.length != 0) {
-    const graph = queue.dequeue()
+    const graph = queue.shift()
     // Добавляем всех соседедей graph в очередь
-    for (let i = 0; i < (graph.neighbors?.length || 0); i++) {
-      const neighborId = graph.neighbors?.[i]
+    for (let i = 0; i < (graph?.neighbors?.length || 0); i++) {
+      const neighborId = graph?.neighbors?.[i]
       const neighbor = graphRegistry.find((gr) => gr.id === neighborId)
       if (!neighbor || visited.has(neighbor.id)) continue
-      queue.enqueue(neighbor)
+      queue.push(neighbor)
       visited.add(neighbor.id)
-      const currentLL = new LinkedList<string>(
-        neighbor.id,
-        tracks.get(graph.id),
-      )
-      tracks.set(neighbor.id, currentLL)
+      if (graph) {
+        const currentLL = new LinkedList<string>(
+          neighbor.id,
+          tracks.get(graph.id),
+        )
+        tracks.set(neighbor.id, currentLL)
+      }
     }
   }
   // Есди мы посетили конечный граф, то выводим генератор в виде связанного списка айдишников
