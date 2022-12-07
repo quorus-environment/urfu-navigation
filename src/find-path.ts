@@ -67,15 +67,19 @@ export function findPaths(
   const endGraph = graphRegistry.find((gr) => gr.id === endGraphId)
   const resultPath: string[] = []
   // Будет поиск по этажам
-  if (startGraph.floor !== endGraph.floor) {
+  if (startGraph?.floor !== endGraph?.floor) {
     return []
   }
   let sectionPathLL: Generator<LinkedList<string> | undefined, any, unknown>
   // Поиск по секциям
-  if (startGraph.section !== endGraph.section) {
+  if (
+    startGraph?.section !== endGraph?.section &&
+    startGraph?.section !== undefined &&
+    endGraph?.section !== undefined
+  ) {
     sectionPathLL = createLinkedListPath(
-      startGraph.section,
-      endGraph.section,
+      startGraph?.section,
+      endGraph?.section,
       graphRegistry,
     )
     // Список секций, через которые нужно пройти включая начальную и конечную
@@ -88,18 +92,22 @@ export function findPaths(
       const turnoverToNextSection = graphRegistry.find(
         (gr) => gr.linkedSection === nextSectionId,
       )
-      const pathToTurnoverLL = createLinkedListPath(
-        startGraphId,
-        turnoverToNextSection.id,
-        graphRegistry,
-      )
-      // Ищем путь до этого turnover и добавляем в итоговый путь
-      resultPath.push(...unwrapLinkedList(pathToTurnoverLL))
+      if (turnoverToNextSection?.id !== undefined) {
+        const pathToTurnoverLL = createLinkedListPath(
+          startGraphId,
+          turnoverToNextSection?.id,
+          graphRegistry,
+        )
+        // Ищем путь до этого turnover и добавляем в итоговый путь
+        resultPath.push(...unwrapLinkedList(pathToTurnoverLL))
+      }
       const turnoverInNewSection = graphRegistry.find(
         (gr) => gr.linkedSection === sectionId,
       )
       // Записываем последний turnover, который станет точкой старта
-      lastTurnOverId = turnoverInNewSection.id
+      if (turnoverInNewSection?.id !== undefined) {
+        lastTurnOverId = turnoverInNewSection?.id
+      }
     }
     // Записываем путь в последней секции
     resultPath.push(
