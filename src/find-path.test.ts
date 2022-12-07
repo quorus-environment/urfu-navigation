@@ -61,6 +61,16 @@ test("FindPathToOtherSection", () => {
   ])
 })
 
+test("FindPathToOtherSection2", () => {
+  expect(findPaths("РИ-103", "РИ-115", graph)).toStrictEqual([
+    "РИ-103",
+    "cor_3",
+    "turnover1to2",
+    "turnover3to1",
+    "РИ-115",
+  ])
+})
+
 export type section = {
   sectionName: string
   graph: TGraph[]
