@@ -10,7 +10,7 @@ export type TGraph = {
   destination: GraphDestination
   isFilled?: boolean
   neighbors?: string[]
-  linkedSection?: string
+  linkedSection?: string[]
 }
 
 export enum GraphDestination {
