@@ -43,7 +43,7 @@ function* createLinkedListPath(
 }
 
 // Разворачиваем связанный лист в массив айдишников
-export function findPaths(
+function findPathsInSection(
   startGraphId: string,
   endGraphId: string,
   graphRegistry: TGraph[],
@@ -53,7 +53,62 @@ export function findPaths(
     endGraphId,
     graphRegistry,
   )
-  const iterationResult = pathLinkedList.next()
+  return unwrapLinkedList(pathLinkedList)
+}
+
+export function findPaths(
+  startGraphId: string,
+  endGraphId: string,
+  graphRegistry: TGraph[],
+): string[] {
+  const startGraph = graphRegistry.find((gr) => gr.id === startGraphId)
+  const endGraph = graphRegistry.find((gr) => gr.id === endGraphId)
+  const resultPath: string[] = []
+  if (startGraph.floor !== endGraph.floor) {
+    return []
+  }
+  let sectionPathLL: Generator<LinkedList<string> | undefined, any, unknown>
+  if (startGraph.section !== endGraph.section) {
+    sectionPathLL = createLinkedListPath(
+      startGraph.section,
+      endGraph.section,
+      graphRegistry,
+    )
+    const sectionPath = unwrapLinkedList(sectionPathLL)
+    let lastTurnOverId = ""
+    for (let i = 0; i < sectionPath.length - 1; i++) {
+      const sectionId = sectionPath[i]
+      const nextSectionId = sectionPath[i + 1]
+      const turnoverToNextSection = graphRegistry.find(
+        (gr) => gr.linkedSection === nextSectionId,
+      )
+      const pathToTurnoverLL = createLinkedListPath(
+        startGraphId,
+        turnoverToNextSection.id,
+        graphRegistry,
+      )
+      const pathToTurnover = unwrapLinkedList(pathToTurnoverLL)
+      resultPath.push(...pathToTurnover)
+      const turnoverInNewSection = graphRegistry.find(
+        (gr) => gr.linkedSection === sectionId,
+      )
+      lastTurnOverId = turnoverInNewSection.id
+    }
+    resultPath.push(
+      ...findPathsInSection(lastTurnOverId, endGraphId, graphRegistry),
+    )
+    return resultPath
+  }
+  resultPath.push(
+    ...findPathsInSection(startGraphId, endGraphId, graphRegistry),
+  )
+  return resultPath
+}
+
+function unwrapLinkedList(
+  linkedListPath: Generator<LinkedList<string> | undefined, any, unknown>,
+): string[] {
+  const iterationResult = linkedListPath.next()
   let currentPathPoint = iterationResult.value
   const path: string[] = []
   while (currentPathPoint) {
