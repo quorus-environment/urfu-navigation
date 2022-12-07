@@ -2,11 +2,16 @@ import "jest"
 import { TGraph } from "./entities/graph/model/interface"
 import { findPaths } from "./find-path"
 import { getGraphsFromAuditoriums } from "./entities/auditorium/lib/get-graphs-from-auditoriums"
-import { auditoriumsConfig, neighborsGraph } from "./pages/universities/config"
+import {
+  auditoriumsConfig,
+  neighborsGraph,
+  sectionsGraph,
+} from "./pages/universities/config"
 
 const graph = [
   ...neighborsGraph,
   ...getGraphsFromAuditoriums(auditoriumsConfig),
+  ...sectionsGraph,
 ]
 
 test("FindPathInSectionWithoutCoridor", () => {
@@ -45,15 +50,14 @@ test("FindPathInSectionToTurnOver", () => {
 })
 
 test("FindPathToOtherSection", () => {
-  expect(findPaths("РИ-101", "РИ-110", graph)).toStrictEqual([
+  expect(findPaths("РИ-101", "РИ-109", graph)).toStrictEqual([
     "РИ-101",
     "cor_1",
     "cor_2",
     "cor_3",
     "turnover1to2",
     "turnover2to1",
-    "cor_4",
-    "РИ-110",
+    "РИ-109",
   ])
 })
 
