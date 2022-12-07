@@ -53,6 +53,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
     }
     if (name !== startId) {
       const path = findPaths(startId, name, graph)
+      console.log(path)
       setColoredGraph(path)
 
       setEndId(name)
