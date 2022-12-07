@@ -4,10 +4,14 @@ import { TAuditorium } from "../model/interface"
 import { TCoords } from "../../../shared/model/geometry"
 import { Graph } from "../../graph/ui/graph"
 import { GraphDestination } from "../../graph/model/interface"
-import { ChosenContext } from "../../../shared/providers/chosenContext/ui/chosen-provider"
+import { ChosenContext } from "../../../shared/providers/chosen-context/ui/chosen-provider"
 import { AuditoriumTitle } from "./auditorium-title"
 import { useEntryCoords } from "../lib/use-entry-coords"
 import { Colors } from "../../../shared/constants"
+import { usePointsDeclaration } from "../lib/use-points-declaration"
+import { useGraph } from "../../graph/lib/use-graph"
+import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
+import { findPaths } from "../../../find-path"
 
 /**
  * компонент аудитории: пока это просто квадратик с названием и входом, дальше будем расширять до
@@ -17,6 +21,8 @@ import { Colors } from "../../../shared/constants"
  * @param name - Название аудитории
  * @param height - Высота
  * @param width - Ширина
+ * @param section - Секция
+ * @param floor - Этаж
  * */
 export const Auditorium: React.FC<TAuditorium> = ({
   name,
@@ -24,11 +30,14 @@ export const Auditorium: React.FC<TAuditorium> = ({
   entry,
   width,
   height,
+  section,
+  floor,
 }) => {
   // Получаем выбранные элементы
   const { startId, endId, setEndId } = useContext(ChosenContext)
+  const { setColoredGraph, graph } = useGraphContext()
 
-  // Координаты тектса (по центру)
+  // Координаты текста (по центру)
   // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается
   // половина от сторон, чтобы x и y подстроились под размеры текста
   const textCoords: TCoords = useMemo(() => {
@@ -38,34 +47,37 @@ export const Auditorium: React.FC<TAuditorium> = ({
   // Вычисляем координаты входа
   const entryCoords = useEntryCoords(entry, coords, width, height)
 
-  // Колбек при нажатии
   const onClick = useCallback(() => {
-    name !== startId && setEndId(name)
-  }, [name, startId, setEndId])
+    if (!startId) {
+      return
+    }
+    if (name !== startId) {
+      const path = findPaths(startId, name, graph)
+      setColoredGraph(path)
 
-  // Получаем описание в зависимости от того начальная или конечная эта ауд.
-  const description = useMemo(() => {
-    if (startId === name) {
-      return {
-        description: "Вы здесь",
-        descriptionColor: "red",
-      }
+      setEndId(name)
     }
-    if (endId === name) {
-      return {
-        description: "Конечная точка",
-        descriptionColor: "gray",
-      }
-    }
-    return null
-  }, [startId, endId, name])
+  }, [graph, startId, setColoredGraph, name, setEndId])
+
+  // Описание начальной и конечной точки
+  const description = usePointsDeclaration(name)
+
+  const { graph: auditoriumGraph } = useGraph(
+    name,
+    GraphDestination.AUDITORIUM,
+    [entryCoords.x, entryCoords.y],
+    entry,
+    25,
+    section,
+    floor,
+  )
 
   return (
-    <Group onClick={onClick} globalCompositeOperation={"destination-over"}>
+    <Group onClick={onClick} globalCompositeOperation="destination-over">
       <Circle
         width={10}
         height={10}
-        fill={"red"}
+        fill="red"
         x={entryCoords.x}
         y={entryCoords.y}
       />
@@ -81,7 +93,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
             ? Colors.LightYellow
             : undefined
         }
-        stroke={"black"}
+        stroke="black"
         strokeWidth={3}
         strokeEnabled
       />
@@ -92,11 +104,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
         description={description?.description}
         descriptionColor={description?.descriptionColor}
       />
-      <Graph
-        destination={GraphDestination.AUDITORIUM}
-        points={[entryCoords.x, entryCoords.y]}
-        direction={entry}
-      />
+      <Graph graph={auditoriumGraph} />
     </Group>
   )
 }
