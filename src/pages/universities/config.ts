@@ -183,6 +183,27 @@ export const auditoriumsConfig: TAuditorium[] = [
     floor: 1,
     section: "sec3",
   },
+
+  {
+    name: "РИ-131",
+    height: 100,
+    width: 150,
+    coords: { x: 950, y: 1000 },
+    entry: Side.RIGHT,
+    neighbors: ["turnover2_1", "РИ-130"],
+    floor: 1,
+    section: "sec4",
+  },
+  {
+    name: "РИ-130",
+    height: 100,
+    width: 150,
+    coords: { x: 1150, y: 1000 },
+    entry: Side.LEFT,
+    neighbors: ["turnover2_1", "РИ-131"],
+    floor: 1,
+    section: "sec4",
+  },
 ]
 
 export const neighborsGraph: TGraph[] = [
@@ -209,6 +230,17 @@ export const neighborsGraph: TGraph[] = [
     floor: 1,
     linkedSection: ["sec1", "sec3"],
   },
+  {
+    id: "turnover2_1",
+    destination: GraphDestination.TURN_OVER,
+    height: 150,
+    neighbors: ["РИ-113", "РИ-114", "cor_5"],
+    direction: Side.RIGHT,
+    points: [1125, 800, 1125, 925],
+    section: "sec2",
+    floor: 1,
+    linkedSection: ["sec4"],
+  },
 
   {
     id: "turnover3_0",
@@ -220,6 +252,18 @@ export const neighborsGraph: TGraph[] = [
     section: "sec3",
     floor: 1,
     linkedSection: ["sec1", "sec2"],
+  },
+
+  {
+    id: "turnover4_0",
+    destination: GraphDestination.TURN_OVER,
+    height: 150,
+    neighbors: ["РИ-130", "РИ-131"],
+    direction: Side.RIGHT,
+    points: [1125, 1050, 1125, 925],
+    section: "sec4",
+    floor: 1,
+    linkedSection: ["sec2"],
   },
   {
     id: "cor_1",
@@ -265,7 +309,7 @@ export const neighborsGraph: TGraph[] = [
     id: "cor_5",
     destination: GraphDestination.CORRIDOR,
     height: 150,
-    neighbors: ["РИ-113", "РИ-114", "РИ-111", "РИ-112", "cor_4"],
+    neighbors: ["РИ-113", "РИ-114", "РИ-111", "РИ-112", "cor_4", "turnover2_1"],
     direction: Side.RIGHT,
     points: [1125, 700, 1125, 800],
     section: "sec2",
@@ -299,7 +343,7 @@ export const sectionsGraph: TGraph[] = [
     id: "sec2",
     destination: GraphDestination.SECTION,
     height: 0,
-    neighbors: ["sec1", "sec3"],
+    neighbors: ["sec1", "sec3", "sec4"],
     direction: Side.RIGHT,
     points: [0, 0, 0, 0],
     section: "sec2",
@@ -313,6 +357,16 @@ export const sectionsGraph: TGraph[] = [
     direction: Side.RIGHT,
     points: [0, 0, 0, 0],
     section: "sec3",
+    floor: 1,
+  },
+  {
+    id: "sec4",
+    destination: GraphDestination.SECTION,
+    height: 0,
+    neighbors: ["sec2"],
+    direction: Side.RIGHT,
+    points: [0, 0, 0, 0],
+    section: "sec4",
     floor: 1,
   },
 ]

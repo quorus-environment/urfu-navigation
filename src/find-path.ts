@@ -85,7 +85,6 @@ export function findPaths(
     )
     // Список секций, через которые нужно пройти включая начальную и конечную
     const sectionPath = unwrapLinkedList(sectionPathLL)
-    let lastTurnOverId = undefined
     for (let i = 0; i < sectionPath.length - 1; i++) {
       const sectionId = sectionPath[i]
       const nextSectionId = sectionPath[i + 1]
@@ -109,13 +108,13 @@ export function findPaths(
       )
       // Записываем последний turnover, который станет точкой старта
       if (turnoverInNewSection?.id) {
-        lastTurnOverId = turnoverInNewSection?.id
+        startGraphId = turnoverInNewSection?.id
       }
     }
     // Записываем путь в последней секции
-    if (lastTurnOverId) {
+    if (startGraphId) {
       const pathToEndGraph = findPathsInSection(
-        lastTurnOverId,
+        startGraphId,
         endGraphId,
         graphRegistry,
       )
