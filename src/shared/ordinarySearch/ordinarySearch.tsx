@@ -1,69 +1,24 @@
 import "./ordinarySearch.css"
 import Lens from "../assets/Vector.svg"
-import { Side } from "../model/geometry"
-import { useState } from "react"
+import { FC, useState } from "react"
 
-const auditoriumsConfig: any[] = [
-  // для теста здесь
-  {
-    name: "РИ-101",
-    height: 200,
-    width: 150,
-    coords: { x: 350, y: 250 },
-    entry: Side.BOTTOM,
-  },
-  {
-    name: "РИ-102",
-    height: 200,
-    width: 150,
-    coords: { x: 500, y: 250 },
-    entry: Side.BOTTOM,
-  },
-  {
-    name: "РИ-103",
-    height: 200,
-    width: 150,
-    coords: { x: 650, y: 250 },
-    entry: Side.BOTTOM,
-  },
-  {
-    name: "РИ-104",
-    height: 200,
-    width: 150,
-    coords: { x: 800, y: 250 },
-    entry: Side.BOTTOM,
-  },
-  {
-    name: "РИ-105",
-    height: 200,
-    width: 150,
-    coords: { x: 350, y: 500 },
-    entry: Side.TOP,
-  },
-  {
-    name: "РИ-106",
-    height: 200,
-    width: 150,
-    coords: { x: 500, y: 500 },
-    entry: Side.TOP,
-  },
-  {
-    name: "РИ-107",
-    height: 200,
-    width: 150,
-    coords: { x: 650, y: 500 },
-    entry: Side.TOP,
-  },
-  {
-    name: "РИ-108",
-    height: 200,
-    width: 150,
-    coords: { x: 800, y: 500 },
-    entry: Side.TOP,
-  },
+const auditoriumsNames: string[] = [
+  "РИ-101",
+  "РИ-102",
+  "РИ-103",
+  "РИ-104",
+  "РИ-105",
+  "РИ-106",
+  "РИ-107",
+  "РИ-108",
+  "РИ-114",
 ]
-const auditoriumsNames = auditoriumsConfig.map((el) => el.name)
-export function OrdinarySearch() {
+
+interface IOrdinarySearch {
+  name: string
+}
+
+export const OrdinarySearch: FC<IOrdinarySearch> = ({ name }) => {
   const [inputValue, setInputValue] = useState("")
 
   const filtered = auditoriumsNames.filter((auditorium) =>
@@ -92,7 +47,7 @@ export function OrdinarySearch() {
         <input
           className="search"
           type="text"
-          placeholder="Аудитория или название места"
+          placeholder={name}
           value={inputValue}
           onChange={(event) => {
             setInputValue(event.target.value)
