@@ -90,8 +90,8 @@ export function findPaths(
       const sectionId = sectionPath[i]
       const nextSectionId = sectionPath[i + 1]
       // Ищем turnover, который соединяем текущую секцию с следующей
-      const turnoverToNextSection = graphRegistry.find(
-        (gr) => gr.linkedSection === nextSectionId,
+      const turnoverToNextSection = graphRegistry.find((gr) =>
+        gr.linkedSection?.includes(nextSectionId),
       )
       if (turnoverToNextSection?.id) {
         const pathToTurnoverLL = createLinkedListPath(
@@ -104,7 +104,8 @@ export function findPaths(
         resultPath.push(...pathToTurnover)
       }
       const turnoverInNewSection = graphRegistry.find(
-        (gr) => gr.linkedSection === sectionId,
+        (gr) =>
+          gr.linkedSection?.includes(sectionId) && gr.section === nextSectionId,
       )
       // Записываем последний turnover, который станет точкой старта
       if (turnoverInNewSection?.id) {
