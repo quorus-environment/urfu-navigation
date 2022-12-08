@@ -40,12 +40,12 @@ test("FindPathInSectionWithManyCoridors", () => {
 })
 
 test("FindPathInSectionToTurnOver", () => {
-  expect(findPaths("РИ-101", "turnover1to2", graph)).toStrictEqual([
+  expect(findPaths("РИ-101", "turnover1_0", graph)).toStrictEqual([
     "РИ-101",
     "cor_1",
     "cor_2",
     "cor_3",
-    "turnover1to2",
+    "turnover1_0",
   ])
 })
 
@@ -55,9 +55,19 @@ test("FindPathToOtherSection", () => {
     "cor_1",
     "cor_2",
     "cor_3",
-    "turnover1to2",
-    "turnover2to1",
+    "turnover1_0",
+    "turnover2_0",
     "РИ-109",
+  ])
+})
+
+test("FindPathToOtherSection2", () => {
+  expect(findPaths("РИ-103", "РИ-115", graph)).toStrictEqual([
+    "РИ-103",
+    "cor_3",
+    "turnover1_0",
+    "turnover3_0",
+    "РИ-115",
   ])
 })
 
