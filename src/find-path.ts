@@ -110,6 +110,7 @@ export function findPaths(
       // Записываем последний turnover, который станет точкой старта
       if (turnoverInNewSection?.id) {
         lastTurnOverId = turnoverInNewSection?.id
+        startGraphId = turnoverInNewSection.id
       }
     }
     // Записываем путь в последней секции
