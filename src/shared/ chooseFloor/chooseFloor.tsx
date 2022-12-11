@@ -14,7 +14,7 @@ interface IChooseFloor {
 export const ChooseFloor: FC<IChooseFloor> = ({ links, size = 32 }) => {
   const [activeIndex, setActiveIndex] = useState(-1)
   const currentPath = window.location.pathname
-  const list = links.map((floor, index) => {
+  const floors = links.map((floor, index) => {
     const linkHandler = () => setActiveIndex(index)
     return (
       <NavLink
@@ -32,5 +32,5 @@ export const ChooseFloor: FC<IChooseFloor> = ({ links, size = 32 }) => {
       </NavLink>
     )
   })
-  return <div className="floors-container">{list}</div>
+  return <div className="floors-container">{floors}</div>
 }
