@@ -1,36 +1,36 @@
-import { FC, useState } from "react"
+import { FC, useMemo, useState } from "react"
 import "./chooseFloor.css"
-import { NavLink } from "react-router-dom"
 
 interface IChooseFloor {
-  links: string[]
+  actions: Array<() => void>
   size?: number
 }
 /**Component of choosing floors
  *
- * @links string[] - links an array of paths to pages with floors
+ * @callbacks Array<() => void> - callbacks for changing floor
  * @size number - a size of component
  * */
-export const ChooseFloor: FC<IChooseFloor> = ({ links, size = 32 }) => {
-  const [activeIndex, setActiveIndex] = useState(-1)
-  const currentPath = window.location.pathname
-  const floors = links.map((floor, index) => {
-    const linkHandler = () => setActiveIndex(index)
-    return (
-      <NavLink
-        style={{ width: size, height: size, fontSize: size * 0.6 }}
-        to={floor}
-        key={index}
-        className={
-          activeIndex === index || currentPath === floor
-            ? "floor active-link"
-            : "floor"
+export const ChooseFloor: FC<IChooseFloor> = ({ actions, size = 32 }) => {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const floors: JSX.Element[] = useMemo(
+    () =>
+      actions.map((callback, index) => {
+        const linkHandler = () => {
+          callback()
+          setActiveIndex(index)
         }
-        onClick={linkHandler}
-      >
-        {index}
-      </NavLink>
-    )
-  })
+        return (
+          <div
+            style={{ width: size, height: size, fontSize: size * 0.6 }}
+            key={index}
+            className={activeIndex === index ? "floor active-link" : "floor"}
+            onClick={linkHandler}
+          >
+            {index}
+          </div>
+        )
+      }),
+    [actions, activeIndex, size],
+  )
   return <div className="floors-container">{floors}</div>
 }

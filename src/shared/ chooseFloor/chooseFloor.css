@@ -3,11 +3,12 @@ a{
     color: inherit;
 }
 li, li a {
+    text-decoration: none;
+    color: inherit;
     display: inline;
     margin-right: 20px;
     cursor: pointer;
     height: 100%;
-    text-decoration: none;
 }
 .floor{
     display: flex;
