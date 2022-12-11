@@ -57,6 +57,61 @@ function findPathsInSection(
   return unwrapLinkedList(pathLinkedList)
 }
 
+// Поиск пути на этаже при отличающихся секциях
+function findPathInFloor(
+  startGraphId: string,
+  endGraphId: string,
+  graphRegistry: TGraph[],
+  startGraph: TGraph,
+  endGraph: TGraph,
+): string[] {
+  const resultPath: string[] = []
+  const sectionPathLL = createLinkedListPath(
+    startGraph?.section,
+    endGraph?.section,
+    graphRegistry,
+  )
+  // Список секций, через которые нужно пройти включая начальную и конечную
+  const sectionPath = unwrapLinkedList(sectionPathLL)
+  for (let i = 0; i < sectionPath.length - 1; i++) {
+    const sectionId = sectionPath[i]
+    const nextSectionId = sectionPath[i + 1]
+    // Ищем turnover, который соединяем текущую секцию с следующей
+    const turnoverToNextSection = graphRegistry.find((gr) =>
+      gr.linkedSection?.includes(nextSectionId),
+    )
+    if (turnoverToNextSection?.id) {
+      const pathToTurnoverLL = createLinkedListPath(
+        startGraphId,
+        turnoverToNextSection?.id,
+        graphRegistry,
+      )
+      // Ищем путь до этого turnover и добавляем в итоговый путь
+      const pathToTurnover = unwrapLinkedList(pathToTurnoverLL)
+      resultPath.push(...pathToTurnover)
+    }
+    const turnoverInNewSection = graphRegistry.find(
+      (gr) =>
+        gr.linkedSection?.includes(sectionId) && gr.section === nextSectionId,
+    )
+    // Записываем последний turnover, который станет точкой старта
+    if (turnoverInNewSection?.id) {
+      startGraphId = turnoverInNewSection?.id
+    }
+  }
+  // Записываем путь в последней секции
+  if (startGraphId) {
+    const pathToEndGraph = findPathsInSection(
+      startGraphId,
+      endGraphId,
+      graphRegistry,
+    )
+    resultPath.push(...pathToEndGraph)
+  }
+
+  return resultPath
+}
+
 // Поиск пути от startGraphId до endGraphId
 export function findPaths(
   startGraphId: string,
@@ -66,66 +121,27 @@ export function findPaths(
   // Создаем входной и искомый графы
   const startGraph = graphRegistry.find((gr) => gr.id === startGraphId)
   const endGraph = graphRegistry.find((gr) => gr.id === endGraphId)
-  let resultPath: string[] = []
   // Будет поиск по этажам
   if (startGraph?.floor !== endGraph?.floor) {
     return []
   }
-  let sectionPathLL: Generator<LinkedList<string> | undefined>
   // Поиск по секциям
   if (
     startGraph?.section !== endGraph?.section &&
     startGraph?.section &&
     endGraph?.section
   ) {
-    sectionPathLL = createLinkedListPath(
-      startGraph?.section,
-      endGraph?.section,
+    return findPathInFloor(
+      startGraphId,
+      endGraphId,
       graphRegistry,
+      startGraph,
+      endGraph,
     )
-    // Список секций, через которые нужно пройти включая начальную и конечную
-    const sectionPath = unwrapLinkedList(sectionPathLL)
-    for (let i = 0; i < sectionPath.length - 1; i++) {
-      const sectionId = sectionPath[i]
-      const nextSectionId = sectionPath[i + 1]
-      // Ищем turnover, который соединяем текущую секцию с следующей
-      const turnoverToNextSection = graphRegistry.find((gr) =>
-        gr.linkedSection?.includes(nextSectionId),
-      )
-      if (turnoverToNextSection?.id) {
-        const pathToTurnoverLL = createLinkedListPath(
-          startGraphId,
-          turnoverToNextSection?.id,
-          graphRegistry,
-        )
-        // Ищем путь до этого turnover и добавляем в итоговый путь
-        const pathToTurnover = unwrapLinkedList(pathToTurnoverLL)
-        resultPath.push(...pathToTurnover)
-      }
-      const turnoverInNewSection = graphRegistry.find(
-        (gr) =>
-          gr.linkedSection?.includes(sectionId) && gr.section === nextSectionId,
-      )
-      // Записываем последний turnover, который станет точкой старта
-      if (turnoverInNewSection?.id) {
-        startGraphId = turnoverInNewSection?.id
-      }
-    }
-    // Записываем путь в последней секции
-    if (startGraphId) {
-      const pathToEndGraph = findPathsInSection(
-        startGraphId,
-        endGraphId,
-        graphRegistry,
-      )
-      resultPath.push(...pathToEndGraph)
-    }
-
-    return resultPath
   }
   // Поиск пути в случае, если графы находятся в одной секци
-  resultPath = findPathsInSection(startGraphId, endGraphId, graphRegistry)
-  return resultPath
+  // resultPath = findPathsInSection(startGraphId, endGraphId, graphRegistry)
+  return findPathsInSection(startGraphId, endGraphId, graphRegistry)
 }
 
 // Разворачиваем связанный лист в массив айдишников
