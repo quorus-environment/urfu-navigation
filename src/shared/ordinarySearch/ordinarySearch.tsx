@@ -1,6 +1,6 @@
 import "./ordinarySearch.css"
 import Lens from "../assets/Vector.svg"
-import { FC, useState } from "react"
+import { FC, useEffect, useMemo, useRef, useState } from "react"
 
 const auditoriumsNames: string[] = [
   "РИ-101",
@@ -20,29 +20,46 @@ interface IOrdinarySearch {
 
 export const OrdinarySearch: FC<IOrdinarySearch> = ({ name }) => {
   const [inputValue, setInputValue] = useState("")
-
-  const filtered = auditoriumsNames.filter((auditorium) =>
-    auditorium.toLowerCase().includes(inputValue.toLowerCase()),
-  )
-
   const [isOpenedBar, setOpenedBar] = useState(true)
 
-  const listItem = filtered.map((name) => (
-    <li
-      key=""
-      className="auto-complite__item"
-      onClick={() => {
-        setInputValue(name)
-        setOpenedBar(!isOpenedBar)
-      }}
-    >
-      {name}
-    </li>
-  ))
+  const ref = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      if (!ref.current?.contains(event.target as Node)) {
+        setOpenedBar(false)
+      }
+    }
+    document.addEventListener("click", handler)
+    return () => {
+      document.removeEventListener("click", handler)
+    }
+  })
+
+  const filtered = useMemo(() => {
+    return auditoriumsNames.filter((auditorium) =>
+      auditorium.toLowerCase().includes(inputValue.toLowerCase()),
+    )
+  }, [inputValue])
+
+  const listItem = useMemo(() => {
+    return filtered.map((name, index) => (
+      <li
+        key={index}
+        className="auto-complete__item"
+        onClick={() => {
+          setInputValue(name)
+          setOpenedBar(false)
+        }}
+      >
+        {name}
+      </li>
+    ))
+  }, [filtered])
 
   return (
     <div className="body">
-      <div className="searchbar">
+      <div className="searchbar" ref={ref}>
         <img className="lens" src={Lens} alt="" />
         <input
           className="search"
@@ -55,9 +72,7 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({ name }) => {
           onClick={() => setOpenedBar(true)}
         />
         {inputValue && isOpenedBar && filtered.length ? (
-          <ul className="auto-complite">
-            {inputValue && isOpenedBar ? listItem : null}
-          </ul>
+          <ul className="auto-complete">{listItem}</ul>
         ) : null}
       </div>
     </div>

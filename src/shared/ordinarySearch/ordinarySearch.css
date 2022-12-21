@@ -6,19 +6,18 @@
     outline: none;
     border: none;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 48px;
     background-color: #F4F4F2;
     width: 100%;
 }
-input::placeholder{
-    font-size: 0.67em;
-}
+
 .searchbar{
     height: 48px;
-    width: 260px;
+    width: 340px;
     border-radius: 15px;
     background-color: #F4F4F2;
-    padding: 11px 15px;
+    padding: 0 15px;
     flex-shrink: 0;
     display: flex;
     gap: 11px;
@@ -28,16 +27,16 @@ input::placeholder{
 }
 
 .lens{
-    width: 21px;
-    height: 21px;
+    width: 16px;
+    height: 16px;
 }
 
-.auto-complite{
+.auto-complete{
     position: absolute;
     left: 0;
-    top: 50px;
+    top: 48px;
     background-color: #F4F4F2;
-    z-index: 100;
+    z-index: 1;
     width: 100%;
     display: block;
     border-radius: 15px;
@@ -46,13 +45,13 @@ input::placeholder{
     height: auto;
     overflow: auto;
 }
-.auto-complite::-webkit-scrollbar {
+.auto-complete::-webkit-scrollbar {
     width: 0;
 }
-.auto-complite__item{
+.auto-complete__item{
     padding:10px;
 }
-.auto-complite__item:hover{
+.auto-complete__item:hover{
     background-color: #9D9B98;
     cursor: pointer;
     border-radius: 15px;

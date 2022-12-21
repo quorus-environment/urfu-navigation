@@ -19,7 +19,7 @@ function* createLinkedListPath(
   const tracks = new Map<string, LinkedList<string>>() // Словарь, связывающий айдишник со связанным списком
   const initLL = new LinkedList<string>(startGraphId) // Создаем голову связанного списка
   tracks.set(startGraph.id, initLL)
-  while (queue.length != 0) {
+  while (queue.length !== 0) {
     const graph = queue.shift()
     // Добавляем всех соседедей graph в очередь
     for (let i = 0; i < (graph?.neighbors?.length || 0); i++) {

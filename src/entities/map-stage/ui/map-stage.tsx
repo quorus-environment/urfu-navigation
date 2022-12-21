@@ -4,9 +4,10 @@ import Konva from "konva"
 import KonvaEventObject = Konva.KonvaEventObject
 import { mapConfig } from "../config"
 import { ChosenProvider } from "../../../shared/providers/chosen-context/ui/chosen-provider"
+import { Header } from "../../../widgets/header/ui/header"
 
 type TMapStageProps = {
-  children: JSX.Element
+  children: React.ReactNode
 }
 
 export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
@@ -45,6 +46,7 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
 
   return (
     <ChosenProvider>
+      <Header />
       <Stage
         ref={stageRef}
         width={window.innerWidth}
