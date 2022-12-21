@@ -9,22 +9,14 @@ import {
   useState,
 } from "react"
 
-const auditoriumsNames: string[] = [
-  "РИ-101",
-  "РИ-102",
-  "РИ-103",
-  "РИ-104",
-  "РИ-105",
-  "РИ-106",
-  "РИ-107",
-  "РИ-108",
-  "РИ-114",
-]
-
 interface IOrdinarySearch {
-  name: string
+  placeholder: string
+  items: string[]
+  value: string
+  setValue: (v: string) => void
 }
 
+// Закрываем дропдаун при нажатии на любое пространство
 const useAutocompleteClosingByRef = (setOpened: (v: boolean) => void) => {
   const ref = useRef<HTMLDivElement | null>(null)
   useEffect(() => {
@@ -41,6 +33,7 @@ const useAutocompleteClosingByRef = (setOpened: (v: boolean) => void) => {
   return ref
 }
 
+// Управление дропдауном через кнопочки как в дефолтном селекте
 const useKeyboardManagement = (
   ref: MutableRefObject<HTMLDivElement | null>,
   filtered: string[],
@@ -51,7 +44,6 @@ const useKeyboardManagement = (
   useEffect(() => {
     const current = ref.current
     const handler = (evt: KeyboardEventInit) => {
-      console.log(evt.code)
       if (evt.code === "ArrowUp") {
         if (currentIndex === -1) {
           return
@@ -87,8 +79,12 @@ const useKeyboardManagement = (
   return currentIndex
 }
 
-export const OrdinarySearch: FC<IOrdinarySearch> = ({ name }) => {
-  const [inputValue, setInputValue] = useState("")
+export const OrdinarySearch: FC<IOrdinarySearch> = ({
+  placeholder,
+  items,
+  value,
+  setValue,
+}) => {
   const [isOpenedBar, setOpenedBar] = useState(true)
 
   // Закрытие модалки на клик извне
@@ -96,21 +92,21 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({ name }) => {
 
   // Получаем текущие строки в выпадающее меню
   const filtered = useMemo(() => {
-    if (!inputValue) {
+    if (!value) {
       return []
     }
-    return auditoriumsNames
+    return items
       .filter((auditorium) =>
-        auditorium.toLowerCase().includes(inputValue.toLowerCase()),
+        auditorium.toLowerCase().includes(value.toLowerCase()),
       )
       .slice(0, 5)
-  }, [inputValue])
+  }, [items, value])
 
   // Выбор клавишами
   const currentIndex = useKeyboardManagement(
     ref,
     filtered,
-    setInputValue,
+    setValue,
     setOpenedBar,
   )
 
@@ -122,14 +118,14 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({ name }) => {
           currentIndex === index ? " hovered" : undefined
         }`}
         onClick={() => {
-          setInputValue(name)
+          setValue(name)
           setOpenedBar(false)
         }}
       >
         {name}
       </li>
     ))
-  }, [currentIndex, filtered])
+  }, [currentIndex, filtered, setValue])
 
   return (
     <div className="body">
@@ -138,18 +134,18 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({ name }) => {
         <input
           className="search"
           type="text"
-          placeholder={name}
-          value={inputValue}
+          placeholder={placeholder}
+          value={value}
           onKeyDown={(e) => {
             e.stopPropagation()
           }}
           onChange={(event) => {
             setOpenedBar(true)
-            setInputValue(event.target.value)
+            setValue(event.target.value)
           }}
           onClick={() => setOpenedBar(true)}
         />
-        {inputValue && isOpenedBar && filtered.length ? (
+        {value && isOpenedBar && filtered.length ? (
           <ul className="auto-complete">{listItem}</ul>
         ) : null}
       </div>

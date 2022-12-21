@@ -13,6 +13,7 @@ export const IritRtf: React.FC = () => {
     const audGraphs = getGraphsFromAuditoriums(auditoriumsConfig)
     setGraphRegistry([...neighborsGraph, ...audGraphs, ...sectionsGraph])
   }, [setGraphRegistry])
+
   return (
     <MapStage>
       <Layer height={window.innerHeight - 60}>
