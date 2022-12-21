@@ -1,0 +1,20 @@
+.double-search{
+  width: fit-content;
+}
+.search__body{
+  padding: 4px 20px;
+  background-color: white;
+  max-width: fit-content;
+  min-height: 48px;
+  border-radius: 17px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.search__menu{
+  flex-basis: fit-content;
+}
+.search__inner{
+  width: fit-content;
+  display: block;
+}

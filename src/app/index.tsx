@@ -8,6 +8,7 @@ import { GraphProvider } from "../shared/providers/graph-context/ui/graph-provid
 
 /**
  * Основная компонента приложения
+ *
  * */
 export const App: React.FC = () => {
   return (

@@ -1,17 +1,13 @@
 import "./header.css"
-import Lens from "./../../../shared/assets/Vector.svg"
+import { DoubleSearch } from "../../../shared/doubleSearch/doubleSearch"
 
-export function Header() {
+export const Header = () => {
   return (
     <div className="header">
-      <div className="header__searchbar">
-        <img className="lens" src={Lens} alt="" />
-        <input
-          className="search"
-          type="search"
-          placeholder="Аудитория или название места"
-        />
-      </div>
+      <DoubleSearch
+        nameFirst="Аудитория или название места"
+        nameSecond="Аудитория или название места"
+      />
     </div>
   )
 }
