@@ -33,15 +33,15 @@
 
 .auto-complete{
     position: absolute;
-    left: 0;
+    left: 5%;
     top: 48px;
     background-color: #F4F4F2;
     z-index: 1;
-    width: 100%;
+    width: 90%;
     display: block;
-    border-radius: 15px;
-    padding: 10px;
-    max-height: 200px;
+    border-radius: 0 0 7px 7px;
+    padding: 2px;
+    max-height: 260px;
     height: auto;
     overflow: auto;
 }
@@ -49,12 +49,12 @@
     width: 0;
 }
 .auto-complete__item{
-    padding:10px;
+    padding:4px;
 }
-.auto-complete__item:hover{
-    background-color: #9D9B98;
+.auto-complete__item:hover, .auto-complete__item.hovered{
+    color: #242424;
+    filter: drop-shadow(2px 2px 1px #000a);
     cursor: pointer;
-    border-radius: 15px;
 }
 li{
     list-style: none;
