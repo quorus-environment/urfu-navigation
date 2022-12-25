@@ -88,9 +88,10 @@ export function findPaths(
     for (let i = 0; i < sectionPath.length - 1; i++) {
       const sectionId = sectionPath[i]
       const nextSectionId = sectionPath[i + 1]
-      // Ищем turnover, который соединяем текущую секцию с следующей
-      const turnoverToNextSection = graphRegistry.find((gr) =>
-        gr.linkedSection?.includes(nextSectionId),
+      // Ищем turnover, который соединяет текущую секцию с следующей
+      const turnoverToNextSection = graphRegistry.find(
+        (gr) =>
+          gr.linkedSection?.includes(nextSectionId) && gr.section === sectionId,
       )
       if (turnoverToNextSection?.id) {
         const pathToTurnoverLL = createLinkedListPath(
@@ -120,11 +121,12 @@ export function findPaths(
       )
       resultPath.push(...pathToEndGraph)
     }
-
+    console.log(resultPath)
     return resultPath
   }
   // Поиск пути в случае, если графы находятся в одной секци
   resultPath = findPathsInSection(startGraphId, endGraphId, graphRegistry)
+  console.log(resultPath)
   return resultPath
 }
 
