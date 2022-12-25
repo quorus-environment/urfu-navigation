@@ -1,6 +1,5 @@
 import React from "react"
 import { Routes, Route } from "react-router-dom"
-import { Header } from "../widgets/header/ui/header"
 import { Main } from "../pages/main/main"
 import { IritRtf } from "../pages/universities/irit-rtf"
 import "./app.css"
@@ -13,7 +12,6 @@ import { GraphProvider } from "../shared/providers/graph-context/ui/graph-provid
 export const App: React.FC = () => {
   return (
     <div className="app">
-      <Header />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route

@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from "react"
+import React, { useCallback, useContext, useEffect, useMemo } from "react"
 import { Circle, Group, Rect } from "react-konva"
 import { TAuditorium } from "../model/interface"
 import { TCoords } from "../../../shared/model/geometry"
@@ -34,8 +34,15 @@ export const Auditorium: React.FC<TAuditorium> = ({
   floor,
 }) => {
   // Получаем выбранные элементы
-  const { startId, endId, setEndId } = useContext(ChosenContext)
-  const { setColoredGraph, graph } = useGraphContext()
+  const { startId, endId, setEndId, setStartId } = useContext(ChosenContext)
+  const { graph, setColoredGraph } = useGraphContext()
+
+  useEffect(() => {
+    if (startId && endId) {
+      const path = findPaths(startId, endId, graph)
+      setColoredGraph(path)
+    }
+  }, [endId, graph, setColoredGraph, startId])
 
   // Координаты текста (по центру)
   // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается
@@ -49,16 +56,13 @@ export const Auditorium: React.FC<TAuditorium> = ({
 
   const onClick = useCallback(() => {
     if (!startId) {
+      setStartId(name)
       return
     }
     if (name !== startId) {
-      const path = findPaths(startId, name, graph)
-      console.log(path)
-      setColoredGraph(path)
-
       setEndId(name)
     }
-  }, [graph, startId, setColoredGraph, name, setEndId])
+  }, [startId, name, setStartId, setEndId])
 
   // Описание начальной и конечной точки
   const description = usePointsDeclaration(name)

@@ -2,14 +2,14 @@ import React, { createContext, PropsWithChildren, useState } from "react"
 import { TChosenContext } from "../model/interface"
 
 export const ChosenContext = createContext<TChosenContext>({
-  startId: "РИ-103",
+  startId: null,
   setStartId: () => void 0,
   endId: null,
   setEndId: () => void 0,
 })
 
 export const ChosenProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [chosenId, setChosenId] = useState<string | null>("РИ-103")
+  const [chosenId, setChosenId] = useState<string | null>(null)
   const [chosenSecondId, setChosenSecondId] = useState<string | null>(null)
 
   return (
