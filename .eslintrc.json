@@ -54,7 +54,8 @@
             "interface"
         ],
         "@typescript-eslint/ban-ts-comment": "warn",
-        "sonarjs/cognitive-complexity": "warn",
+        "sonarjs/cognitive-complexity": "off",
+        "sonarjs/no-duplicate-string": "off",
         "clean-regex/no-obscure-range": "warn",
         "react/jsx-curly-brace-presence": [
             "error",
