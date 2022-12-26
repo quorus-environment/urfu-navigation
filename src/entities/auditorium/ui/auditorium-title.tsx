@@ -20,25 +20,25 @@ export const AuditoriumTitle: React.FC<TAuditoriumTitleProps> = ({
     <>
       <Text
         text={title}
-        height={16}
+        height={12}
         width={100}
         fontFamily="Montserrat"
         fontStyle="bold"
         x={x}
         y={y}
-        fontSize={16}
+        fontSize={12}
         align="center"
       />
       {description && (
         <Text
           text={description}
-          height={16}
+          height={13}
           width={100}
           fill={descriptionColor}
           fontFamily="Montserrat"
           x={x}
           y={y + 16}
-          fontSize={11}
+          fontSize={8}
           align="center"
         />
       )}

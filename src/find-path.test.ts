@@ -6,7 +6,7 @@ import {
   auditoriumsConfig,
   neighborsGraph,
   sectionsGraph,
-} from "./pages/universities/config"
+} from "./pages/universities/config-default"
 
 const graph = [
   ...neighborsGraph,

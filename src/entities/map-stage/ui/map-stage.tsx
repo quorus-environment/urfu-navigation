@@ -52,6 +52,16 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
         width={window.innerWidth}
         style={{ cursor: isDragging ? "grabbing" : "default" }}
         draggable
+        onClick={(e) =>
+          console.log(
+            "Mouse: ",
+            e.evt.pageX,
+            e.evt.pageY,
+            "\nTarget:",
+            e.target.x(),
+            e.target.y(),
+          )
+        }
         onDragStart={() => setDragging(true)}
         onDragEnd={() => setDragging(false)}
         height={window.innerHeight - 60}

@@ -5,7 +5,8 @@ import { MapStage } from "../../entities/map-stage/ui/map-stage"
 import { Graph } from "../../entities/graph/ui/graph"
 import { useGraphContext } from "../../shared/providers/graph-context/lib/use-graph-context"
 import { getGraphsFromAuditoriums } from "../../entities/auditorium/lib/get-graphs-from-auditoriums"
-import { auditoriumsConfig, neighborsGraph, sectionsGraph } from "./config"
+import { neighborsGraph, sectionsGraph } from "./config-default"
+import { auditoriumsConfig } from "./config-irit-rtf"
 
 export const IritRtf: React.FC = () => {
   const { setGraphRegistry } = useGraphContext()
@@ -28,6 +29,7 @@ export const IritRtf: React.FC = () => {
             floor={aud.floor}
             section={aud.section}
             neighbors={aud.neighbors}
+            entryOffset={aud.entryOffset}
           />
         ))}
         {neighborsGraph.map((graph, index) => (
