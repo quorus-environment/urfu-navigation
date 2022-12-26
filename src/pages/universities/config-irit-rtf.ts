@@ -1092,7 +1092,6 @@ export const neighborsGraph: TGraph[] = [
     destination: GraphDestination.CORRIDOR,
     height: 0,
     neighbors: [
-      "РИ-136",
       "Коридор РИ-135",
       "Коридор РИ-136",
       "Коридор гардероб налево",
