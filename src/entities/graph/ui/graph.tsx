@@ -11,7 +11,10 @@ export const Graph: React.FC<{ graph: TGraph }> = ({ graph }) => {
   )
 
   return (
-    <Group globalCompositeOperation="destination-over">
+    <Group
+      globalCompositeOperation="destination-over"
+      onClick={() => console.log(graph.id)}
+    >
       <Circle
         width={7}
         height={7}
