@@ -5,14 +5,18 @@ import { MapStage } from "../../entities/map-stage/ui/map-stage"
 import { Graph } from "../../entities/graph/ui/graph"
 import { useGraphContext } from "../../shared/providers/graph-context/lib/use-graph-context"
 import { getGraphsFromAuditoriums } from "../../entities/auditorium/lib/get-graphs-from-auditoriums"
-import { neighborsGraph, sectionsGraph } from "./config-default"
-import { auditoriumsConfig, walls } from "./config-irit-rtf"
+import {
+  auditoriumsConfig,
+  configSectionsGraph,
+  neighborsGraph,
+  walls,
+} from "./config-irit-rtf"
 
 export const IritRtf: React.FC = () => {
   const { setGraphRegistry } = useGraphContext()
   useEffect(() => {
     const audGraphs = getGraphsFromAuditoriums(auditoriumsConfig)
-    setGraphRegistry([...neighborsGraph, ...audGraphs, ...sectionsGraph])
+    setGraphRegistry([...neighborsGraph, ...audGraphs, ...configSectionsGraph])
   }, [setGraphRegistry])
 
   return (
