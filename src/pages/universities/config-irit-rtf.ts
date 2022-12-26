@@ -1293,7 +1293,6 @@ export const neighborsGraph: TGraph[] = [
   },
 ]
 export const auditoriumsConfig = [...leftWing, ...mainSection, ...rightWing]
-export const configSectionsGraph: TGraph[] = []
 
 export const walls = [
   { x: 300, y: 0, width: 50, height: 0 },
@@ -1301,4 +1300,37 @@ export const walls = [
   { x: 470, y: 1500, width: 700, height: 0 },
   { x: 1230, y: 1500, width: 100, height: 0 },
   { x: 1280, y: 850, width: 50, height: 0 },
+]
+
+export const configSectionsGraph: TGraph[] = [
+  {
+    id: "left_wing",
+    destination: GraphDestination.SECTION,
+    height: 0,
+    neighbors: ["main_section"],
+    direction: Side.RIGHT,
+    points: [0, 0, 0, 0],
+    section: "left_wing",
+    floor: 1,
+  },
+  {
+    id: "main_section",
+    destination: GraphDestination.SECTION,
+    height: 0,
+    neighbors: ["left_wing", "rightWing1"],
+    direction: Side.RIGHT,
+    points: [0, 0, 0, 0],
+    section: "main_section",
+    floor: 1,
+  },
+  {
+    id: "rightWing1",
+    destination: GraphDestination.SECTION,
+    height: 0,
+    neighbors: ["main_section"],
+    direction: Side.RIGHT,
+    points: [0, 0, 0, 0],
+    section: "rightWing1",
+    floor: 1,
+  },
 ]
