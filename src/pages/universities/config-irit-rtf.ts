@@ -971,7 +971,6 @@ export const neighborsGraph: TGraph[] = [
       "turnoverMainToLeft",
       "Коридор РИ-131",
       "Коридор РИ-134",
-      "Коридор РИ-135",
     ],
     direction: Side.RIGHT,
     points: [330, 1375, 385, 1375],
