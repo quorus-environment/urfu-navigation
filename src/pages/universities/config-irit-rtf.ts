@@ -279,7 +279,7 @@ export const leftWing: TAuditorium[] = [
     width: 100,
     coords: { x: 350, y: 1100 },
     entry: Side.LEFT,
-    neighbors: ["РИ-107"],
+    neighbors: ["Коридор РИ-127", "РИ-124", "Коридор РИ-124"],
     floor: 1,
     section: "left_wing",
   },
