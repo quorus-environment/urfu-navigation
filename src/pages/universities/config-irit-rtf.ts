@@ -503,6 +503,9 @@ const mainSection: TAuditorium[] = [
     floor: 1,
     section: "main_section",
   },
+]
+
+const rightWing: TAuditorium[] = [
   {
     name: "РИ-144",
     height: 100,
@@ -511,7 +514,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-144"],
     floor: 1,
-    section: "main_section",
+    section: "rightWing1",
   },
   {
     name: "РИ-145",
@@ -521,7 +524,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-145"],
     floor: 1,
-    section: "main_section",
+    section: "rightWing1",
   },
   {
     name: "РИ-146",
@@ -531,11 +534,8 @@ const mainSection: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-144", "Коридор РИ-146", "Коридор РИ-147"],
     floor: 1,
-    section: "main_section",
+    section: "rightWing1",
   },
-]
-
-const rightWing: TAuditorium[] = [
   {
     name: "РИ-147",
     height: 100,
@@ -929,7 +929,7 @@ export const neighborsGraph: TGraph[] = [
     id: "Коридор РИ-133",
     destination: GraphDestination.CORRIDOR,
     height: 0,
-    neighbors: ["РИ-129", "РИ-132", "Коридор РИ-130", "Коридор РИ-129"],
+    neighbors: ["РИ-129", "РИ-133", "Коридор РИ-130", "Коридор РИ-129"],
     direction: Side.RIGHT,
     points: [165, 1375, 195, 1375],
     section: "main_section",
@@ -1139,7 +1139,7 @@ export const neighborsGraph: TGraph[] = [
     destination: GraphDestination.CORRIDOR,
     height: 0,
     neighbors: [
-      "вход",
+      "Вход",
       "Коридор гардероб налево",
       "Гардероб",
       "Коридор гардероб направо",
