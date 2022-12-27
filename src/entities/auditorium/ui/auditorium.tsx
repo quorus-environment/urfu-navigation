@@ -23,6 +23,7 @@ import { findPaths } from "../../../find-path"
  * @param width - Ширина
  * @param section - Секция
  * @param floor - Этаж
+ * @param entryOffset - Отклонение входа от центра
  * */
 export const Auditorium: React.FC<TAuditorium> = ({
   name,
@@ -32,6 +33,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
   height,
   section,
   floor,
+  entryOffset = 0,
 }) => {
   // Получаем выбранные элементы
   const { startId, endId, setEndId, setStartId } = useContext(ChosenContext)
@@ -52,7 +54,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
   }, [coords, width, height])
 
   // Вычисляем координаты входа
-  const entryCoords = useEntryCoords(entry, coords, width, height)
+  const entryCoords = useEntryCoords(entry, coords, width, height, entryOffset)
 
   const onClick = useCallback(() => {
     if (!startId) {
@@ -80,9 +82,9 @@ export const Auditorium: React.FC<TAuditorium> = ({
   return (
     <Group onClick={onClick} globalCompositeOperation="destination-over">
       <Circle
-        width={10}
-        height={10}
-        fill="red"
+        width={6}
+        height={6}
+        fill="none"
         x={entryCoords.x}
         y={entryCoords.y}
       />

@@ -6,12 +6,15 @@ import { useGraphContext } from "../../../shared/providers/graph-context/lib/use
 export const Graph: React.FC<{ graph: TGraph }> = ({ graph }) => {
   const { coloredGraph } = useGraphContext()
   const color = useMemo(
-    () => (coloredGraph.includes(graph.id) ? "red" : undefined),
+    () => (coloredGraph.includes(graph.id) ? "green" : undefined),
     [coloredGraph, graph.id],
   )
 
   return (
-    <Group globalCompositeOperation="destination-over">
+    <Group
+      globalCompositeOperation="destination-over"
+      onClick={() => console.log(graph.id)}
+    >
       <Circle
         width={7}
         height={7}

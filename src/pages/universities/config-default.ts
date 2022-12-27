@@ -215,6 +215,7 @@ export const neighborsGraph: TGraph[] = [
     direction: Side.RIGHT,
     points: [875, 475, 1125, 475],
     section: "sec1",
+    isFilled: true,
     floor: 1,
     linkedSection: ["sec2", "sec3"],
   },

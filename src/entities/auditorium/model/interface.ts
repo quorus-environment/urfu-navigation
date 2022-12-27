@@ -13,4 +13,5 @@ export type TAuditorium = {
   }
   entry: Side
   neighbors: string[]
+  entryOffset?: number
 }
