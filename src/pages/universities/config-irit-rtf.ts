@@ -1082,7 +1082,7 @@ export const neighborsGraph: TGraph[] = [
     id: "Коридор РИ-138",
     destination: GraphDestination.CORRIDOR,
     height: 0,
-    neighbors: ["РИ-136", "РИ-138", "Коридор РИ-136"],
+    neighbors: ["РИ-136", "РИ-138", "Коридор РИ-136", "Коридор РИ-138 направо"],
     direction: Side.RIGHT,
     points: [855, 1345, 1025, 1345],
     section: "main_section",
