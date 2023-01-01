@@ -2,7 +2,7 @@ import { TAuditorium } from "../../entities/auditorium/model/interface"
 import { Side } from "../../shared/model/geometry"
 import { GraphDestination, TGraph } from "../../entities/graph/model/interface"
 
-export const leftWing: TAuditorium[] = [
+const leftWing: TAuditorium[] = [
   {
     name: "РИ-101",
     height: 50,
