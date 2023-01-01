@@ -121,12 +121,12 @@ export function findPaths(
       )
       resultPath.push(...pathToEndGraph)
     }
-    console.log(resultPath)
+    // console.log(resultPath)
     return resultPath
   }
   // Поиск пути в случае, если графы находятся в одной секци
   resultPath = findPathsInSection(startGraphId, endGraphId, graphRegistry)
-  console.log(resultPath)
+  // console.log(resultPath)
   return resultPath
 }
 
