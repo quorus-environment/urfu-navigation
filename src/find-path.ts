@@ -8,7 +8,7 @@ function* createLinkedListPath(
   graphRegistry: TGraph[],
 ): Generator<LinkedList<string> | undefined> {
   const queue: TGraph[] = []
-  const visited = new Set() // Сет для посещеных графов
+  const visited = new Set() // Сет для посещенных графов
   const startGraph = graphRegistry.find((gr) => gr.id === startGraphId)
   const endGraph = graphRegistry.find((gr) => gr.id === endGraphId)
   if (!startGraph) {
@@ -21,7 +21,7 @@ function* createLinkedListPath(
   tracks.set(startGraph.id, initLL)
   while (queue.length !== 0) {
     const graph = queue.shift()
-    // Добавляем всех соседедей graph в очередь
+    // Добавляем всех соседей graph в очередь
     for (let i = 0; i < (graph?.neighbors?.length || 0); i++) {
       const neighborId = graph?.neighbors?.[i]
       const neighbor = graphRegistry.find((gr) => gr.id === neighborId)
@@ -37,7 +37,7 @@ function* createLinkedListPath(
       }
     }
   }
-  // Есди мы посетили конечный граф, то выводим генератор в виде связанного списка айдишников
+  // Если мы посетили конечный граф, то выводим генератор в виде связанного списка айдишников
   if (tracks.has(endGraph?.id || "")) {
     yield tracks.get(endGraph?.id || "")
   }

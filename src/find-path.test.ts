@@ -1,6 +1,7 @@
 import "jest"
-import { TGraph } from "./entities/graph/model/interface"
+import { GraphDestination, TGraph } from "./entities/graph/model/interface"
 import { findPaths } from "./find-path"
+import { findPaths2 } from "./test"
 import { getGraphsFromAuditoriums } from "./entities/auditorium/lib/get-graphs-from-auditoriums"
 import {
   auditoriumsConfig,
@@ -125,6 +126,27 @@ test("FindPathThroughSection", () => {
     "РИ-140",
   ])
 })
+
+test("test", () => {
+  expect(findPaths2("РИ-103", GraphDestination.LADDER, graph)).toStrictEqual([
+    "РИ-103",
+    "Коридор Лестница",
+    "Лестница",
+  ])
+})
+
+// test("test", () => {
+//   expect(findPaths2("РИ-111", GraphDestination.LADDER, graph)).toStrictEqual([
+//     "РИ-111",
+//     "Коридор РИ-109",
+//     "Коридор РИ-107",
+//     "Коридор РИ-105",
+//     "Коридор РИ-102",
+//     "Коридор РИ-103",
+//     "Коридор Лестница",
+//     "Лестница",
+//   ])
+// })
 
 // test("FindPathThroughSectionWithTwoTurnoversInSection", () => {
 //   expect(findPaths("РИ-130", "РИ-101", graph)).toStrictEqual([
