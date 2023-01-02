@@ -128,7 +128,6 @@ export function findPaths(
   if (startGraph?.floor !== endGraph?.floor) {
     return []
   }
-  // let sectionPathLL: Generator<LinkedList<string> | undefined>
   // Поиск по секциям
   if (
     startGraph?.section !== endGraph?.section &&
