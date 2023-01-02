@@ -1,5 +1,6 @@
 // Настройки аудитории
 import { Side } from "../../../shared/model/geometry"
+import { GraphDestination } from "../../graph/model/interface"
 
 export type TAuditorium = {
   name: string
@@ -13,5 +14,6 @@ export type TAuditorium = {
   }
   entry: Side
   neighbors: string[]
+  destination: GraphDestination
   entryOffset?: number
 }

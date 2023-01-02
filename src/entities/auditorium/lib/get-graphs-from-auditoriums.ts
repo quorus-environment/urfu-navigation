@@ -1,4 +1,4 @@
-import { GraphDestination, TGraph } from "../../graph/model/interface"
+import { TGraph } from "../../graph/model/interface"
 import { getEntryPoints, getResultPoint } from "../../graph/lib/use-graph"
 import { TAuditorium } from "../model/interface"
 
@@ -17,7 +17,7 @@ export const getGraphsFromAuditoriums = (
       ...graph,
       {
         id: config.name,
-        destination: GraphDestination.AUDITORIUM,
+        destination: config.destination,
         height: 25,
         neighbors: config.neighbors,
         direction: config.entry,

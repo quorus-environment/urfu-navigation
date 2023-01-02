@@ -31,6 +31,7 @@ export const IritRtf: React.FC = () => {
             coords={aud.coords}
             entry={aud.entry}
             floor={aud.floor}
+            destination={aud.destination}
             section={aud.section}
             neighbors={aud.neighbors}
             entryOffset={aud.entryOffset}
