@@ -11,6 +11,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["cor_1", "РИ-105"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec1",
   },
   {
@@ -21,6 +22,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["cor_1", "РИ-106", "cor_2"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec1",
   },
   {
@@ -31,6 +33,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["cor_2", "РИ-107", "cor_3"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec1",
   },
   {
@@ -41,6 +44,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["cor_3", "РИ-108", "turnover1_0"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec1",
   },
   {
@@ -51,6 +55,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["cor_1", "РИ-101"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec1",
   },
   {
@@ -61,6 +66,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["cor_1", "РИ-102", "cor_2"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec1",
   },
   {
@@ -71,6 +77,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["cor_2", "РИ-103", "cor_3"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec1",
   },
   {
@@ -81,6 +88,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["cor_3", "РИ-104", "turnover1_0"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec1",
   },
   {
@@ -91,6 +99,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["turnover2_0", "РИ-110", "cor_4"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec2",
   },
   {
@@ -101,6 +110,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["turnover2_0", "РИ-109", "cor_4"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec2",
   },
   {
@@ -111,6 +121,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["cor_4", "РИ-112", "cor_5"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec2",
   },
   {
@@ -121,6 +132,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["cor_4", "РИ-111", "cor_5"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec2",
   },
   {
@@ -131,6 +143,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["cor_5", "РИ-113"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec2",
   },
   {
@@ -141,6 +154,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["cor_5", "РИ-113"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec2",
   },
   {
@@ -151,6 +165,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["turnover3_0", "РИ-116", "cor_6"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec3",
   },
   {
@@ -161,6 +176,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["turnover3_0", "РИ-115", "cor_6"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec3",
   },
   {
@@ -171,6 +187,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["cor_6", "РИ-118"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec3",
   },
   {
@@ -181,6 +198,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["cor_6", "РИ-117"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec3",
   },
 
@@ -192,6 +210,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["turnover4_0", "РИ-130"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec4",
   },
   {
@@ -202,6 +221,7 @@ export const auditoriumsConfig: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["turnover4_0", "РИ-131"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "sec4",
   },
 ]

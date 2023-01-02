@@ -11,6 +11,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-101"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -21,6 +22,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор Лестница", "Коридор РИ-101"],
     floor: 1,
+    destination: GraphDestination.LADDER,
     section: "leftWing1",
   },
   {
@@ -31,6 +33,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор Лестница", "Коридор РИ-103"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -41,6 +44,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-103", "Коридор РИ-102"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -51,6 +55,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-102", "Коридор РИ-105"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -61,6 +66,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-105", "РИ-107", "Коридор РИ-107"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -71,6 +77,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["РИ-104", "Коридор РИ-105", "Коридор РИ-107"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -81,6 +88,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-107", "РИ-109", "Коридор РИ-109"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -91,6 +99,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["РИ-106", "Коридор РИ-107", "Коридор РИ-109"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -101,6 +110,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-111", "Коридор РИ-108"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -111,6 +121,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-109", "Коридор РИ-111"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -121,6 +132,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-108", "Коридор РИ-113"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -131,6 +143,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-113", "Коридор РИ-115", "РИ-115"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -141,6 +154,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-113", "РИ-110", "Коридор РИ-115"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -151,6 +165,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-112", "Коридор РИ-117"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -161,6 +176,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-115", "Коридор РИ-112"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -171,6 +187,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-114", "Коридор РИ-117"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -181,6 +198,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-114", "Коридор РИ-119"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -191,6 +209,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-116", "Коридор РИ-119"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -201,6 +220,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-121", "Коридор РИ-118"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -211,6 +231,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-116", "Коридор РИ-118"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -221,6 +242,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-120", "Коридор РИ-121"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -231,6 +253,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-120", "Коридор РИ-123", "Тех-помещение"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -241,6 +264,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Лестница 2", "Коридор РИ-122", "Коридор РИ-125"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -251,6 +275,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-125", "turnoverLeftToMain"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -261,6 +286,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["РИ-123", "Коридор РИ-123", "Коридор РИ-120"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -271,6 +297,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-123", "Коридор РИ-122"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
   },
   {
@@ -281,6 +308,7 @@ const leftWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-122", "РИ-125", "Коридор РИ-125"],
     floor: 1,
+    destination: GraphDestination.LADDER,
     section: "leftWing1",
   },
 ]
@@ -294,6 +322,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["РИ-127г", "Коридор РИ-127г", "РИ-129б"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
     entryOffset: 40,
   },
@@ -305,6 +334,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["Коридор РИ-129", "Коридор РИ-127а"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -315,6 +345,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["РИ-127в", "РИ-129б", "Коридор РИ-127г"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -325,6 +356,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["Коридор РИ-127а", "Коридор РИ-127"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -335,6 +367,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["РИ-127г", "Коридор РИ-127г", "РИ-127в"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
     entryOffset: 40,
   },
@@ -346,6 +379,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["Коридор РИ-127г", "Коридор РИ-129"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -356,6 +390,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["Коридор РИ-127", "Коридор РадиоТочка", "turnoverMainToLeft"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
     entryOffset: 60,
   },
@@ -367,6 +402,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["Коридор РадиоТочка", "Коридор РИ-124а"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -377,6 +413,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["Коридор С/у", "Коридор РИ-124а"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -387,6 +424,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор гардероб налево", "Коридор Лестница Слева"],
     floor: 1,
+    destination: GraphDestination.LADDER,
     section: "main_section",
   },
   {
@@ -397,6 +435,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["Коридор РИ-124", "Коридор РИ-126"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -407,6 +446,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["Коридор РИ-128", "Коридор РИ-126"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -417,6 +457,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["Коридор РИ-128", "Коридор РИ-130"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -427,6 +468,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["Коридор РИ-132", "Коридор РИ-130"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -437,6 +479,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["Коридор РИ-132", "Коридор РИ-134"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -447,6 +490,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["Коридор РИ-136", "Коридор РИ-134"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -457,6 +501,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["Коридор РИ-136", "Коридор РИ-138"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -467,6 +512,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.BOTTOM,
     neighbors: ["Коридор РИ-138 направо", "Коридор РИ-138"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -477,6 +523,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: [],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -491,6 +538,7 @@ const mainSection: TAuditorium[] = [
       "Коридор гардероб направо",
     ],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
     entryOffset: -25,
   },
@@ -502,6 +550,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.TOP,
     neighbors: ["Коридор вход наверх"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "main_section",
   },
   {
@@ -512,6 +561,7 @@ const mainSection: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор гардероб направо", "Коридор Лестница Справа"],
     floor: 1,
+    destination: GraphDestination.LADDER,
     section: "main_section",
   },
 ]
@@ -525,6 +575,7 @@ const rightWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-138а"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
   },
   {
@@ -535,6 +586,7 @@ const rightWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-135"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
   },
   {
@@ -545,6 +597,7 @@ const rightWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-138а", "Коридор РИ-137", "Коридор РИ-140"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
   },
   {
@@ -555,6 +608,7 @@ const rightWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-142", "Коридор РИ-140", "РИ-139"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
   },
   {
@@ -565,6 +619,7 @@ const rightWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-142", "Коридор РИ-140", "РИ-140"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
   },
   {
@@ -575,6 +630,7 @@ const rightWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-142", "Коридор РИ-141"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
   },
   {
@@ -585,6 +641,7 @@ const rightWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-141", "Коридор РИ-144"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
   },
   {
@@ -595,6 +652,7 @@ const rightWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-144", "Коридор РИ-143"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
   },
   {
@@ -605,6 +663,7 @@ const rightWing: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-146", "Коридор РИ-145"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
   },
   {
@@ -615,6 +674,7 @@ const rightWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-146", "Коридор РИ-143"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
   },
   {
@@ -625,6 +685,7 @@ const rightWing: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-145"],
     floor: 1,
+    destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
   },
 ]
@@ -1675,6 +1736,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-201"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1685,6 +1747,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор Лестница 2 этаж", "Коридор РИ-201"],
     floor: 2,
+    destination: GraphDestination.LADDER,
     section: "leftWing2",
   },
   {
@@ -1695,6 +1758,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор Лестница 2 этаж", "Коридор РИ-203"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1705,6 +1769,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-203", "Коридор РИ-202"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1715,6 +1780,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-202", "Коридор РИ-205"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1725,6 +1791,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-205", "РИ-207", "Коридор РИ-207"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1735,6 +1802,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["РИ-204", "Коридор РИ-205", "Коридор РИ-207"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1745,6 +1813,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-207", "РИ-209", "Коридор РИ-209"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1755,6 +1824,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["РИ-206", "Коридор РИ-207", "Коридор РИ-209"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1765,6 +1835,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-211", "Коридор РИ-208"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1775,6 +1846,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-209", "Коридор РИ-211"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1785,6 +1857,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-208", "Коридор РИ-213"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1795,6 +1868,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-213", "Коридор РИ-215", "РИ-215"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1805,6 +1879,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-213", "РИ-210", "Коридор РИ-215"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1815,6 +1890,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-212", "Коридор РИ-217"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1825,6 +1901,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-215", "Коридор РИ-212"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1835,6 +1912,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-214", "Коридор РИ-217"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1845,6 +1923,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-214", "Коридор РИ-219"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1855,6 +1934,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-216", "Коридор РИ-219"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1865,6 +1945,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-221", "Коридор РИ-218"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1875,6 +1956,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-216", "Коридор РИ-218"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1885,6 +1967,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-220", "Коридор РИ-221"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1895,6 +1978,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-220", "Коридор РИ-223", "РИ-226"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1905,6 +1989,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Лестница 22", "Коридор РИ-222", "Коридор РИ-225"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1915,6 +2000,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.RIGHT,
     neighbors: ["Коридор РИ-225"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1925,6 +2011,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["РИ-223", "Коридор РИ-223", "Коридор РИ-220"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
     section: "leftWing2",
   },
   {
@@ -1935,6 +2022,8 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-223", "Коридор РИ-222"],
     floor: 2,
+    destination: GraphDestination.AUDITORIUM,
+
     section: "leftWing2",
   },
   {
@@ -1945,6 +2034,7 @@ const leftWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-222", "РИ-225", "Коридор РИ-225"],
     floor: 2,
+    destination: GraphDestination.LADDER,
     section: "leftWing2",
   },
 ]
