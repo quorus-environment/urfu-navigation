@@ -11,7 +11,7 @@ import { Colors } from "../../../shared/constants"
 import { usePointsDeclaration } from "../lib/use-points-declaration"
 import { useGraph } from "../../graph/lib/use-graph"
 import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
-import { findPaths } from "../../../find-path"
+import { findPaths } from "../../../shared/pathFinding/findPaths"
 
 /**
  * компонент аудитории: пока это просто квадратик с названием и входом, дальше будем расширять до

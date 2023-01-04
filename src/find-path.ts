@@ -115,7 +115,7 @@ function findPathOnFloor(
 }
 
 // Поиск пути от startGraphId до endGraphId
-export function findPaths(
+function findPaths(
   startGraphId: string,
   endGraphId: string,
   graphRegistry: TGraph[],
@@ -126,7 +126,9 @@ export function findPaths(
   let resultPath: string[] = []
   // Будет поиск по этажам
   if (startGraph?.floor !== endGraph?.floor) {
-    return []
+    resultPath = findPathsInSection(startGraphId, endGraphId, graphRegistry)
+    console.log(resultPath)
+    return resultPath
   }
   // Поиск по секциям
   if (

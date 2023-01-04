@@ -1,6 +1,5 @@
 import "jest"
 import { GraphDestination, TGraph } from "./entities/graph/model/interface"
-import { findPaths } from "./find-path"
 import { findPaths2 } from "./test"
 import { getGraphsFromAuditoriums } from "./entities/auditorium/lib/get-graphs-from-auditoriums"
 import {
@@ -8,6 +7,7 @@ import {
   neighborsGraph,
   configSectionsGraph,
 } from "./pages/universities/config-irit-rtf"
+import { findPaths } from "./shared/pathFinding/findPaths"
 
 const graph = [
   ...neighborsGraph,
@@ -132,6 +132,17 @@ test("test", () => {
     "РИ-103",
     "Коридор Лестница",
     "Лестница",
+  ])
+})
+
+test("FindPathToGraphOnDifferentFloor", () => {
+  expect(findPaths("РИ-103", "РИ-203", graph)).toStrictEqual([
+    "РИ-103",
+    "Коридор Лестница",
+    "Лестница",
+    "Лестница 2 этаж",
+    "Коридор Лестница 2 этаж",
+    "РИ-203",
   ])
 })
 

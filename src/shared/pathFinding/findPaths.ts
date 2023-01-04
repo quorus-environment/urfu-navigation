@@ -1,6 +1,10 @@
-import { TGraph } from "../../entities/graph/model/interface"
+import { GraphDestination, TGraph } from "../../entities/graph/model/interface"
 import { findPathOnFloor } from "./findPathOnFloor"
 import { findPathsInSection } from "./findPathsInSection"
+import {
+  createLinkedListPathToDestination,
+  unwrapLinkedList,
+} from "./LinkedListProcessing"
 
 // Поиск пути от startGraphId до endGraphId
 export function findPaths(
@@ -14,7 +18,37 @@ export function findPaths(
   let resultPath: string[] = []
   // Будет поиск по этажам
   if (startGraph?.floor !== endGraph?.floor) {
-    return []
+    const pathToLadderLL = createLinkedListPathToDestination(
+      startGraphId,
+      GraphDestination.LADDER,
+      graphRegistry,
+    )
+    const pathToLadder = unwrapLinkedList(pathToLadderLL)
+    resultPath.push(...pathToLadder)
+    const ladderOnCurrentFloor = resultPath[resultPath.length - 1]
+
+    const ladderOnCurrentFloorGraph = graphRegistry.find(
+      (gr) => gr.id === ladderOnCurrentFloor,
+    )
+    const huy = ladderOnCurrentFloorGraph?.neighbors
+    const pizda: TGraph[] = []
+    if (huy) {
+      for (const id of huy) {
+        const currentGraph = graphRegistry.find((gr) => gr.id === id)
+        if (currentGraph) pizda.push(currentGraph)
+      }
+    }
+
+    const ladderOnNextFloor = pizda.find(
+      (gr) => gr.destination === GraphDestination.LADDER,
+    )
+    if (ladderOnNextFloor)
+      resultPath.push(
+        ...findPaths(ladderOnNextFloor.id, endGraphId, graphRegistry),
+      )
+    console.log(resultPath)
+
+    return resultPath
   }
   // Поиск по секциям
   if (
