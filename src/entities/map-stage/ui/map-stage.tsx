@@ -78,14 +78,10 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
         style={{ cursor: isDragging ? "grabbing" : "default" }}
         draggable
         onClick={(e) =>
-          console.log(
-            "Mouse: ",
-            e.evt.pageX,
-            e.evt.pageY,
-            "\nTarget:",
-            e.target.x(),
-            e.target.y(),
-          )
+          console.log("Mouse:", {
+            x: Math.floor(e.currentTarget.getRelativePointerPosition().x),
+            y: Math.floor(e.currentTarget.getRelativePointerPosition().y),
+          })
         }
         onDragStart={() => setDragging(true)}
         onDragEnd={() => setDragging(false)}

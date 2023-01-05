@@ -672,7 +672,7 @@ const rightWing: TAuditorium[] = [
     section: "rightWing1",
   },
   {
-    name: "Лестница",
+    name: "Лестница 2",
     height: 50,
     width: 100,
     coords: { x: 1330, y: 700 },
