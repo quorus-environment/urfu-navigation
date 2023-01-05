@@ -478,6 +478,7 @@ const rightWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
+    entryOffset: -50,
   },
   {
     name: "РИ-239",
@@ -489,6 +490,7 @@ const rightWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
+    entryOffset: -30,
   },
   {
     name: "РИ-238а",
@@ -500,6 +502,7 @@ const rightWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
+    entryOffset: -30,
   },
   {
     name: "РИ-239а",
@@ -511,6 +514,7 @@ const rightWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
+    entryOffset: -30,
   },
   {
     name: "РИ-240",
@@ -522,6 +526,7 @@ const rightWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
+    entryOffset: -30,
   },
   {
     name: "РИ-241",
@@ -533,6 +538,7 @@ const rightWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
+    entryOffset: 30,
   },
   {
     name: "РИ-242",
@@ -544,6 +550,7 @@ const rightWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
+    entryOffset: -30,
   },
   {
     name: "РИ-250",
@@ -555,6 +562,7 @@ const rightWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
+    entryOffset: 60,
   },
   {
     name: "РИ-248",
@@ -566,6 +574,7 @@ const rightWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
+    entryOffset: -60,
   },
   {
     name: "РИ-246",
@@ -599,6 +608,7 @@ const rightWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
+    entryOffset: 70,
   },
   {
     name: "РИ-247",
@@ -610,6 +620,7 @@ const rightWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing1",
+    entryOffset: 35,
   },
   {
     name: "РИ-245",
