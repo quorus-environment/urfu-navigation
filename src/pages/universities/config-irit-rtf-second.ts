@@ -256,7 +256,7 @@ const mainSection2: TAuditorium[] = [
     ],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
     entryOffset: 55,
   },
   {
@@ -268,7 +268,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-217", "Коридор РИ-219"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
     entryOffset: -40,
   },
   {
@@ -280,7 +280,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-228 влево", "Коридор РИ-228"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
     entryOffset: -5,
   },
   {
@@ -292,7 +292,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-228", "Коридор C/у"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
   },
   {
     name: "Лестница Слева",
@@ -303,7 +303,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-219"],
     floor: 2,
     destination: GraphDestination.LADDER,
-    section: "main_section",
+    section: "main_section2",
   },
   {
     name: "РИ-223",
@@ -314,7 +314,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор C/у", "Коридор РИ-223"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
     entryOffset: -65,
   },
   {
@@ -326,7 +326,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-223", "РИ-230", "Коридор РИ-230"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
   },
   {
     name: "РИ-227",
@@ -337,7 +337,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-230", "РИ-232", "Коридор РИ-232"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
     entryOffset: -30,
   },
   {
@@ -349,7 +349,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-232", "Коридор РИ-229"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
     entryOffset: -2.5,
   },
   {
@@ -361,7 +361,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-229", "Коридор РИ-231"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
     entryOffset: -2.5,
   },
   {
@@ -373,7 +373,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-231", "Коридор РИ-234", "РИ-234"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
   },
   {
     name: "РИ-235",
@@ -384,7 +384,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-234", "Коридор РИ-235"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
     entryOffset: -60,
   },
   {
@@ -396,7 +396,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-223", "РИ-225", "Коридор РИ-230"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
     entryOffset: 80,
   },
 
@@ -409,7 +409,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-230", "КРИ-227", "Коридор РИ-232"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
     entryOffset: -30,
   },
   {
@@ -421,7 +421,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-231", "Коридор РИ-234", "РИ-233"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
     entryOffset: 55,
   },
   {
@@ -433,7 +433,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор РИ-235", "turnoverMain2ToRight2"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
-    section: "main_section",
+    section: "main_section2",
     entryOffset: 70,
   },
   {
@@ -445,7 +445,7 @@ const mainSection2: TAuditorium[] = [
     neighbors: ["Коридор гардероб направо", "Коридор Лестница Справа"],
     floor: 2,
     destination: GraphDestination.LADDER,
-    section: "main_section",
+    section: "main_section2",
   },
 ]
 
@@ -654,7 +654,7 @@ export const neighborsGraphSecond: TGraph[] = [
     id: "turnoverLeft2ToMain2",
     destination: GraphDestination.TURN_OVER,
     height: 0,
-    neighbors: ["turnoverMain2ToLeft2", "Коридор Лестница 2"],
+    neighbors: ["Коридор Лестница 2"],
     direction: Side.BOTTOM,
     points: [325, 1225, 325, 1300],
     section: "leftWing2",
