@@ -37,7 +37,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
 }) => {
   // Получаем выбранные элементы
   const { startId, endId, setEndId, setStartId } = useContext(ChosenContext)
-  const { graph, setColoredGraph } = useGraphContext()
+  const { graph, setColoredGraph, coloredGraph } = useGraphContext()
 
   useEffect(() => {
     if (startId && endId) {
@@ -79,6 +79,18 @@ export const Auditorium: React.FC<TAuditorium> = ({
     floor,
   )
 
+  const color = useMemo(() => {
+    if (startId === name) {
+      return Colors.LightRed
+    }
+    if (endId === name) {
+      return Colors.LightYellow
+    }
+    if (coloredGraph.includes(name)) {
+      return Colors.LightGray
+    }
+  }, [coloredGraph, endId, name, startId])
+
   return (
     <Group onClick={onClick} globalCompositeOperation="destination-over">
       <Circle
@@ -93,13 +105,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
         x={coords.x}
         y={coords.y}
         height={height}
-        fill={
-          startId === name
-            ? Colors.LightRed
-            : endId === name
-            ? Colors.LightYellow
-            : undefined
-        }
+        fill={color}
         stroke="black"
         strokeWidth={3}
         strokeEnabled
