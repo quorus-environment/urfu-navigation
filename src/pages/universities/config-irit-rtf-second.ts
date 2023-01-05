@@ -433,7 +433,7 @@ const rightWing: TAuditorium[] = [
     section: "rightWing1",
   },
   {
-    name: "РИ-235",
+    name: "РИ-235a",
     height: 150,
     width: 200,
     coords: { x: 1330, y: 1350 },
