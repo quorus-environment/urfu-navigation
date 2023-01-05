@@ -4,6 +4,7 @@ import { Main } from "../pages/main/main"
 import { IritRtf } from "../pages/universities/irit-rtf"
 import "./app.css"
 import { GraphProvider } from "../shared/providers/graph-context/ui/graph-provider"
+import { ChosenProvider } from "../shared/providers/chosen-context/ui/chosen-provider"
 
 /**
  * Основная компонента приложения
@@ -18,7 +19,9 @@ export const App: React.FC = () => {
           path="/irit-rtf"
           element={
             <GraphProvider>
-              <IritRtf />
+              <ChosenProvider>
+                <IritRtf />
+              </ChosenProvider>
             </GraphProvider>
           }
         />

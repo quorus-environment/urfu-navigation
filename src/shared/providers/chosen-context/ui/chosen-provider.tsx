@@ -6,11 +6,14 @@ export const ChosenContext = createContext<TChosenContext>({
   setStartId: () => void 0,
   endId: null,
   setEndId: () => void 0,
+  floor: 1,
+  setFloor: () => void 0,
 })
 
 export const ChosenProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [chosenId, setChosenId] = useState<string | null>(null)
   const [chosenSecondId, setChosenSecondId] = useState<string | null>(null)
+  const [floor, setFloor] = useState<number>(1)
 
   return (
     <ChosenContext.Provider
@@ -19,6 +22,8 @@ export const ChosenProvider: React.FC<PropsWithChildren> = ({ children }) => {
         setStartId: setChosenId,
         endId: chosenSecondId,
         setEndId: setChosenSecondId,
+        floor,
+        setFloor,
       }}
     >
       {children}

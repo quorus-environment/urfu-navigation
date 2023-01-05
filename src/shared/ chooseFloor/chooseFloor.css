@@ -21,24 +21,27 @@ li, li a {
     width: 32px;
     height: 32px;
     -moz-user-select: none;
-    -khtml-user-select: none;
     -webkit-user-select: none;
     user-select: none;
     cursor: pointer;
 }
-.floor:first-child{
+.floor:nth-child(1){
     border-radius: 8px 8px 0 0;
 }
 .floor:last-child{
     border-radius: 0 0 8px 8px;
 }
 .floors-container{
-  display: flex;
-  width: min-content;
-  height: auto;
-  flex-direction: column;
-  background: white;
-  border-radius: 5px;
+    position: absolute;
+    left: 20px;
+    z-index: 100;
+    top: 100px;
+    display: flex;
+    width: min-content;
+    height: auto;
+    flex-direction: column;
+    background: white;
+    border-radius: 5px;
 }
 
 .active-link{
