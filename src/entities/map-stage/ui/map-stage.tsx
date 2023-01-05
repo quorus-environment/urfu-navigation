@@ -68,6 +68,8 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
         actions={[
           { label: "1", onClick: () => setFloor(1) },
           { label: "2", onClick: () => setFloor(2) },
+          { label: "3", onClick: () => setFloor(3) },
+          { label: "4", onClick: () => setFloor(4) },
         ]}
       />
       <Stage

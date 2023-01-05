@@ -18,6 +18,18 @@ import {
   neighborsGraphSecond,
   wallsSecond,
 } from "./config-irit-rtf-second"
+import {
+  auditoriumsConfigThird,
+  configSectionsGraphThird,
+  neighborsGraphThird,
+  wallsThird,
+} from "./config-irit-rtf-third"
+import {
+  auditoriumsConfigFourth,
+  configSectionsGraphFourth,
+  neighborsGraphFourth,
+  wallsFourth,
+} from "./config-irit-rtf-fourth"
 
 export const IritRtf: React.FC = () => {
   const { setGraphRegistry } = useGraphContext()
@@ -25,19 +37,34 @@ export const IritRtf: React.FC = () => {
 
   // Конфигурация аудиторий стен и графов
   const everyFloorAuds = useMemo(() => {
-    return [...auditoriumsConfigSecond, ...auditoriumsConfig]
+    return [
+      ...auditoriumsConfigSecond,
+      ...auditoriumsConfig,
+      ...auditoriumsConfigThird,
+      ...auditoriumsConfigFourth,
+    ]
   }, [])
 
   const everyFloorWalls = useMemo(() => {
-    return [...walls, ...wallsSecond]
+    return [...walls, ...wallsSecond, ...wallsThird, ...wallsFourth]
   }, [])
 
   const everyFloorGraph = useMemo(() => {
-    return [...neighborsGraphSecond, ...neighborsGraph]
+    return [
+      ...neighborsGraphSecond,
+      ...neighborsGraph,
+      ...neighborsGraphThird,
+      ...neighborsGraphFourth,
+    ]
   }, [])
 
   const everyFloorSections = useMemo(() => {
-    return [...configSectionsGraph, ...configSectionsGraphSecond]
+    return [
+      ...configSectionsGraph,
+      ...configSectionsGraphSecond,
+      ...configSectionsGraphThird,
+      ...configSectionsGraphFourth,
+    ]
   }, [])
 
   useEffect(() => {
