@@ -1688,11 +1688,11 @@ export const neighborsGraph: TGraph[] = [
 ]
 
 export const walls = [
-  { x: 300, y: 0, width: 50, height: 0 },
-  { x: 350, y: 1150, width: 0, height: 100 },
-  { x: 470, y: 1500, width: 700, height: 0 },
-  { x: 1230, y: 1500, width: 100, height: 0 },
-  { x: 1280, y: 850, width: 50, height: 0 },
+  { x: 300, y: 0, width: 50, height: 0, floor: 1 },
+  { x: 350, y: 1150, width: 0, height: 100, floor: 1 },
+  { x: 470, y: 1500, width: 700, height: 0, floor: 1 },
+  { x: 1230, y: 1500, width: 100, height: 0, floor: 1 },
+  { x: 1280, y: 850, width: 50, height: 0, floor: 1 },
 ]
 
 export const configSectionsGraph: TGraph[] = [
