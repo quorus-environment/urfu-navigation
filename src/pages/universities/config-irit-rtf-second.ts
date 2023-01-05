@@ -13,6 +13,7 @@ const leftWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
+    entryOffset: 90,
   },
   {
     name: "Лестница",
@@ -49,6 +50,7 @@ const leftWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
+    entryOffset: 30,
   },
 
   {
@@ -61,6 +63,7 @@ const leftWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
+    entryOffset: -10,
   },
   {
     name: "РИ-203",
@@ -72,6 +75,7 @@ const leftWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
+    entryOffset: 50,
   },
   {
     name: "РИ-208",
@@ -83,6 +87,7 @@ const leftWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
+    entryOffset: -20,
   },
   {
     name: "РИ-210",
@@ -105,6 +110,7 @@ const leftWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
+    entryOffset: 30,
   },
   {
     name: "РИ-209",
@@ -116,6 +122,7 @@ const leftWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
+    entryOffset: 30,
   },
   {
     name: "РИ-212",
@@ -138,6 +145,7 @@ const leftWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
+    entryOffset: 30,
   },
   {
     name: "РИ-211",
@@ -149,7 +157,7 @@ const leftWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
-    entryOffset: 5,
+    entryOffset: -100,
   },
   {
     name: "РИ-213",
@@ -161,6 +169,7 @@ const leftWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
+    entryOffset: -10,
   },
   {
     name: "РИ-215",
@@ -172,6 +181,7 @@ const leftWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
+    entryOffset: -70,
   },
   {
     name: "РИ-218",
@@ -194,6 +204,7 @@ const leftWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
+    entryOffset: 90,
   },
   {
     name: "РИ-222",
@@ -216,6 +227,7 @@ const leftWing: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing1",
+    entryOffset: 5,
   },
   {
     name: "Лестница 2",
