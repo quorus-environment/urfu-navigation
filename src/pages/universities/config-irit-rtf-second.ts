@@ -229,7 +229,7 @@ const mainSection: TAuditorium[] = [
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
     section: "main_section",
-    entryOffset: 50,
+    entryOffset: 55,
   },
   {
     name: "РИ-219",
@@ -901,7 +901,7 @@ export const neighborsGraphSecond: TGraph[] = [
     height: 0,
     neighbors: [],
     direction: Side.RIGHT,
-    points: [325, 1300, 325, 1370],
+    points: [325, 1300, 325, 1375],
     section: "main_section2",
     floor: 2,
     linkedSection: ["leftWing2"],
