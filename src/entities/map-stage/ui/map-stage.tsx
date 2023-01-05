@@ -1,4 +1,10 @@
-import React, { useCallback, useContext, useRef, useState } from "react"
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react"
 import { Stage } from "react-konva"
 import Konva from "konva"
 import KonvaEventObject = Konva.KonvaEventObject
@@ -15,6 +21,14 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
   const [isDragging, setDragging] = useState(false)
   const stageRef = useRef<Konva.Stage>(null)
   const { setFloor } = useContext(ChosenContext)
+
+  useEffect(() => {
+    stageRef.current?.setPosition({
+      x: window.innerWidth / 2 - 400,
+      y: window.innerHeight / 2 - 450,
+    })
+    stageRef.current?.scale({ x: 0.5, y: 0.5 })
+  }, [stageRef])
 
   const onWheel = useCallback((event: KonvaEventObject<WheelEvent>) => {
     event.evt.preventDefault()
