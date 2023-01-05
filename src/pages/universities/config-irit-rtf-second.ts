@@ -184,17 +184,6 @@ const leftWing: TAuditorium[] = [
     entryOffset: -70,
   },
   {
-    name: "РИ-215",
-    height: 250,
-    width: 100,
-    coords: { x: 200, y: 1000 },
-    entry: Side.RIGHT,
-    neighbors: ["Коридор РИ-221", "Коридор РИ-218"],
-    floor: 2,
-    destination: GraphDestination.AUDITORIUM,
-    section: "leftWing1",
-  },
-  {
     name: "РИ-218",
     height: 200,
     width: 100,
