@@ -1,6 +1,5 @@
 import "jest"
-import { GraphDestination, TGraph } from "./entities/graph/model/interface"
-import { findPaths2 } from "./test"
+import { TGraph } from "./entities/graph/model/interface"
 import { getGraphsFromAuditoriums } from "./entities/auditorium/lib/get-graphs-from-auditoriums"
 import {
   auditoriumsConfig,
@@ -124,14 +123,6 @@ test("FindPathThroughSection", () => {
     "Коридор РИ-137",
     "Коридор РИ-140",
     "РИ-140",
-  ])
-})
-
-test("test", () => {
-  expect(findPaths2("РИ-103", GraphDestination.LADDER, graph)).toStrictEqual([
-    "РИ-103",
-    "Коридор Лестница",
-    "Лестница",
   ])
 })
 

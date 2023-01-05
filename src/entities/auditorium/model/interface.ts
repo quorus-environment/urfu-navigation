@@ -8,6 +8,8 @@ export type TAuditorium = {
   width: number
   floor: number
   section: string
+  /** Только для лестниц */
+  linkedAuditoriums?: { id: string; floor: number }[]
   coords: {
     x: number
     y: number
