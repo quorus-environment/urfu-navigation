@@ -443,7 +443,7 @@ const rightWing: TAuditorium[] = [
     section: "rightWing1",
   },
   {
-    name: "РИ-235a",
+    name: "РИ-237",
     height: 150,
     width: 200,
     coords: { x: 1330, y: 1350 },
@@ -454,7 +454,7 @@ const rightWing: TAuditorium[] = [
     section: "rightWing1",
   },
   {
-    name: "РИ-237",
+    name: "РИ-239",
     height: 100,
     width: 200,
     coords: { x: 1330, y: 1250 },
@@ -597,7 +597,7 @@ const rightWing: TAuditorium[] = [
     section: "rightWing1",
   },
   {
-    name: "Лестница",
+    name: "Лестница 2",
     height: 50,
     width: 100,
     coords: { x: 1330, y: 700 },
@@ -1038,6 +1038,7 @@ export const neighborsGraphSecond: TGraph[] = [
 
 export const wallsSecond = [
   { x: 300, y: 0, width: 50, height: 0, floor: 2 },
+  { x: 300, y: 1500, width: 50, height: 0, floor: 2 },
   { x: 350, y: 1150, width: 0, height: 100, floor: 2 },
   { x: 470, y: 1500, width: 700, height: 0, floor: 2 },
   { x: 1230, y: 1500, width: 100, height: 0, floor: 2 },
