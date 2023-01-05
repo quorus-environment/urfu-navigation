@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useMemo } from "react"
 import { Layer, Line } from "react-konva"
 import { Auditorium } from "../../entities/auditorium/ui/auditorium"
 import { MapStage } from "../../entities/map-stage/ui/map-stage"
@@ -12,19 +12,43 @@ import {
   walls,
 } from "./config-irit-rtf"
 import { ChosenContext } from "../../shared/providers/chosen-context/ui/chosen-provider"
+import {
+  auditoriumsConfigSecond,
+  configSectionsGraphSecond,
+  neighborsGraphSecond,
+  wallsSecond,
+} from "./config-irit-rtf-second"
 
 export const IritRtf: React.FC = () => {
   const { setGraphRegistry } = useGraphContext()
   const { floor } = useContext(ChosenContext)
+
+  // Конфигурация аудиторий стен и графов
+  const everyFloorAuds = useMemo(() => {
+    return [...auditoriumsConfigSecond, ...auditoriumsConfig]
+  }, [])
+
+  const everyFloorWalls = useMemo(() => {
+    return [...walls, ...wallsSecond]
+  }, [])
+
+  const everyFloorGraph = useMemo(() => {
+    return [...neighborsGraphSecond, ...neighborsGraph]
+  }, [])
+
+  const everyFloorSections = useMemo(() => {
+    return [...configSectionsGraph, ...configSectionsGraphSecond]
+  }, [])
+
   useEffect(() => {
-    const audGraphs = getGraphsFromAuditoriums(auditoriumsConfig)
-    setGraphRegistry([...neighborsGraph, ...audGraphs, ...configSectionsGraph])
-  }, [setGraphRegistry])
+    const audGraphs = getGraphsFromAuditoriums(everyFloorAuds)
+    setGraphRegistry([...everyFloorGraph, ...audGraphs, ...everyFloorSections])
+  }, [everyFloorAuds, everyFloorGraph, everyFloorSections, setGraphRegistry])
 
   return (
     <MapStage>
       <Layer height={window.innerHeight - 60}>
-        {auditoriumsConfig
+        {everyFloorAuds
           .filter((aud) => aud.floor === floor)
           .map((aud) => (
             <Auditorium
@@ -41,12 +65,12 @@ export const IritRtf: React.FC = () => {
               entryOffset={aud.entryOffset}
             />
           ))}
-        {neighborsGraph
+        {everyFloorGraph
           .filter((gr) => gr.floor === floor)
           .map((graph, index) => (
             <Graph graph={graph} key={index} />
           ))}
-        {walls
+        {everyFloorWalls
           .filter((wall) => wall.floor === floor)
           .map((wall) => {
             return (
