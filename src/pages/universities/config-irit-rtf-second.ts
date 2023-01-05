@@ -496,11 +496,22 @@ const mainSection: TAuditorium[] = [
 
 const rightWing: TAuditorium[] = [
   {
-    name: "РИ-238а",
+    name: "РИ-238",
     height: 100,
-    width: 120,
+    width: 70,
+    coords: { x: 1160, y: 1250 },
+    entry: Side.BOTTOM,
+    neighbors: ["Коридор РИ-238а"],
+    floor: 2,
+    destination: GraphDestination.AUDITORIUM,
+    section: "rightWing1",
+  },
+  {
+    name: "С/у (Ж)\nвторой этаж",
+    height: 100,
+    width: 50,
     coords: { x: 1110, y: 1250 },
-    entry: Side.RIGHT,
+    entry: Side.BOTTOM,
     neighbors: ["Коридор РИ-238а"],
     floor: 2,
     destination: GraphDestination.AUDITORIUM,
