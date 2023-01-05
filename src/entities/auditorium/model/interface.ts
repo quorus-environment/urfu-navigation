@@ -3,6 +3,7 @@ import { Side } from "../../../shared/model/geometry"
 import { GraphDestination } from "../../graph/model/interface"
 
 export type TAuditorium = {
+  id?: string
   name: string
   height: number
   width: number
