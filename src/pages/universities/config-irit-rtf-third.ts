@@ -159,7 +159,7 @@ const leftWing: TAuditorium[] = [
     section: "leftWing3",
   },
   {
-    name: "РИ-317",
+    name: "РИ-317a",
     height: 150,
     width: 100,
     coords: { x: 200, y: 550 },
@@ -192,7 +192,7 @@ const leftWing: TAuditorium[] = [
     section: "leftWing3",
   },
   {
-    name: "РИ-319",
+    name: "РИ-319a",
     height: 150,
     width: 100,
     coords: { x: 200, y: 700 },
@@ -236,7 +236,7 @@ const leftWing: TAuditorium[] = [
     section: "leftWing3",
   },
   {
-    name: "РИ-323",
+    name: "РИ-323a",
     height: 50,
     width: 100,
     coords: { x: 200, y: 1000 },
@@ -247,7 +247,7 @@ const leftWing: TAuditorium[] = [
     section: "leftWing3",
   },
   {
-    name: "РИ-325",
+    name: "РИ-325a",
     height: 150,
     width: 100,
     coords: { x: 200, y: 1050 },
@@ -426,7 +426,7 @@ const mainSection: TAuditorium[] = [
     section: "mainSection3",
   },
   {
-    name: "РИ-335",
+    name: "РИ-335a",
     height: 100,
     width: 170,
     coords: { x: 940, y: 1400 },

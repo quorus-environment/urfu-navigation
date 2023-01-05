@@ -35,6 +35,8 @@ export const IritRtf: React.FC = () => {
   const { setGraphRegistry } = useGraphContext()
   const { floor } = useContext(ChosenContext)
 
+  console.log(floor)
+
   // Конфигурация аудиторий стен и графов
   const everyFloorAuds = useMemo(() => {
     return [
