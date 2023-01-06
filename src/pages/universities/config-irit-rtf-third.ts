@@ -580,7 +580,7 @@ const rightWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing3",
-    entryOffset: -30,
+    entryOffset: -20,
   },
   {
     name: "хз",
@@ -614,6 +614,7 @@ const rightWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing3",
+    entryOffset: -15,
   },
   {
     name: "РИ-340",
@@ -647,7 +648,7 @@ const rightWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing3",
-    entryOffset: 30,
+    entryOffset: 60,
   },
   {
     name: "РИ-341а",
@@ -671,6 +672,7 @@ const rightWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing3",
+    entryOffset: 60,
   },
   {
     name: "РИ-342а",
@@ -682,6 +684,7 @@ const rightWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing3",
+    entryOffset: -20,
   },
   {
     name: "РИ-343",
@@ -693,6 +696,7 @@ const rightWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing3",
+    entryOffset: 60,
   },
   {
     name: "РИ-344",
@@ -704,6 +708,7 @@ const rightWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing3",
+    entryOffset: 10,
   },
   {
     name: "РИ-345",
@@ -715,7 +720,7 @@ const rightWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "rightWing3",
-    entryOffset: 35,
+    entryOffset: 55,
   },
   {
     name: "Лестница 3",
