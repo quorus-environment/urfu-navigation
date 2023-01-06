@@ -403,6 +403,7 @@ const mainSection3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "main_section3",
+    entryOffset: -50,
   },
   {
     name: "РИ-331а",
@@ -414,6 +415,7 @@ const mainSection3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "main_section3",
+    entryOffset: 30,
   },
   {
     name: "РИ-333",
@@ -459,6 +461,7 @@ const mainSection3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "main_section3",
+    entryOffset: 40,
   },
   {
     name: "РИ-326",
@@ -470,6 +473,7 @@ const mainSection3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "main_section3",
+    entryOffset: 20,
   },
   {
     name: "РИ-328",
@@ -492,7 +496,7 @@ const mainSection3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "main_section3",
-    entryOffset: 55,
+    entryOffset: 20,
   },
   {
     name: "РИ-332",
@@ -504,7 +508,7 @@ const mainSection3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "main_section3",
-    entryOffset: 70,
+    entryOffset: 50,
   },
   {
     name: "Лестница Справа",
@@ -549,7 +553,7 @@ const mainSection3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "main_section3",
-    entryOffset: -50,
+    entryOffset: -110,
   },
 ]
 
