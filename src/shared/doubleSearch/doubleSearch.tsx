@@ -14,7 +14,8 @@ export const DoubleSearch: FC<IDoubleSearchSearch> = ({
   nameFirst,
   nameSecond,
 }) => {
-  const { startId, setStartId, endId, setEndId } = useContext(ChosenContext)
+  const { startName, setStartName, endName, setEndName } =
+    useContext(ChosenContext)
   const { graph } = useGraphContext()
   const graphIds = useMemo(() => {
     return graph
@@ -26,16 +27,16 @@ export const DoubleSearch: FC<IDoubleSearchSearch> = ({
       <div className="search__body">
         <div className="search__inner">
           <OrdinarySearch
-            value={startId || ""}
-            setValue={setStartId}
+            value={startName || ""}
+            setValue={setStartName}
             items={graphIds}
             placeholder={nameFirst}
           />
         </div>
         <div className="search__inner">
           <OrdinarySearch
-            value={endId || ""}
-            setValue={setEndId}
+            value={endName || ""}
+            setValue={setEndName}
             items={graphIds}
             placeholder={nameSecond}
           />

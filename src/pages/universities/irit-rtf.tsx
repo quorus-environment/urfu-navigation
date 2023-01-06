@@ -81,7 +81,8 @@ export const IritRtf: React.FC = () => {
           .filter((aud) => aud.floor === floor)
           .map((aud) => (
             <Auditorium
-              key={aud.name}
+              key={aud.id}
+              id={aud.id}
               name={aud.name}
               height={aud.height}
               width={aud.width}

@@ -24,6 +24,7 @@ import { findPaths } from "../../../shared/pathFinding/findPaths"
  * @param section - Секция
  * @param floor - Этаж
  * @param entryOffset - Отклонение входа от центра
+ * @param id - id
  * */
 export const Auditorium: React.FC<TAuditorium> = ({
   name,
@@ -34,9 +35,11 @@ export const Auditorium: React.FC<TAuditorium> = ({
   section,
   floor,
   entryOffset = 0,
+  id,
 }) => {
   // Получаем выбранные элементы
-  const { startId, endId, setEndId, setStartId } = useContext(ChosenContext)
+  const { startId, endId, setEndId, setStartId, setStartName, setEndName } =
+    useContext(ChosenContext)
   const { graph, setColoredGraph, coloredGraph } = useGraphContext()
 
   useEffect(() => {
@@ -58,19 +61,21 @@ export const Auditorium: React.FC<TAuditorium> = ({
 
   const onClick = useCallback(() => {
     if (!startId) {
-      setStartId(name)
+      setStartId(id || name)
+      setStartName(name)
       return
     }
-    if (name !== startId) {
-      setEndId(name)
+    if (id !== startId) {
+      setEndId(id || name)
+      setEndName(name)
     }
-  }, [startId, name, setStartId, setEndId])
+  }, [startId, id, setStartId, name, setStartName, setEndId, setEndName])
 
   // Описание начальной и конечной точки
   const description = usePointsDeclaration(name)
 
   const { graph: auditoriumGraph } = useGraph(
-    name,
+    id || name,
     GraphDestination.AUDITORIUM,
     [entryCoords.x, entryCoords.y],
     entry,
@@ -80,16 +85,16 @@ export const Auditorium: React.FC<TAuditorium> = ({
   )
 
   const color = useMemo(() => {
-    if (startId === name) {
+    if (startId === id) {
       return Colors.LightRed
     }
-    if (endId === name) {
+    if (endId === id) {
       return Colors.LightYellow
     }
-    if (coloredGraph.includes(name)) {
+    if (coloredGraph.includes(id || name)) {
       return Colors.LightGray
     }
-  }, [coloredGraph, endId, name, startId])
+  }, [coloredGraph, endId, id, name, startId])
 
   return (
     <Group
