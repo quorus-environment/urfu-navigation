@@ -92,7 +92,11 @@ export const Auditorium: React.FC<TAuditorium> = ({
   }, [coloredGraph, endId, name, startId])
 
   return (
-    <Group onClick={onClick} globalCompositeOperation="destination-over">
+    <Group
+      onClick={onClick}
+      onTap={onClick}
+      globalCompositeOperation="destination-over"
+    >
       <Circle
         width={6}
         height={6}
