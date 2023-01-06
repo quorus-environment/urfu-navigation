@@ -37,6 +37,7 @@ const leftWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
+    entryOffset: 50,
   },
   {
     name: "РИ-303",
@@ -59,6 +60,7 @@ const leftWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
+    entryOffset: -40,
   },
   {
     name: "РИ-304",
@@ -70,6 +72,7 @@ const leftWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
+    entryOffset: 30,
   },
   {
     name: "РИ-305",
@@ -81,6 +84,7 @@ const leftWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
+    entryOffset: -60,
   },
   {
     name: "РИ-306",
@@ -92,14 +96,16 @@ const leftWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
+    entryOffset: 60,
   },
   {
+    // Входа нет на плане
     name: "РИ-307",
     height: 50,
     width: 100,
     coords: { x: 200, y: 350 },
     entry: Side.RIGHT,
-    neighbors: ["Коридор РИ-312", "Коридор РИ-303"],
+    neighbors: [],
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
@@ -114,6 +120,7 @@ const leftWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
+    entryOffset: 30,
   },
   {
     name: "РИ-309",
@@ -125,6 +132,7 @@ const leftWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
+    entryOffset: -10,
   },
   {
     name: "РИ-309а",
@@ -136,6 +144,7 @@ const leftWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
+    entryOffset: -30,
   },
   {
     // На плане входа нет, так что его с соседями не соединяем
@@ -214,8 +223,10 @@ const leftWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
+    entryOffset: -25,
   },
   {
+    // Входа нет
     name: "РИ-316",
     height: 50,
     width: 100,
@@ -236,6 +247,7 @@ const leftWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
+    entryOffset: 30,
   },
   {
     name: "РИ-318",
@@ -247,6 +259,7 @@ const leftWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
+    entryOffset: -30,
   },
   {
     name: "РИ-319",
@@ -269,6 +282,7 @@ const leftWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
+    entryOffset: 25,
   },
   {
     name: "РИ-321",
@@ -302,6 +316,7 @@ const leftWing3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "leftWing3",
+    entryOffset: -75,
   },
   {
     name: "Лестница 2",
@@ -331,7 +346,7 @@ const mainSection3: TAuditorium[] = [
     floor: 3,
     destination: GraphDestination.AUDITORIUM,
     section: "main_section3",
-    entryOffset: 55,
+    entryOffset: 110,
   },
   {
     name: "Тайная комната",
