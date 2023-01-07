@@ -25,6 +25,7 @@ export const getGraphsFromAuditoriums = (
         points: [points.x, points.y, resPoints.x, resPoints.y],
         section: config.section,
         floor: config.floor,
+        linkedAuditoriums: config.linkedAuditoriums,
       },
     ]
   }, [])
