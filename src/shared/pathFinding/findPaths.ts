@@ -46,13 +46,14 @@ export function findPaths(
       }
     }
     if (nextLadder?.id) {
-      const pathFromLadderToEndLL = createLinkedListPath(
-        nextLadder?.id,
-        endGraphId,
-        graphRegistry,
-      )
-      const pathFromLadderToEnd = unwrapLinkedList(pathFromLadderToEndLL)
-      resultPath.push(...pathFromLadderToEnd)
+      resultPath.push(...findPaths(nextLadder?.id, endGraphId, graphRegistry))
+      // const pathFromLadderToEndLL = createLinkedListPath(
+      //   nextLadder?.id,
+      //   endGraphId,
+      //   graphRegistry,
+      // )
+      // const pathFromLadderToEnd = unwrapLinkedList(pathFromLadderToEndLL)
+      // resultPath.push(...pathFromLadderToEnd)
     }
 
     // let nextLadderAud =  auditoriumsConfig.find((aud) => aud.linkedAuditoriums)
