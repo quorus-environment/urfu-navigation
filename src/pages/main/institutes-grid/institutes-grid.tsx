@@ -1,6 +1,4 @@
 import { InstituteLogo } from "../../../shared/ui/institute-logo/institute-logo"
-import { useEffect, useState } from "react"
-import axios, { AxiosResponse } from "axios"
 import "./institutes-grid.css"
 
 type Institute = {
@@ -9,15 +7,23 @@ type Institute = {
   photourl: string
 }
 
+const institutes: Institute[] = [
+  {
+    photourl: "https://posurfu.ru/wp-content/uploads/2020/02/K29FWJYxtJ0.jpg",
+    instid: "iritrtf",
+    instname: "ИРИТ-РТФ",
+  },
+]
+
 export function Institutes() {
-  const [institutes, setInstitutes] = useState<Institute[]>([])
-  useEffect(() => {
-    axios
-      .get("http://89.108.81.160:8080")
-      .then((resp: AxiosResponse<Institute[]>) => {
-        setInstitutes(resp.data)
-      })
-  }, [])
+  // const [institutes, setInstitutes] = useState<Institute[]>([])
+  // useEffect(() => {
+  //   axios
+  //     .get("http://89.108.81.160:8080")
+  //     .then((resp: AxiosResponse<Institute[]>) => {
+  //       setInstitutes(resp.data)
+  //     })
+  // }, [])
 
   return (
     <div className="main__institutes">

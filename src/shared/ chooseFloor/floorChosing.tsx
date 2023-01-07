@@ -1,8 +1,8 @@
 import { FC, useMemo, useState } from "react"
 import "./chooseFloor.css"
 
-interface IChooseFloor {
-  actions: Array<() => void>
+interface IFloorChosingProps {
+  actions: { label: string; onClick: () => void }[]
   size?: number
 }
 /**Component of choosing floors
@@ -10,23 +10,31 @@ interface IChooseFloor {
  * @callbacks Array<() => void> - callbacks for changing floor
  * @size number - a size of component
  * */
-export const ChooseFloor: FC<IChooseFloor> = ({ actions, size = 32 }) => {
+export const FloorChosing: FC<IFloorChosingProps> = ({
+  actions,
+  size = 32,
+}) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const floors: JSX.Element[] = useMemo(
     () =>
-      actions.map((callback, index) => {
+      actions.map((action, index) => {
         const linkHandler = () => {
-          callback()
+          action.onClick()
           setActiveIndex(index)
         }
         return (
           <div
-            style={{ width: size, height: size, fontSize: size * 0.6 }}
+            style={{
+              width: size,
+              height: size,
+              fontSize: size * 0.6,
+              left: 20,
+            }}
             key={index}
             className={activeIndex === index ? "floor active-link" : "floor"}
             onClick={linkHandler}
           >
-            {index}
+            {action.label}
           </div>
         )
       }),
