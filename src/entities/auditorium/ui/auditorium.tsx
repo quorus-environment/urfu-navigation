@@ -24,6 +24,7 @@ import { findPaths } from "../../../shared/pathFinding/findPaths"
  * @param section - Секция
  * @param floor - Этаж
  * @param entryOffset - Отклонение входа от центра
+ * @param id - id
  * */
 export const Auditorium: React.FC<TAuditorium> = ({
   name,
@@ -34,10 +35,12 @@ export const Auditorium: React.FC<TAuditorium> = ({
   section,
   floor,
   entryOffset = 0,
+  id,
 }) => {
   // Получаем выбранные элементы
-  const { startId, endId, setEndId, setStartId } = useContext(ChosenContext)
-  const { graph, setColoredGraph } = useGraphContext()
+  const { startId, endId, setEndId, setStartId, setStartName, setEndName } =
+    useContext(ChosenContext)
+  const { graph, setColoredGraph, coloredGraph } = useGraphContext()
 
   useEffect(() => {
     if (startId && endId) {
@@ -58,19 +61,21 @@ export const Auditorium: React.FC<TAuditorium> = ({
 
   const onClick = useCallback(() => {
     if (!startId) {
-      setStartId(name)
+      setStartId(id || name)
+      setStartName(name)
       return
     }
-    if (name !== startId) {
-      setEndId(name)
+    if (id !== startId) {
+      setEndId(id || name)
+      setEndName(name)
     }
-  }, [startId, name, setStartId, setEndId])
+  }, [startId, id, setStartId, name, setStartName, setEndId, setEndName])
 
   // Описание начальной и конечной точки
   const description = usePointsDeclaration(name)
 
   const { graph: auditoriumGraph } = useGraph(
-    name,
+    id || name,
     GraphDestination.AUDITORIUM,
     [entryCoords.x, entryCoords.y],
     entry,
@@ -79,8 +84,24 @@ export const Auditorium: React.FC<TAuditorium> = ({
     floor,
   )
 
+  const color = useMemo(() => {
+    if (startId === id) {
+      return Colors.LightRed
+    }
+    if (endId === id) {
+      return Colors.LightYellow
+    }
+    if (coloredGraph.includes(id || name)) {
+      return Colors.LightGray
+    }
+  }, [coloredGraph, endId, id, name, startId])
+
   return (
-    <Group onClick={onClick} globalCompositeOperation="destination-over">
+    <Group
+      onClick={onClick}
+      onTap={onClick}
+      globalCompositeOperation="destination-over"
+    >
       <Circle
         width={6}
         height={6}
@@ -93,13 +114,7 @@ export const Auditorium: React.FC<TAuditorium> = ({
         x={coords.x}
         y={coords.y}
         height={height}
-        fill={
-          startId === name
-            ? Colors.LightRed
-            : endId === name
-            ? Colors.LightYellow
-            : undefined
-        }
+        fill={color}
         stroke="black"
         strokeWidth={3}
         strokeEnabled

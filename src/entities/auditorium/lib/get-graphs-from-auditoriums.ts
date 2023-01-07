@@ -16,7 +16,8 @@ export const getGraphsFromAuditoriums = (
     return [
       ...graph,
       {
-        id: config.name,
+        name: config.name,
+        id: config.id || config.name,
         destination: config.destination,
         height: 25,
         neighbors: config.neighbors,

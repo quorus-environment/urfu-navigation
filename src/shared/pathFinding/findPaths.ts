@@ -46,7 +46,6 @@ export function findPaths(
       resultPath.push(
         ...findPaths(ladderOnNextFloor.id, endGraphId, graphRegistry),
       )
-    console.log(resultPath)
 
     return resultPath
   }
@@ -67,6 +66,5 @@ export function findPaths(
   }
   // Поиск пути в случае, если графы находятся в одной секции
   resultPath = findPathsInSection(startGraphId, endGraphId, graphRegistry)
-  console.log(resultPath)
   return resultPath
 }
