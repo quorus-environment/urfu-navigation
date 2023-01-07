@@ -12,6 +12,8 @@ import { mapConfig } from "../config"
 import { ChosenContext } from "../../../shared/providers/chosen-context/ui/chosen-provider"
 import { Header } from "../../../widgets/header/ui/header"
 import { FloorChosing } from "../../../shared/ chooseFloor/floorChosing"
+import { findPaths } from "../../../shared/pathFinding/findPaths"
+import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
 
 type TMapStageProps = {
   children: React.ReactNode
@@ -21,6 +23,9 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
   const [isDragging, setDragging] = useState(false)
   const stageRef = useRef<Konva.Stage>(null)
   const { setFloor } = useContext(ChosenContext)
+
+  const { startId, endId } = useContext(ChosenContext)
+  const { graph, setColoredGraph } = useGraphContext()
 
   useEffect(() => {
     stageRef.current?.setPosition({
@@ -59,6 +64,13 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
     }
     stageRef?.current?.position(newPos)
   }, [])
+
+  useEffect(() => {
+    if (startId && endId) {
+      const path = findPaths(startId, endId, graph)
+      setColoredGraph(path)
+    }
+  }, [endId, graph, setColoredGraph, startId])
 
   return (
     <>

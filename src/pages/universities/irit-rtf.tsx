@@ -31,11 +31,9 @@ import {
   wallsFourth,
 } from "./config-irit-rtf-fourth"
 
-export const IritRtf: React.FC = () => {
+export const IritRtf: React.FC = React.memo(() => {
   const { setGraphRegistry } = useGraphContext()
   const { floor } = useContext(ChosenContext)
-
-  console.log(floor)
 
   // Конфигурация аудиторий стен и графов
   const everyFloorAuds = useMemo(() => {
@@ -97,8 +95,8 @@ export const IritRtf: React.FC = () => {
           ))}
         {everyFloorGraph
           .filter((gr) => gr.floor === floor)
-          .map((graph, index) => (
-            <Graph graph={graph} key={index} />
+          .map((graph) => (
+            <Graph graph={graph} key={graph.id + graph.height} />
           ))}
         {everyFloorWalls
           .filter((wall) => wall.floor === floor)
@@ -122,4 +120,4 @@ export const IritRtf: React.FC = () => {
       </Layer>
     </MapStage>
   )
-}
+})

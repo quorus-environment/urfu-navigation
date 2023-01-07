@@ -2,11 +2,9 @@ import { GraphDestination, TGraph } from "../../entities/graph/model/interface"
 import { findPathOnFloor } from "./findPathOnFloor"
 import { findPathsInSection } from "./findPathsInSection"
 import {
-  createLinkedListPath,
   createLinkedListPathToDestination,
   unwrapLinkedList,
 } from "./LinkedListProcessing"
-import { auditoriumsConfig } from "../../pages/universities/config-irit-rtf"
 
 // Поиск пути от startGraphId до endGraphId
 export function findPaths(
