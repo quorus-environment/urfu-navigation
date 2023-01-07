@@ -34,11 +34,9 @@ export function findPaths(
           if (
             linkedAuditorium.id === ladderIdOnCurrentFloor &&
             endGraph &&
-            linkedAuditorium.floor === endGraph.floor
+            graph.floor === endGraph.floor
           ) {
-            nextLadder = graphRegistry.find(
-              (gr) => gr.id === linkedAuditorium.id,
-            )
+            nextLadder = graph
           }
         }
       }
