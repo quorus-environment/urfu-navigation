@@ -25,27 +25,6 @@ export function findPaths(
     )
     const pathToLadder = unwrapLinkedList(pathToLadderLL)
     resultPath.push(...pathToLadder)
-    const ladderOnCurrentFloor = resultPath[resultPath.length - 1]
-
-    const ladderOnCurrentFloorGraph = graphRegistry.find(
-      (gr) => gr.id === ladderOnCurrentFloor,
-    )
-    const huy = ladderOnCurrentFloorGraph?.neighbors
-    const pizda: TGraph[] = []
-    if (huy) {
-      for (const id of huy) {
-        const currentGraph = graphRegistry.find((gr) => gr.id === id)
-        if (currentGraph) pizda.push(currentGraph)
-      }
-    }
-
-    const ladderOnNextFloor = pizda.find(
-      (gr) => gr.destination === GraphDestination.LADDER,
-    )
-    if (ladderOnNextFloor)
-      resultPath.push(
-        ...findPaths(ladderOnNextFloor.id, endGraphId, graphRegistry),
-      )
 
     return resultPath
   }
