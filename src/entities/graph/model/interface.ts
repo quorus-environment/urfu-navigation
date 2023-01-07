@@ -5,7 +5,7 @@ export type TGraph = {
   id: string
   points: [number, number, number, number]
   direction: Side
-  linkedAuditoriums: TAuditorium["linkedAuditoriums"]
+  linkedAuditoriums?: TAuditorium["linkedAuditoriums"]
   height: number
   section: string
   floor: number
