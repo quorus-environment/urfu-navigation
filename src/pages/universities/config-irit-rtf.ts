@@ -33,7 +33,7 @@ const leftWing: TAuditorium[] = [
         id: "Лестница 2floor",
       },
     ],
-    neighbors: ["Коридор Лестница 1floor", "Коридор РИ-101", "Лестница 2floor"],
+    neighbors: ["Коридор Лестница 1floor", "Коридор РИ-101"],
     floor: 1,
     destination: GraphDestination.LADDER,
     section: "leftWing1",
@@ -423,11 +423,12 @@ const leftWing: TAuditorium[] = [
       y: 1100,
     },
     entry: Side.LEFT,
-    neighbors: [
-      "Коридор РИ-122",
-      "РИ-125",
-      "Коридор РИ-125",
-      "Лестница 2 2floor",
+    neighbors: ["Коридор РИ-122", "РИ-125", "Коридор РИ-125"],
+    linkedAuditoriums: [
+      {
+        floor: 2,
+        id: "Лестница 2 2floor",
+      },
     ],
     floor: 1,
     destination: GraphDestination.LADDER,
@@ -584,10 +585,12 @@ const mainSection: TAuditorium[] = [
       y: 1400,
     },
     entry: Side.RIGHT,
-    neighbors: [
-      "Коридор гардероб налево",
-      "Коридор Лестница Слева 1floor",
-      "Лестница Слева 2floor",
+    neighbors: ["Коридор гардероб налево", "Коридор Лестница Слева 1floor"],
+    linkedAuditoriums: [
+      {
+        floor: 2,
+        id: "Лестница Слева 2floor",
+      },
     ],
     floor: 1,
     destination: GraphDestination.LADDER,
@@ -773,10 +776,12 @@ const mainSection: TAuditorium[] = [
       y: 1400,
     },
     entry: Side.LEFT,
-    neighbors: [
-      "Коридор гардероб направо",
-      "Коридор Лестница Справа 1floor",
-      "Лестница Справа 2floor",
+    neighbors: ["Коридор гардероб направо", "Коридор Лестница Справа 1floor"],
+    linkedAuditoriums: [
+      {
+        floor: 2,
+        id: "Лестница Справа 2floor",
+      },
     ],
     floor: 1,
     destination: GraphDestination.LADDER,
