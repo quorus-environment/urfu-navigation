@@ -1,71 +1,23 @@
-import React, { useContext, useEffect, useMemo } from "react"
+import React, { useContext, useEffect } from "react"
 import { Layer, Line } from "react-konva"
 import { Auditorium } from "../../entities/auditorium/ui/auditorium"
 import { MapStage } from "../../entities/map-stage/ui/map-stage"
 import { Graph } from "../../entities/graph/ui/graph"
 import { useGraphContext } from "../../shared/providers/graph-context/lib/use-graph-context"
 import { getGraphsFromAuditoriums } from "../../entities/auditorium/lib/get-graphs-from-auditoriums"
-import {
-  auditoriumsConfig,
-  configSectionsGraph,
-  neighborsGraph,
-  walls,
-} from "./config-irit-rtf"
 import { ChosenContext } from "../../shared/providers/chosen-context/ui/chosen-provider"
-import {
-  auditoriumsConfigSecond,
-  configSectionsGraphSecond,
-  neighborsGraphSecond,
-  wallsSecond,
-} from "./config-irit-rtf-second"
-import {
-  auditoriumsConfigThird,
-  configSectionsGraphThird,
-  neighborsGraphThird,
-  wallsThird,
-} from "./config-irit-rtf-third"
-import {
-  auditoriumsConfigFourth,
-  configSectionsGraphFourth,
-  neighborsGraphFourth,
-  wallsFourth,
-} from "./config-irit-rtf-fourth"
+import { useIritRtfEntities } from "./use-irit-rtf-entities"
 
 export const IritRtf: React.FC = React.memo(() => {
   const { setGraphRegistry } = useGraphContext()
   const { floor } = useContext(ChosenContext)
 
-  // Конфигурация аудиторий стен и графов
-  const everyFloorAuds = useMemo(() => {
-    return [
-      ...auditoriumsConfigSecond,
-      ...auditoriumsConfig,
-      ...auditoriumsConfigThird,
-      ...auditoriumsConfigFourth,
-    ]
-  }, [])
-
-  const everyFloorWalls = useMemo(() => {
-    return [...walls, ...wallsSecond, ...wallsThird, ...wallsFourth]
-  }, [])
-
-  const everyFloorGraph = useMemo(() => {
-    return [
-      ...neighborsGraphSecond,
-      ...neighborsGraph,
-      ...neighborsGraphThird,
-      ...neighborsGraphFourth,
-    ]
-  }, [])
-
-  const everyFloorSections = useMemo(() => {
-    return [
-      ...configSectionsGraph,
-      ...configSectionsGraphSecond,
-      ...configSectionsGraphThird,
-      ...configSectionsGraphFourth,
-    ]
-  }, [])
+  const {
+    everyFloorSections,
+    everyFloorWalls,
+    everyFloorGraph,
+    everyFloorAuds,
+  } = useIritRtfEntities()
 
   useEffect(() => {
     const audGraphs = getGraphsFromAuditoriums(everyFloorAuds)
