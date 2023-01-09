@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [dev, main]
+    branches: [dev, main, feature/ci-cd]
 
 jobs:
   build:
