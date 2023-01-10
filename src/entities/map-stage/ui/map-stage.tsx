@@ -32,6 +32,7 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
       x: window.innerWidth / 2 - 400,
       y: window.innerHeight / 2 - 450,
     })
+    stageRef.current?.height(window.innerHeight - 60)
     stageRef.current?.scale({ x: 0.5, y: 0.5 })
   }, [stageRef])
 
@@ -97,7 +98,6 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
         }
         onDragStart={() => setDragging(true)}
         onDragEnd={() => setDragging(false)}
-        height={window.innerHeight - 60}
         onWheel={onWheel}
       >
         {children}
