@@ -27,3 +27,5 @@ export const MainMap = () => {
     </YMaps>
   )
 }
+
+export default MainMap

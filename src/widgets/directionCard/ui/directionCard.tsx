@@ -10,7 +10,6 @@ interface directionCardProps {
 }
 
 export const DirectionCard: FC<directionCardProps> = ({
-  width,
   sign,
   title,
   subtitle,

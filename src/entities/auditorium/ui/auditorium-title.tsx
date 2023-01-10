@@ -1,5 +1,5 @@
 import { Text } from "react-konva"
-import React from "react"
+import React, { memo } from "react"
 
 type TAuditoriumTitleProps = {
   title: string
@@ -9,7 +9,7 @@ type TAuditoriumTitleProps = {
   descriptionColor?: string
 }
 
-export const AuditoriumTitle: React.FC<TAuditoriumTitleProps> = ({
+const CAuditoriumTitle: React.FC<TAuditoriumTitleProps> = ({
   title,
   x,
   y,
@@ -45,3 +45,5 @@ export const AuditoriumTitle: React.FC<TAuditoriumTitleProps> = ({
     </>
   )
 }
+
+export const AuditoriumTitle = memo(CAuditoriumTitle)

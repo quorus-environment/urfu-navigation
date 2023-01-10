@@ -1,5 +1,5 @@
 import "./ordinarySearch.css"
-import Lens from "../assets/Vector.svg"
+import Lens from "../../assets/Vector.svg"
 import {
   FC,
   MutableRefObject,
@@ -11,9 +11,10 @@ import {
 
 interface IOrdinarySearch {
   placeholder: string
-  items: string[]
+  items: { value: string; label?: string }[]
   value: string
   setValue: (v: string) => void
+  setId: (v: string) => void
 }
 
 // Закрываем дропдаун при нажатии на любое пространство
@@ -36,8 +37,9 @@ const useAutocompleteClosingByRef = (setOpened: (v: boolean) => void) => {
 // Управление дропдауном через кнопочки как в дефолтном селекте
 const useKeyboardManagement = (
   ref: MutableRefObject<HTMLDivElement | null>,
-  filtered: string[],
+  filtered: IOrdinarySearch["items"],
   setInputValue: (v: string) => void,
+  setInputId: (v: string) => void,
   setOpenedBar: (v: boolean) => void,
 ) => {
   const [currentIndex, setCurrentIndex] = useState(-1)
@@ -46,12 +48,14 @@ const useKeyboardManagement = (
     const handler = (evt: KeyboardEventInit) => {
       if (evt.code === "ArrowUp") {
         if (currentIndex === -1) {
+          setCurrentIndex(filtered.length - 1)
           return
         }
         setCurrentIndex(currentIndex - 1)
       }
       if (evt.code === "ArrowDown") {
         if (currentIndex === filtered.length - 1) {
+          setCurrentIndex(0)
           return
         }
         setCurrentIndex(currentIndex + 1)
@@ -59,7 +63,8 @@ const useKeyboardManagement = (
       if (evt.code === "Enter") {
         setOpenedBar(false)
         if (currentIndex !== -1) {
-          setInputValue(filtered[currentIndex])
+          setInputValue(filtered[currentIndex]?.value)
+          setInputId(filtered[currentIndex]?.label || "")
         }
         setCurrentIndex(-1)
       }
@@ -73,6 +78,7 @@ const useKeyboardManagement = (
     filtered,
     filtered.length,
     ref,
+    setInputId,
     setInputValue,
     setOpenedBar,
   ])
@@ -84,8 +90,9 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
   items,
   value,
   setValue,
+  setId,
 }) => {
-  const [isOpenedBar, setOpenedBar] = useState(true)
+  const [isOpenedBar, setOpenedBar] = useState(false)
 
   // Закрытие модалки на клик извне
   const ref = useAutocompleteClosingByRef(setOpenedBar)
@@ -97,7 +104,7 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
     }
     return items
       .filter((auditorium) =>
-        auditorium.toLowerCase().includes(value.toLowerCase()),
+        auditorium.label?.toLowerCase().includes(value.toLowerCase()),
       )
       .slice(0, 5)
   }, [items, value])
@@ -107,29 +114,38 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
     ref,
     filtered,
     setValue,
+    setId,
     setOpenedBar,
   )
 
   const listItem = useMemo(() => {
-    return filtered.map((name, index) => (
+    return filtered.map((item, index) => (
       <li
         key={index}
         className={`auto-complete__item ${
           currentIndex === index ? " hovered" : undefined
         }`}
         onClick={() => {
-          setValue(name)
+          setId(item.value)
+          setValue(item.label || "")
           setOpenedBar(false)
         }}
       >
-        {name}
+        {item.label}
       </li>
     ))
-  }, [currentIndex, filtered, setValue])
+  }, [currentIndex, filtered, setId, setValue])
 
   return (
     <div className="body">
-      <div className="searchbar" ref={ref}>
+      <div
+        className="searchbar"
+        style={{
+          borderRadius:
+            isOpenedBar && filtered.length ? "15px 15px 0 0" : "15px",
+        }}
+        ref={ref}
+      >
         <img className="lens" src={Lens} alt="" />
         <input
           className="search"

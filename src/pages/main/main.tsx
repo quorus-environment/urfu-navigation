@@ -1,17 +1,20 @@
 import "./main.css"
-import { MainMap } from "../../widgets/map/ui/map"
 import { Institutes } from "./institutes-grid/institutes-grid"
-import { Header } from "../../widgets/header/ui/header"
-import React from "react"
+import { MainPageHeader } from "../../widgets/header/ui/header"
+import React, { Suspense } from "react"
+
+const MainMap = React.lazy(() => import("../../widgets/map/ui/map"))
 
 export function Main() {
   return (
     <>
-      <Header />
+      <MainPageHeader />
       <section className="main">
         <div className="main__map">
           <h2>Корпуса</h2>
-          <MainMap />
+          <Suspense fallback="Загрузка">
+            <MainMap />
+          </Suspense>
         </div>
         <div>
           <h2>Институты</h2>

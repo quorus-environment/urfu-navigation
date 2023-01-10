@@ -1,9 +1,9 @@
 import { Circle, Group, Line } from "react-konva"
-import React, { useMemo } from "react"
+import React, { memo, useMemo } from "react"
 import { TGraph } from "../model/interface"
 import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
 
-export const Graph: React.FC<{ graph: TGraph }> = React.memo(({ graph }) => {
+const CGraph: React.FC<{ graph: TGraph }> = ({ graph }) => {
   const { coloredGraph } = useGraphContext()
   const color = useMemo(
     () => (coloredGraph.includes(graph.id) ? "green" : undefined),
@@ -32,4 +32,6 @@ export const Graph: React.FC<{ graph: TGraph }> = React.memo(({ graph }) => {
       />
     </Group>
   )
-})
+}
+
+export const Graph = memo(CGraph)

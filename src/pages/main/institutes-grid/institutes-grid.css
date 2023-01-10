@@ -2,3 +2,10 @@
     display: flex;
     padding: 30px 70px;
 }
+
+@media (max-width: 590px) {
+    .main__institutes {
+        padding: 10px;
+        min-height: 200px;
+    }
+}
