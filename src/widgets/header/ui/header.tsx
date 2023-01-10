@@ -8,3 +8,11 @@ export const Header = () => {
     </div>
   )
 }
+
+export const MainPageHeader = () => {
+  return (
+    <div className="header" style={{ justifyContent: "center" }}>
+      УрФУ Навигатор
+    </div>
+  )
+}
