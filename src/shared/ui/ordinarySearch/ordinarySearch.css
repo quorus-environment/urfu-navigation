@@ -59,3 +59,19 @@
 li{
     list-style: none;
 }
+
+@media (max-width: 600px) {
+    .searchbar {
+        height: 25px;
+        width: 140px;
+    }
+
+    .search {
+        line-height: 25px;
+        font-size: 10px;
+    }
+    .lens {
+        width: 10px;
+        height: 10px;
+    }
+}

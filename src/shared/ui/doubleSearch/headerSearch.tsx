@@ -30,7 +30,7 @@ export const HeaderSearch = () => {
   return (
     <div className="double-search">
       <div className="search__body">
-        <div onClick={onReset} style={{ fontSize: 14, cursor: "pointer" }}>
+        <div onClick={onReset} className="search__body_reset">
           Сбросить
         </div>
         <div className="search__inner">
