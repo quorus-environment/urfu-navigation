@@ -7,13 +7,14 @@ import React, {
 } from "react"
 import { Stage } from "react-konva"
 import Konva from "konva"
-import KonvaEventObject = Konva.KonvaEventObject
 import { mapConfig } from "../config"
 import { ChosenContext } from "../../../shared/providers/chosen-context/ui/chosen-provider"
 import { Header } from "../../../widgets/header/ui/header"
 import { FloorChosing } from "../../../shared/ui/ chooseFloor/floorChosing"
 import { findPaths } from "../../../shared/pathFinding/findPaths"
 import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
+import { useTouchZooming } from "../lib/use-touch-zooming"
+import KonvaEventObject = Konva.KonvaEventObject
 
 type TMapStageProps = {
   children: React.ReactNode
@@ -26,6 +27,9 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
 
   const { startId, endId } = useContext(ChosenContext)
   const { graph, setColoredGraph } = useGraphContext()
+
+  const { pinching, setIsPinching, handleTouchEnd, handleTouch } =
+    useTouchZooming(stageRef)
 
   useEffect(() => {
     stageRef.current?.setPosition({
@@ -89,7 +93,7 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
         ref={stageRef}
         width={window.innerWidth}
         style={{ cursor: isDragging ? "grabbing" : "default" }}
-        draggable
+        draggable={!pinching}
         onClick={(e) =>
           console.log("Mouse:", {
             x: Math.floor(e.currentTarget.getRelativePointerPosition().x),
@@ -97,8 +101,11 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
           })
         }
         onDragStart={() => setDragging(true)}
+        onTouchEnd={handleTouchEnd}
         onDragEnd={() => setDragging(false)}
+        onTouchMove={handleTouch}
         onWheel={onWheel}
+        onTouchStart={(e) => setIsPinching(!!e.evt.touches[1])}
       >
         {children}
       </Stage>
