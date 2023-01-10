@@ -11,7 +11,10 @@ export const Header = () => {
 
 export const MainPageHeader = () => {
   return (
-    <div className="header" style={{ justifyContent: "center" }}>
+    <div
+      className="header"
+      style={{ justifyContent: "center", fontSize: "16px", fontWeight: "bold" }}
+    >
       УрФУ Навигатор
     </div>
   )

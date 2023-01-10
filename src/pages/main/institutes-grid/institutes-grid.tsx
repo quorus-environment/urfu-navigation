@@ -9,7 +9,8 @@ type Institute = {
 
 const institutes: Institute[] = [
   {
-    photourl: "https://posurfu.ru/wp-content/uploads/2020/02/K29FWJYxtJ0.jpg",
+    photourl:
+      "https://sun6-21.userapi.com/s/v1/if2/LmVis6Stwa0AsauFzLjxA0A6-yWKNX16fxGqUxUmfG9rhfaj0DLhs9wzFwr1giKqvO9kPM2AzIvTd_MTk0YcTmKX.jpg?size=200x200&quality=96&crop=20,0,200,200&ava=1",
     instid: "iritrtf",
     instname: "ИРИТ-РТФ",
   },
