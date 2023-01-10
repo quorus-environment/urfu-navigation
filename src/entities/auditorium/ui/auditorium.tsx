@@ -37,9 +37,16 @@ const CAuditorium: React.FC<TAuditorium> = ({
   id,
 }) => {
   // Получаем выбранные элементы
-  const { startId, endId, setEndId, setStartId, setStartName, setEndName } =
-    useContext(ChosenContext)
-  const { coloredGraph } = useGraphContext()
+  const {
+    startId,
+    endId,
+    setEndId,
+    setStartId,
+    setStartName,
+    setEndName,
+    endName,
+  } = useContext(ChosenContext)
+  const { coloredGraph, setColoredGraph } = useGraphContext()
 
   // Координаты текста (по центру)
   // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается
@@ -94,6 +101,15 @@ const CAuditorium: React.FC<TAuditorium> = ({
   return (
     <Group
       onClick={() => onClick(startId)}
+      onDblClick={() => {
+        if (startId === name) {
+          setStartId(endId)
+          setStartName(endName)
+          setEndName(null)
+          setEndId(null)
+          setColoredGraph([])
+        }
+      }}
       onTap={() => onClick(startId)}
       globalCompositeOperation="destination-over"
     >
