@@ -46,12 +46,14 @@ const useKeyboardManagement = (
     const handler = (evt: KeyboardEventInit) => {
       if (evt.code === "ArrowUp") {
         if (currentIndex === -1) {
+          setCurrentIndex(filtered.length - 1)
           return
         }
         setCurrentIndex(currentIndex - 1)
       }
       if (evt.code === "ArrowDown") {
         if (currentIndex === filtered.length - 1) {
+          setCurrentIndex(0)
           return
         }
         setCurrentIndex(currentIndex + 1)
@@ -129,7 +131,14 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
 
   return (
     <div className="body">
-      <div className="searchbar" ref={ref}>
+      <div
+        className="searchbar"
+        style={{
+          borderRadius:
+            isOpenedBar && filtered.length ? "15px 15px 0 0" : "15px",
+        }}
+        ref={ref}
+      >
         <img className="lens" src={Lens} alt="" />
         <input
           className="search"
