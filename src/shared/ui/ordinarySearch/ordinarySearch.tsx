@@ -1,5 +1,5 @@
 import "./ordinarySearch.css"
-import Lens from "../assets/Vector.svg"
+import Lens from "../../assets/Vector.svg"
 import {
   FC,
   MutableRefObject,

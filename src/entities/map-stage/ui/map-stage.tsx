@@ -11,7 +11,7 @@ import KonvaEventObject = Konva.KonvaEventObject
 import { mapConfig } from "../config"
 import { ChosenContext } from "../../../shared/providers/chosen-context/ui/chosen-provider"
 import { Header } from "../../../widgets/header/ui/header"
-import { FloorChosing } from "../../../shared/ chooseFloor/floorChosing"
+import { FloorChosing } from "../../../shared/ui/ chooseFloor/floorChosing"
 import { findPaths } from "../../../shared/pathFinding/findPaths"
 import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
 
