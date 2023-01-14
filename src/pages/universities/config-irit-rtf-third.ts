@@ -1155,7 +1155,7 @@ export const neighborsGraphThird: TGraph[] = [
     height: 0,
     neighbors: [
       "turnoverMain3ToLeft3",
-      "Коридор Лестница Слева",
+      "Коридор Лестница Слева 3floor",
       "Коридор Тайная",
       "hz1",
     ],
@@ -1318,7 +1318,7 @@ export const neighborsGraphThird: TGraph[] = [
     height: 0,
     neighbors: [
       "hz2",
-      "Коридор C/y (Ж)",
+      "Коридор С/у (Ж) 3floor",
       "Коридор Лестница Справа 3floor",
       "TurnoverMain3ToRight3",
     ],
@@ -1367,7 +1367,7 @@ export const neighborsGraphThird: TGraph[] = [
     id: "Коридор РИ-339",
     destination: GraphDestination.CORRIDOR,
     height: 0,
-    neighbors: ["Коридор РИ-341а", "РИ-339"],
+    neighbors: ["Коридор РИ-341а", "РИ-339", "TurnoverRight3ToMain3"],
     direction: Side.RIGHT,
     points: [1305, 1325, 1305, 1265],
     section: "rightWing3",
