@@ -5,6 +5,51 @@ import {
   createLinkedListPathToDestination,
   unwrapLinkedList,
 } from "./LinkedListProcessing"
+import { getGraphLength } from "../../entities/graph/lib/get-graph-length"
+
+function getPathLength(graphRegistry: TGraph[], resultPath: string[]) {
+  return resultPath.reduce(
+    (a, b) => a + getGraphLength(graphRegistry.find((gr) => gr.id === b)),
+    0,
+  )
+}
+
+function getSecondPath(
+  startGraph: TGraph | undefined,
+  endGraphId: string,
+  graphRegistry: TGraph[],
+) {
+  const secondResultPath: string[] = []
+  // Ищем путь к лестнице, ближайшей к конечной аудитории
+  const pathToSecondLadderInEndFloorLL = createLinkedListPathToDestination(
+    endGraphId,
+    GraphDestination.LADDER,
+    graphRegistry,
+  )
+  const pathToSecondLadderInEndFloor = unwrapLinkedList(
+    pathToSecondLadderInEndFloorLL,
+  )
+  if (pathToSecondLadderInEndFloor.length) {
+    const ladderOnEndFloorId =
+      pathToSecondLadderInEndFloor[pathToSecondLadderInEndFloor.length - 1]
+    const ladderOnEndFloor = graphRegistry.find(
+      (gr) => gr.id === ladderOnEndFloorId,
+    )
+    const ladderOnStartFloor = ladderOnEndFloor?.linkedAuditoriums?.find(
+      (aud) => aud.floor === startGraph?.floor,
+    )?.id
+
+    const pathToSecondLadder = findPaths(
+      startGraph?.id || "",
+      ladderOnStartFloor || "",
+      graphRegistry,
+    )
+    if (pathToSecondLadder) {
+      secondResultPath.push(...pathToSecondLadder)
+    }
+  }
+  return secondResultPath
+}
 
 // Поиск пути от startGraphId до endGraphId
 export function findPaths(
@@ -19,7 +64,7 @@ export function findPaths(
   // Будет поиск по этажам
   if (startGraph?.floor !== endGraph?.floor) {
     const firstResultPath: string[] = []
-    const secondResultPath: string[] = []
+
     // Ищем путь к первой от начальной аудитории лестницы
     const pathToFirstLadderLL = createLinkedListPathToDestination(
       startGraphId,
@@ -29,40 +74,17 @@ export function findPaths(
     const pathToFirstLadder = unwrapLinkedList(pathToFirstLadderLL)
     firstResultPath.push(...pathToFirstLadder)
 
-    // Ищем путь к лестнице, ближайшей к конечной аудитории
-    const pathToSecondLadderInEndFloorLL = createLinkedListPathToDestination(
-      endGraphId,
-      GraphDestination.LADDER,
-      graphRegistry,
-    )
-    const pathToSecondLadderInEndFloor = unwrapLinkedList(
-      pathToSecondLadderInEndFloorLL,
-    )
-    if (pathToSecondLadderInEndFloor.length) {
-      const ladderOnEndFloorId =
-        pathToSecondLadderInEndFloor[pathToSecondLadderInEndFloor.length - 1]
-      const ladderOnEndFloor = graphRegistry.find(
-        (gr) => gr.id === ladderOnEndFloorId,
-      )
-      const ladderOnStartFloor = ladderOnEndFloor?.linkedAuditoriums?.find(
-        (aud) => aud.floor === startGraph?.floor,
-      )?.id
-
-      const pathToSecondLadder = findPaths(
-        startGraph?.id || "",
-        ladderOnStartFloor || "",
-        graphRegistry,
-      )
-      if (pathToSecondLadder) {
-        secondResultPath.push(...pathToSecondLadder)
-      }
-    }
-
     const results: { firstResultPath: string[]; secondResultPath: string[] } = {
       firstResultPath: [],
       secondResultPath: [],
     }
     let index = 0
+
+    const secondResultPath = getSecondPath(
+      startGraph,
+      endGraphId,
+      graphRegistry,
+    )
 
     for (const resultPath of [firstResultPath, secondResultPath]) {
       if (index === 1 && secondResultPath.length === 0) {
@@ -93,7 +115,8 @@ export function findPaths(
       results[index === 0 ? "firstResultPath" : "secondResultPath"] = resultPath
       index++
     }
-    return results.firstResultPath.length > results.secondResultPath.length &&
+    return getPathLength(graphRegistry, results.firstResultPath) >
+      getPathLength(graphRegistry, results.secondResultPath) &&
       results.secondResultPath.length !== 0
       ? results.secondResultPath
       : results.firstResultPath
