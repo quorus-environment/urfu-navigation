@@ -1,0 +1,22 @@
+.search__body{
+  padding: 20px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.search__body_reset {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .search__body {
+    padding: 20px 10px;
+    gap: 5px;
+  }
+  .search__body_reset {
+    font-size: 10px;
+  }
+}

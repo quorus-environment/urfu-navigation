@@ -15,8 +15,8 @@ export const ChosenContext = createContext<TChosenContext>({
 })
 
 export const ChosenProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [chosenId, setChosenId] = useState<string | null>(null)
-  const [chosenName, setChosenName] = useState<string | null>(null)
+  const [chosenId, setChosenId] = useState<string | null>("Вход")
+  const [chosenName, setChosenName] = useState<string | null>("Вход")
   const [chosenSecondId, setChosenSecondId] = useState<string | null>(null)
   const [chosenSecondName, setChosenSecondName] = useState<string | null>(null)
   const [floor, setFloor] = useState<number>(1)
