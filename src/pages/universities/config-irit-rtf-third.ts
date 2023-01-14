@@ -793,7 +793,7 @@ const rightWing3: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор Лестница 3 3floor"],
     floor: 3,
-    destination: GraphDestination.AUDITORIUM,
+    destination: GraphDestination.LADDER,
     section: "rightWing3",
     id: "Лестница 3 3floor",
   },
