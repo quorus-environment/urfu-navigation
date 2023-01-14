@@ -24,25 +24,29 @@ export function findPaths(
       graphRegistry,
     )
     const pathToLadder = unwrapLinkedList(pathToLadderLL)
-    let nextLadder: TGraph | undefined
     resultPath.push(...pathToLadder)
-    const ladderIdOnCurrentFloor = resultPath[resultPath.length - 1]
-    for (const graph of graphRegistry) {
-      const linkedAuditoriums = graph.linkedAuditoriums
-      if (linkedAuditoriums) {
-        for (const linkedAuditorium of linkedAuditoriums) {
-          if (
-            linkedAuditorium.id === ladderIdOnCurrentFloor &&
-            endGraph &&
-            graph.floor === endGraph.floor
-          ) {
-            nextLadder = graph
-          }
-        }
-      }
+
+    // лучше по ссылочкам поискать чем для каждого вложенную логику делать,
+    // ищем лестницу на текущем этаже и итоговом по всему графу
+    const ladderOnCurrentFloor = graphRegistry.find(
+      (gr) => gr.id === resultPath[resultPath.length - 1],
+    )
+    // если не нашлась лестница на текущем этаже значит какая то херня испоганила айдишник
+    if (!ladderOnCurrentFloor) {
+      return []
     }
+    // некст лестница
+    const nextLadderId = ladderOnCurrentFloor?.linkedAuditoriums?.find(
+      (ladder) => ladder.floor === endGraph?.floor,
+    )?.id
+    if (!nextLadderId) {
+      // тут надо искать новую лестницу если нет соответствующей текущей
+      return []
+    }
+    const nextLadder = graphRegistry.find((gr) => gr.id === nextLadderId)
+
     if (nextLadder?.id) {
-      resultPath.push(...findPaths(nextLadder?.id, endGraphId, graphRegistry))
+      resultPath.push(...findPaths(nextLadder.id, endGraphId, graphRegistry))
     }
     return resultPath
   }
