@@ -20,13 +20,27 @@ const CGraph: React.FC<{ graph: TGraph }> = ({ graph }) => {
     <Group
       globalCompositeOperation="destination-over"
       onClick={async () => {
-        unsecuredCopyToClipboard(graph.id)
-        return params.get("dev") === "true" ? console.log(graph.id) : void 0
+        if (params.get("dev") === "true") {
+          unsecuredCopyToClipboard(graph.id)
+          console.log(graph.id)
+        }
       }}
     >
-      <Circle width={7} height={7} x={graph.points[0]} y={graph.points[1]} />
+      <Circle
+        width={6}
+        height={6}
+        fill={params.get("dev") === "true" ? color : undefined}
+        x={graph.points[0]}
+        y={graph.points[1]}
+      />
       <Line strokeWidth={3} stroke={color} points={graph.points} />
-      <Circle width={7} height={7} x={graph.points[2]} y={graph.points[3]} />
+      <Circle
+        width={6}
+        height={6}
+        fill={params.get("dev") === "true" ? color : undefined}
+        x={graph.points[2]}
+        y={graph.points[3]}
+      />
     </Group>
   )
 }

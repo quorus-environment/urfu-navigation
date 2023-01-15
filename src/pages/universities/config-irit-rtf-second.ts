@@ -882,7 +882,7 @@ const rightWing2: TAuditorium[] = [
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-250"],
     floor: 2,
-    destination: GraphDestination.AUDITORIUM,
+    destination: GraphDestination.LADDER,
     section: "rightWing2",
     id: "Лестница 3 2floor",
   },
@@ -1376,7 +1376,7 @@ export const neighborsGraphSecond: TGraph[] = [
     height: 0,
     neighbors: [
       "Коридор РИ-236",
-      "С/у (Ж) второй этаж 2 floor",
+      "С/у (Ж) второй этаж 2floor",
       "РИ-238",
       "Коридор РИ-238",
     ],
