@@ -1,11 +1,10 @@
 import { GraphDestination, TGraph } from "../../entities/graph/model/interface"
 import { findPathOnFloor } from "./findPathOnFloor"
 import { findPathsInSection } from "./findPathsInSection"
-import {
-  createLinkedListPathToDestination,
-  unwrapLinkedList,
-} from "./LinkedListProcessing"
+import { findPathToDestination } from "./LinkedListProcessing"
 import { getGraphLength } from "../../entities/graph/lib/get-graph-length"
+
+// todo: отрефачить и разбить на функции, очень медленный алгоритм щас из-за поиска в длину
 
 function getPathLength(graphRegistry: TGraph[], resultPath: string[]) {
   return resultPath.reduce(
@@ -16,20 +15,29 @@ function getPathLength(graphRegistry: TGraph[], resultPath: string[]) {
 
 function getSecondPath(
   startGraph: TGraph | undefined,
-  endGraphId: string,
+  endGraph: TGraph | undefined,
   graphRegistry: TGraph[],
 ) {
+  if (!endGraph) {
+    return []
+  }
   const secondResultPath: string[] = []
   // Ищем путь к лестнице, ближайшей к конечной аудитории
-  const pathToSecondLadderInEndFloorLL = createLinkedListPathToDestination(
-    endGraphId,
+  // const pathToSecondLadderInEndFloorLL = createLinkedListPathToDestination(
+  //   endGraph?.id,
+  //   GraphDestination.LADDER,
+  //   graphRegistry,
+  //   (graph) =>
+  //     !!graph.linkedAuditoriums?.find((aud) => aud.floor === startGraph?.floor),
+  // )
+  const pathToSecondLadderInEndFloor = findPathToDestination(
+    endGraph,
     GraphDestination.LADDER,
     graphRegistry,
+    (graph) =>
+      !!graph.linkedAuditoriums?.find((aud) => aud.floor === startGraph?.floor),
   )
-  const pathToSecondLadderInEndFloor = unwrapLinkedList(
-    pathToSecondLadderInEndFloorLL,
-  )
-  if (pathToSecondLadderInEndFloor.length) {
+  if (pathToSecondLadderInEndFloor?.length) {
     const ladderOnEndFloorId =
       pathToSecondLadderInEndFloor[pathToSecondLadderInEndFloor.length - 1]
     const ladderOnEndFloor = graphRegistry.find(
@@ -60,18 +68,23 @@ export function findPaths(
   // Создаем входной и искомый графы
   const startGraph = graphRegistry.find((gr) => gr.id === startGraphId)
   const endGraph = graphRegistry.find((gr) => gr.id === endGraphId)
+  if (!startGraph) {
+    return []
+  }
   let resultPath: string[] = []
   // Будет поиск по этажам
   if (startGraph?.floor !== endGraph?.floor) {
     const firstResultPath: string[] = []
 
     // Ищем путь к первой от начальной аудитории лестницы
-    const pathToFirstLadderLL = createLinkedListPathToDestination(
-      startGraphId,
+    const pathToFirstLadder = findPathToDestination(
+      startGraph,
       GraphDestination.LADDER,
       graphRegistry,
+      (graph) =>
+        !!graph.linkedAuditoriums?.find((aud) => aud.floor === endGraph?.floor),
     )
-    const pathToFirstLadder = unwrapLinkedList(pathToFirstLadderLL)
+    // const pathToFirstLadder = unwrapLinkedList(pathToFirstLadderLL)
     firstResultPath.push(...pathToFirstLadder)
 
     const results: { firstResultPath: string[]; secondResultPath: string[] } = {
@@ -80,15 +93,11 @@ export function findPaths(
     }
     let index = 0
 
-    const secondResultPath = getSecondPath(
-      startGraph,
-      endGraphId,
-      graphRegistry,
-    )
+    const secondResultPath = getSecondPath(startGraph, endGraph, graphRegistry)
 
     for (const resultPath of [firstResultPath, secondResultPath]) {
       if (index === 1 && secondResultPath.length === 0) {
-        break
+        continue
       }
       // лучше по ссылочкам поискать чем для каждого вложенную логику делать,
       // ищем лестницу на текущем этаже и итоговом по всему графу
@@ -97,7 +106,7 @@ export function findPaths(
       )
       // если не нашлась лестница на текущем этаже значит какая то херня испоганила айдишник
       if (!ladderOnCurrentFloor) {
-        return []
+        continue
       }
       // некст лестница
       const nextLadderId = ladderOnCurrentFloor?.linkedAuditoriums?.find(
@@ -105,7 +114,7 @@ export function findPaths(
       )?.id
       if (!nextLadderId) {
         // тут возвращаем пустой массив потому что лестница не подходит
-        return []
+        continue
       }
       const nextLadder = graphRegistry.find((gr) => gr.id === nextLadderId)
 
@@ -115,6 +124,7 @@ export function findPaths(
       results[index === 0 ? "firstResultPath" : "secondResultPath"] = resultPath
       index++
     }
+    console.log(results)
     return getPathLength(graphRegistry, results.firstResultPath) >
       getPathLength(graphRegistry, results.secondResultPath) &&
       results.secondResultPath.length !== 0

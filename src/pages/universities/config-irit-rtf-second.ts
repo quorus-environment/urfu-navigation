@@ -1376,7 +1376,7 @@ export const neighborsGraphSecond: TGraph[] = [
     height: 0,
     neighbors: [
       "Коридор РИ-236",
-      "С/у (Ж) второй этаж 2 floor",
+      "С/у (Ж) второй этаж 2floor",
       "РИ-238",
       "Коридор РИ-238",
     ],

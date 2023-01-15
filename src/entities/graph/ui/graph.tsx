@@ -26,9 +26,21 @@ const CGraph: React.FC<{ graph: TGraph }> = ({ graph }) => {
         }
       }}
     >
-      <Circle width={7} height={7} x={graph.points[0]} y={graph.points[1]} />
+      <Circle
+        width={6}
+        height={6}
+        fill={params.get("dev") === "true" ? color : undefined}
+        x={graph.points[0]}
+        y={graph.points[1]}
+      />
       <Line strokeWidth={3} stroke={color} points={graph.points} />
-      <Circle width={7} height={7} x={graph.points[2]} y={graph.points[3]} />
+      <Circle
+        width={6}
+        height={6}
+        fill={params.get("dev") === "true" ? color : undefined}
+        x={graph.points[2]}
+        y={graph.points[3]}
+      />
     </Group>
   )
 }
