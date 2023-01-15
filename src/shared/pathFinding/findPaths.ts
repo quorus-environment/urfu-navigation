@@ -22,14 +22,7 @@ function getSecondPath(
     return []
   }
   const secondResultPath: string[] = []
-  // Ищем путь к лестнице, ближайшей к конечной аудитории
-  // const pathToSecondLadderInEndFloorLL = createLinkedListPathToDestination(
-  //   endGraph?.id,
-  //   GraphDestination.LADDER,
-  //   graphRegistry,
-  //   (graph) =>
-  //     !!graph.linkedAuditoriums?.find((aud) => aud.floor === startGraph?.floor),
-  // )
+
   const pathToSecondLadderInEndFloor = findPathToDestination(
     endGraph,
     GraphDestination.LADDER,
@@ -37,6 +30,7 @@ function getSecondPath(
     (graph) =>
       !!graph.linkedAuditoriums?.find((aud) => aud.floor === startGraph?.floor),
   )
+
   if (pathToSecondLadderInEndFloor?.length) {
     const ladderOnEndFloorId =
       pathToSecondLadderInEndFloor[pathToSecondLadderInEndFloor.length - 1]
@@ -124,7 +118,10 @@ export function findPaths(
       results[index === 0 ? "firstResultPath" : "secondResultPath"] = resultPath
       index++
     }
-    console.log(results)
+    console.log(
+      getPathLength(graphRegistry, results.firstResultPath),
+      getPathLength(graphRegistry, results.secondResultPath),
+    )
     return getPathLength(graphRegistry, results.firstResultPath) >
       getPathLength(graphRegistry, results.secondResultPath) &&
       results.secondResultPath.length !== 0
