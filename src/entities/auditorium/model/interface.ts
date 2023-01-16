@@ -19,4 +19,5 @@ export type TAuditorium = {
   neighbors: string[]
   destination: GraphDestination
   entryOffset?: number
+  graphHeight?: number
 }
