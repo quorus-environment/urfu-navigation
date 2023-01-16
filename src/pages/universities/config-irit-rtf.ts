@@ -772,6 +772,7 @@ const mainSection: TAuditorium[] = [
       x: 540,
       y: 1482,
     },
+    graphHeight: 32,
     entry: Side.TOP,
     neighbors: ["Коридор гардероб налево", "Коридор вендинговый автомат"],
     floor: 1,
@@ -794,6 +795,7 @@ const mainSection: TAuditorium[] = [
     ],
     floor: 1,
     destination: GraphDestination.FOODCORT,
+    graphHeight: 32,
     section: "mainSection1",
     id: "Вендинговый автомат справа 1",
   },
@@ -806,6 +808,7 @@ const mainSection: TAuditorium[] = [
       y: 1482,
     },
     entry: Side.TOP,
+    graphHeight: 32,
     neighbors: [
       "Коридор вендинговый автомат справа 1",
       "Коридор вендинговый автомат справа 2",
