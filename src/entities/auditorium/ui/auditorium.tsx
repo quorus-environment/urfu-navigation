@@ -23,6 +23,8 @@ import { useGraphContext } from "../../../shared/providers/graph-context/lib/use
  * @param section - Секция
  * @param floor - Этаж
  * @param entryOffset - Отклонение входа от центра
+ * @param destination - Назначение
+ * @param graphHeight - Назначение
  * @param id - id
  * */
 const CAuditorium: React.FC<TAuditorium> = ({
@@ -36,6 +38,7 @@ const CAuditorium: React.FC<TAuditorium> = ({
   id,
   destination,
   entryOffset = 0,
+  graphHeight = 25,
 }) => {
   // Получаем выбранные элементы
   const {
@@ -82,7 +85,7 @@ const CAuditorium: React.FC<TAuditorium> = ({
     GraphDestination.AUDITORIUM,
     [entryCoords.x, entryCoords.y],
     entry,
-    25,
+    graphHeight,
     section,
     floor,
   )

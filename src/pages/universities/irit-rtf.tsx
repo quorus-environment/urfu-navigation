@@ -30,20 +30,7 @@ export const IritRtf: React.FC = React.memo(() => {
         {everyFloorAuds
           .filter((aud) => aud.floor === floor)
           .map((aud) => (
-            <Auditorium
-              key={aud.id}
-              id={aud.id}
-              name={aud.name}
-              height={aud.height}
-              width={aud.width}
-              coords={aud.coords}
-              entry={aud.entry}
-              floor={aud.floor}
-              destination={aud.destination}
-              section={aud.section}
-              neighbors={aud.neighbors}
-              entryOffset={aud.entryOffset}
-            />
+            <Auditorium key={aud.id} {...aud} />
           ))}
         {everyFloorGraph
           .filter((gr) => gr.floor === floor)
