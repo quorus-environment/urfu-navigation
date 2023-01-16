@@ -22,4 +22,8 @@ export enum GraphDestination {
   TURN_OVER = "turnover",
   LADDER = "ladder",
   SECTION = "section-corridor",
+  TOILET_WOMAN = "toilet_woman",
+  TOILET_MAN = "toilet_man",
+  FOODCORT = "food",
+  OTHER = "other",
 }

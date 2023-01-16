@@ -78,7 +78,9 @@ export function findPaths(
       (graph) =>
         !!graph.linkedAuditoriums?.find((aud) => aud.floor === endGraph?.floor),
     )
-    // const pathToFirstLadder = unwrapLinkedList(pathToFirstLadderLL)
+    if (!pathToFirstLadder) {
+      return []
+    }
     firstResultPath.push(...pathToFirstLadder)
 
     const results: { firstResultPath: string[]; secondResultPath: string[] } = {
