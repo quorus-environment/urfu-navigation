@@ -128,9 +128,9 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
           if (differentFloor) {
             setFloor(differentFloor)
           }
-          setButtonShown(false)
         }}
-        isOpen={isButtonShown}
+        message={"Переместиться на " + differentFloor + " этаж"}
+        isOpen={differentFloor ? isButtonShown : false}
       />
     </>
   )

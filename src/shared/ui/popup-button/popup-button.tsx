@@ -5,18 +5,20 @@ import "./popup-button.css"
 export type ModalProps = {
   onClick: () => void
   isOpen: boolean
+  message: string
 }
 
-export const PopupButton: React.FC<ModalProps> = ({ onClick, isOpen }) => {
+export const PopupButton: React.FC<ModalProps> = ({
+  onClick,
+  isOpen,
+  message,
+}) => {
   if (!isOpen) {
     return null
   }
   return createPortal(
-    <div className="popup-button">
-      <span className="popup-button__message">{123213}</span>
-      <button className="popup-button__button" onClick={onClick}>
-        Close
-      </button>
+    <div className="popup-button" onClick={onClick}>
+      <span className="popup-button__message">{message}</span>
     </div>,
     document.body,
   )
