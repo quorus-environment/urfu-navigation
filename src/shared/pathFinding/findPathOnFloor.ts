@@ -54,7 +54,6 @@ export function findPathOnFloor(
       )
       resultPath.push(...pathToEndGraph)
     }
-    console.log(resultPath)
   }
   return resultPath
 }

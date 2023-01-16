@@ -34,6 +34,7 @@ const leftWing2: TAuditorium[] = [
         id: "Лестница 1floor",
       },
       { floor: 3, id: "Лестница 3floor" },
+      { floor: 4, id: "Лестница 4floor" },
     ],
     neighbors: ["Коридор Лестница 2floor"],
     floor: 2,
@@ -320,6 +321,7 @@ const leftWing2: TAuditorium[] = [
     linkedAuditoriums: [
       { floor: 1, id: "Лестница 2 1floor" },
       { floor: 3, id: "Лестница 2 3floor" },
+      { floor: 4, id: "Лестница 2 4floor" },
     ],
     neighbors: ["Коридор РИ-215", "Коридор Лестница 2 2floor"],
     floor: 2,
@@ -409,6 +411,7 @@ const mainSection2: TAuditorium[] = [
     linkedAuditoriums: [
       { floor: 1, id: "Лестница Слева 1floor" },
       { floor: 3, id: "Лестница Слева 3floor" },
+      { floor: 4, id: "Лестница Слева 4floor" },
     ],
     neighbors: ["Коридор РИ-219"],
     floor: 2,
@@ -602,12 +605,13 @@ const mainSection2: TAuditorium[] = [
     linkedAuditoriums: [
       { floor: 1, id: "Лестница Справа 1floor" },
       { floor: 3, id: "Лестница Справа 3floor" },
+      { floor: 4, id: "Лестница Справа 4floor" },
     ],
     neighbors: ["Коридор Лестница Справа 2floor"],
     floor: 2,
     destination: GraphDestination.LADDER,
     section: "mainSection2",
-    id: "Лестница Справа 3floor",
+    id: "Лестница Справа 2floor",
   },
   {
     name: "С/у (Ж)\nвторой этаж",
@@ -871,10 +875,14 @@ const rightWing2: TAuditorium[] = [
       x: 1330,
       y: 550,
     },
+    linkedAuditoriums: [
+      { floor: 3, id: "Лестница 3 3floor" },
+      { floor: 4, id: "Лестница 3 4floor" },
+    ],
     entry: Side.LEFT,
     neighbors: ["Коридор РИ-250"],
     floor: 2,
-    destination: GraphDestination.AUDITORIUM,
+    destination: GraphDestination.LADDER,
     section: "rightWing2",
     id: "Лестница 3 2floor",
   },
@@ -1368,7 +1376,7 @@ export const neighborsGraphSecond: TGraph[] = [
     height: 0,
     neighbors: [
       "Коридор РИ-236",
-      "С/у (Ж) второй этаж 2 floor",
+      "С/у (Ж) второй этаж 2floor",
       "РИ-238",
       "Коридор РИ-238",
     ],
