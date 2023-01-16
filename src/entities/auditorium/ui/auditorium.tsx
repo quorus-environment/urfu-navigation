@@ -33,8 +33,9 @@ const CAuditorium: React.FC<TAuditorium> = ({
   height,
   section,
   floor,
-  entryOffset = 0,
   id,
+  destination,
+  entryOffset = 0,
 }) => {
   // Получаем выбранные элементы
   const {
@@ -91,12 +92,27 @@ const CAuditorium: React.FC<TAuditorium> = ({
       return Colors.LightRed
     }
     if (endId === id) {
-      return Colors.LightYellow
+      return Colors.LightGreen
     }
     if (coloredGraph.includes(id || name)) {
+      return Colors.LightYellow
+    }
+    if (destination === GraphDestination.FOODCORT) {
+      return Colors.LightOrange
+    }
+    if (
+      destination === GraphDestination.OTHER ||
+      destination === GraphDestination.LADDER
+    ) {
       return Colors.LightGray
     }
-  }, [coloredGraph, endId, id, name, startId])
+    if (destination === GraphDestination.TOILET_WOMAN) {
+      return Colors.LightPink
+    }
+    if (destination === GraphDestination.TOILET_MAN) {
+      return Colors.LightBlue
+    }
+  }, [coloredGraph, destination, endId, id, name, startId])
 
   return (
     <Group
