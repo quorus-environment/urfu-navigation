@@ -1,0 +1,25 @@
+.popup-button {
+    height: auto;
+    display: flex;
+    width: auto;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    background-color: red;
+    transform: translate(-50%);
+    flex-direction: column;
+    border-radius: 7px;
+    padding: 15px 7px;
+}
+
+.popup-button__message {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.popup-button__button {
+    border: none;
+    outline: none;
+    color: #0001;
+
+}

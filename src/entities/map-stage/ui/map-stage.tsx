@@ -15,18 +15,22 @@ import { findPaths } from "../../../shared/pathFinding/findPaths"
 import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
 import { useTouchZooming } from "../lib/use-touch-zooming"
 import KonvaEventObject = Konva.KonvaEventObject
+import { PopupButton } from "../../../shared/ui/popup-button/popup-button"
 
 type TMapStageProps = {
   children: React.ReactNode
 }
 
 export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
+  const { startId, endId, floor } = useContext(ChosenContext)
+  const { graph, setColoredGraph } = useGraphContext()
+
+  const [isButtonShown, setButtonShown] = useState(true)
+  const [differentFloor, setDifferentFloor] = useState<number | null>(null)
+
   const [isDragging, setDragging] = useState(false)
   const stageRef = useRef<Konva.Stage>(null)
   const { setFloor } = useContext(ChosenContext)
-
-  const { startId, endId } = useContext(ChosenContext)
-  const { graph, setColoredGraph } = useGraphContext()
 
   const { pinching, setIsPinching, handleTouchEnd, handleTouch } =
     useTouchZooming(stageRef)
@@ -77,6 +81,16 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
     }
   }, [endId, graph, setColoredGraph, startId])
 
+  useEffect(() => {
+    const startFloor = graph.find((gr) => gr.id === startId)?.floor
+    const endFloor = graph.find((gr) => gr.id === endId)?.floor
+    if (floor === startFloor) {
+      setDifferentFloor(endFloor || null)
+    } else if (floor === endFloor) {
+      setDifferentFloor(startFloor || null)
+    }
+  }, [endId, floor, graph, startId])
+
   return (
     <>
       <Header />
@@ -109,6 +123,15 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
       >
         {children}
       </Stage>
+      <PopupButton
+        onClick={() => {
+          if (differentFloor) {
+            setFloor(differentFloor)
+          }
+          setButtonShown(false)
+        }}
+        isOpen={isButtonShown}
+      />
     </>
   )
 }
