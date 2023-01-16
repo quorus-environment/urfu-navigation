@@ -15,6 +15,7 @@ interface IOrdinarySearch {
   value: string
   setValue: (v: string) => void
   setId: (v: string) => void
+  preflightFields?: { value: string; label?: string }[]
 }
 
 // Закрываем дропдаун при нажатии на любое пространство
@@ -63,8 +64,8 @@ const useKeyboardManagement = (
       if (evt.code === "Enter") {
         setOpenedBar(false)
         if (currentIndex !== -1) {
-          setInputValue(filtered[currentIndex]?.value)
-          setInputId(filtered[currentIndex]?.label || "")
+          setInputValue(filtered[currentIndex]?.label || "")
+          setInputId(filtered[currentIndex]?.value)
         }
         setCurrentIndex(-1)
       }
@@ -90,6 +91,7 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
   items,
   value,
   setValue,
+  preflightFields,
   setId,
 }) => {
   const [isOpenedBar, setOpenedBar] = useState(false)
@@ -107,7 +109,8 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
         auditorium.label?.toLowerCase().includes(value.toLowerCase()),
       )
       .slice(0, 5)
-  }, [items, value])
+      .concat(preflightFields || [])
+  }, [items, preflightFields, value])
 
   // Выбор клавишами
   const currentIndex = useKeyboardManagement(

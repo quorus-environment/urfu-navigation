@@ -10,17 +10,21 @@ export function findPathToDestination(
   condition: (graph: TGraph) => boolean = () => true,
 ) {
   const endGraphArr = graphRegistry.filter(
-    (gr) =>
-      gr.destination === destination &&
-      condition?.(gr) &&
-      gr.floor === startGraph?.floor,
+    (gr) => gr.destination === destination && condition?.(gr),
   )
-  const paths = endGraphArr.map((gr) =>
-    findPaths(startGraph.id, gr.id, graphRegistry),
-  )
-  return paths.sort(
-    (pathA: string[], pathB: string[]) => pathA.length - pathB.length,
-  )[0]
+  const paths = endGraphArr.map((gr) => ({
+    floor: gr.floor,
+    path: findPaths(startGraph.id, gr.id, graphRegistry),
+  }))
+  return paths
+    .sort(
+      (
+        pathA: { path: string[]; floor: number },
+        pathB: { path: string[]; floor: number },
+      ) =>
+        pathA.path.length - pathB.path.length / pathA.floor - startGraph.floor,
+    )
+    .map((path) => path.path)[0]
 }
 
 export function* createLinkedListPath(

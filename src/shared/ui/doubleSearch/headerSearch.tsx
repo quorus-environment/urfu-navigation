@@ -5,6 +5,11 @@ import { ChosenContext } from "../../providers/chosen-context/ui/chosen-provider
 import { useGraphContext } from "../../providers/graph-context/lib/use-graph-context"
 import { GraphDestination } from "../../../entities/graph/model/interface"
 
+export enum Closest {
+  ClosestManToilet = "closest_man_toilet",
+  ClosestWomanToilet = "closest_woman_toilet",
+}
+
 export const HeaderSearch = () => {
   const { endName, setEndName, setEndId, setStartName, startName, setStartId } =
     useContext(ChosenContext)
@@ -47,7 +52,17 @@ export const HeaderSearch = () => {
             setId={setEndId}
             value={endName || ""}
             setValue={setEndName}
-            items={graphIds}
+            items={[...graphIds]}
+            preflightFields={[
+              {
+                label: "Найти ближайший женский туалет",
+                value: Closest.ClosestWomanToilet,
+              },
+              {
+                label: "Найти ближайший мужской туалет",
+                value: Closest.ClosestManToilet,
+              },
+            ]}
             placeholder="Конечная точка"
           />
         </div>

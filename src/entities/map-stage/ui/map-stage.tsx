@@ -14,18 +14,74 @@ import { FloorChosing } from "../../../shared/ui/ chooseFloor/floorChosing"
 import { findPaths } from "../../../shared/pathFinding/findPaths"
 import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
 import { useTouchZooming } from "../lib/use-touch-zooming"
-import KonvaEventObject = Konva.KonvaEventObject
 import { PopupButton } from "../../../shared/ui/popup-button/popup-button"
+import { Closest } from "../../../shared/ui/doubleSearch/headerSearch"
+import { findPathToDestination } from "../../../shared/pathFinding/LinkedListProcessing"
+import { GraphDestination, TGraph } from "../../graph/model/interface"
+import KonvaEventObject = Konva.KonvaEventObject
 
 type TMapStageProps = {
   children: React.ReactNode
 }
 
+export const useGraphSelecting = (
+  graph: TGraph[],
+  setColoredGraph: (v: string[]) => void,
+) => {
+  const { startId, endId, setEndId, setEndName } = useContext(ChosenContext)
+  return useCallback(() => {
+    if (startId && endId) {
+      const startGraph = graph.find((gr) => gr.id === startId)
+      if (!startGraph) {
+        return
+      }
+      if (endId === Closest.ClosestManToilet) {
+        const pathTemp = findPathToDestination(
+          startGraph,
+          GraphDestination.TOILET_MAN,
+          graph,
+        )
+        if (pathTemp?.length === 0) {
+          return
+        }
+        const endAud = graph.find(
+          (gr) => gr.id === pathTemp[pathTemp.length - 1],
+        )
+        if (!endAud) {
+          return
+        }
+        setEndId(endAud?.id)
+        setEndName(endAud.name || null)
+      } else if (endId === Closest.ClosestWomanToilet) {
+        const pathTemp = findPathToDestination(
+          startGraph,
+          GraphDestination.TOILET_WOMAN,
+          graph,
+        )
+        if (pathTemp?.length === 0) {
+          return
+        }
+        const endAud = graph.find(
+          (gr) => gr.id === pathTemp[pathTemp.length - 1],
+        )
+        if (!endAud) {
+          return
+        }
+        setEndId(endAud?.id)
+        setEndName(endAud.name || null)
+      } else {
+        const path = findPaths(startId, endId, graph)
+        setColoredGraph(path)
+      }
+    }
+  }, [endId, graph, setColoredGraph, setEndId, setEndName, startId])
+}
+
 export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
-  const { startId, endId, floor } = useContext(ChosenContext)
+  const { startId, endId, floor, setEndId } = useContext(ChosenContext)
   const { graph, setColoredGraph } = useGraphContext()
 
-  const [isButtonShown, _] = useState(true)
+  const [isButtonShown] = useState(true)
   const [differentFloor, setDifferentFloor] = useState<number | null>(null)
 
   const [isDragging, setDragging] = useState(false)
@@ -74,12 +130,11 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
     stageRef?.current?.position(newPos)
   }, [])
 
+  const setNewAuditoriums = useGraphSelecting(graph, setColoredGraph)
+
   useEffect(() => {
-    if (startId && endId) {
-      const path = findPaths(startId, endId, graph)
-      setColoredGraph(path)
-    }
-  }, [endId, graph, setColoredGraph, startId])
+    setNewAuditoriums()
+  }, [endId, graph, setColoredGraph, setEndId, setNewAuditoriums, startId])
 
   useEffect(() => {
     const startFloor = graph.find((gr) => gr.id === startId)?.floor
@@ -112,12 +167,6 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
         width={window.innerWidth}
         style={{ cursor: isDragging ? "grabbing" : "default" }}
         draggable={!pinching}
-        onClick={(e) =>
-          console.log("Mouse:", {
-            x: Math.floor(e.currentTarget.getRelativePointerPosition().x),
-            y: Math.floor(e.currentTarget.getRelativePointerPosition().y),
-          })
-        }
         onDragStart={() => setDragging(true)}
         onTouchEnd={handleTouchEnd}
         onDragEnd={() => setDragging(false)}

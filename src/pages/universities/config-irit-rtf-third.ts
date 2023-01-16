@@ -585,7 +585,7 @@ const mainSection3: TAuditorium[] = [
     width: 70,
     coords: { x: 1160, y: 1250 },
     entry: Side.BOTTOM,
-    neighbors: [],
+    neighbors: ["Коридор С/у (Ж) 3floor", "Коридор Нарния"],
     floor: 3,
     destination: GraphDestination.OTHER,
     section: "mainSection3",
@@ -792,7 +792,6 @@ const rightWing3: TAuditorium[] = [
     coords: { x: 1330, y: 550 },
     entry: Side.LEFT,
     linkedAuditoriums: [
-      { floor: 1, id: "Лестница 3 1floor" },
       { floor: 2, id: "Лестница 3 2floor" },
       { floor: 4, id: "Лестница 3 4floor" },
     ],
