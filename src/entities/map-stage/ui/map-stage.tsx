@@ -25,7 +25,7 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
   const { startId, endId, floor } = useContext(ChosenContext)
   const { graph, setColoredGraph } = useGraphContext()
 
-  const [isButtonShown, setButtonShown] = useState(true)
+  const [isButtonShown, _] = useState(true)
   const [differentFloor, setDifferentFloor] = useState<number | null>(null)
 
   const [isDragging, setDragging] = useState(false)
@@ -84,10 +84,14 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
   useEffect(() => {
     const startFloor = graph.find((gr) => gr.id === startId)?.floor
     const endFloor = graph.find((gr) => gr.id === endId)?.floor
-    if (floor === startFloor) {
+    if (endFloor === startFloor) {
+      setDifferentFloor(null)
+    } else if (floor === startFloor) {
       setDifferentFloor(endFloor || null)
     } else if (floor === endFloor) {
       setDifferentFloor(startFloor || null)
+    } else {
+      setDifferentFloor(endFloor || null)
     }
   }, [endId, floor, graph, startId])
 
