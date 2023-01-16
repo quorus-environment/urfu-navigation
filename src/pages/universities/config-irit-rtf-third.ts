@@ -791,6 +791,11 @@ const rightWing3: TAuditorium[] = [
     width: 100,
     coords: { x: 1330, y: 550 },
     entry: Side.LEFT,
+    linkedAuditoriums: [
+      { floor: 1, id: "Лестница 3 1floor" },
+      { floor: 2, id: "Лестница 3 2floor" },
+      { floor: 4, id: "Лестница 3 4floor" },
+    ],
     neighbors: ["Коридор Лестница 3 3floor"],
     floor: 3,
     destination: GraphDestination.LADDER,
