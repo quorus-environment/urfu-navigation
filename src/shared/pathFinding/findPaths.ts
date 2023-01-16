@@ -28,7 +28,9 @@ function getSecondPath(
     GraphDestination.LADDER,
     graphRegistry,
     (graph) =>
-      !!graph.linkedAuditoriums?.find((aud) => aud.floor === startGraph?.floor),
+      !!graph.linkedAuditoriums?.find(
+        (aud) => aud.floor === startGraph?.floor,
+      ) && graph.floor === endGraph?.floor,
   )
 
   if (pathToSecondLadderInEndFloor?.length) {
@@ -76,7 +78,9 @@ export function findPaths(
       GraphDestination.LADDER,
       graphRegistry,
       (graph) =>
-        !!graph.linkedAuditoriums?.find((aud) => aud.floor === endGraph?.floor),
+        !!graph.linkedAuditoriums?.find(
+          (aud) => aud.floor === endGraph?.floor,
+        ) && graph.floor === startGraph?.floor,
     )
     if (!pathToFirstLadder) {
       return []
