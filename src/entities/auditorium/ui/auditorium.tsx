@@ -116,7 +116,10 @@ const CAuditorium: React.FC<TAuditorium> = ({
 
   return (
     <Group
-      onClick={() => onClick(startId)}
+      onClick={(evt) => {
+        console.log(name, coords, evt)
+        onClick(startId)
+      }}
       onDblClick={() => {
         if (startId === name) {
           setStartId(endId)
