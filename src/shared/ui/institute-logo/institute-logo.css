@@ -1,0 +1,19 @@
+.institute-logo{
+    display: flex;
+    width: 80px;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.institute-logo__photo{
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+}
+
+.institute-logo__title{
+    font-size: 14px;
+}

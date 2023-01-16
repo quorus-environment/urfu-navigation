@@ -1,0 +1,41 @@
+.card-body{
+    display: flex;
+    align-items: center;
+    width: 346px;
+    height: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 7px 8px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(4px);
+    border-radius: 12px;
+    justify-content: center;
+}
+.card-body__sign{
+     align-self: start;
+     margin-top: 20px;
+     height: auto;
+}
+.card-body__text{
+  width: 210px;
+  height: auto;
+  padding: 0 16px;
+}
+.text__title{
+    font-weight: 800;
+    font-size: 22px;
+}
+.text__subtitle{
+    font-weight: 600;
+    font-size: 16px;
+    word-wrap: break-word;
+}
+.card-body__switch{
+  align-self: start;
+}
+.switch__item{
+    height: auto;
+    cursor: pointer;
+}
+.switch__item:last-child{
+  rotate: 180deg;
+}
