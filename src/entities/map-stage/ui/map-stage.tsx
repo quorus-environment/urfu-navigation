@@ -92,12 +92,16 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
     useTouchZooming(stageRef)
 
   useEffect(() => {
-    stageRef.current?.setPosition({
+    const stage = stageRef.current
+    if (!stage) {
+      return
+    }
+    stage.setPosition({
       x: window.innerWidth / 2 - 400,
       y: window.innerHeight / 2 - 450,
     })
-    stageRef.current?.height(window.innerHeight - 60)
-    stageRef.current?.scale({ x: 0.5, y: 0.5 })
+    stage.height(window.innerHeight - 60)
+    stage.scale({ x: 0.5, y: 0.5 })
   }, [stageRef])
 
   const onWheel = useCallback((event: KonvaEventObject<WheelEvent>) => {
@@ -120,14 +124,14 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
       event.evt.deltaY < 0
         ? oldScale * mapConfig.zoomRatio
         : oldScale / mapConfig.zoomRatio
-    stageRef?.current?.scale({ x: newScale, y: newScale })
+    stage.scale({ x: newScale, y: newScale })
 
     // Получаем новое положение курсора
     const newPos = {
       x: pointerX - ((pointerX - stage.x()) / oldScale) * newScale,
       y: pointerY - ((pointerY - stage.y()) / oldScale) * newScale,
     }
-    stageRef?.current?.position(newPos)
+    stage.position(newPos)
   }, [])
 
   const setNewAuditoriums = useGraphSelecting(graph, setColoredGraph)

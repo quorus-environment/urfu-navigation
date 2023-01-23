@@ -8,7 +8,7 @@ import { getGraphsFromAuditoriums } from "../../entities/auditorium/lib/get-grap
 import { ChosenContext } from "../../shared/providers/chosen-context/ui/chosen-provider"
 import { useIritRtfEntities } from "./use-irit-rtf-entities"
 
-export const IritRtf: React.FC = React.memo(() => {
+export const IritRtf: React.FC = () => {
   const { setGraphRegistry } = useGraphContext()
   const { floor } = useContext(ChosenContext)
 
@@ -23,7 +23,6 @@ export const IritRtf: React.FC = React.memo(() => {
     const audGraphs = getGraphsFromAuditoriums(everyFloorAuds)
     setGraphRegistry([...everyFloorGraph, ...audGraphs, ...everyFloorSections])
   }, [everyFloorAuds, everyFloorGraph, everyFloorSections, setGraphRegistry])
-
   return (
     <MapStage>
       <Layer height={window.innerHeight - 60}>
@@ -59,4 +58,4 @@ export const IritRtf: React.FC = React.memo(() => {
       </Layer>
     </MapStage>
   )
-})
+}

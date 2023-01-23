@@ -1,3 +1,3 @@
 export const mapConfig = {
-  zoomRatio: 1.04,
+  zoomRatio: 1.03,
 }
