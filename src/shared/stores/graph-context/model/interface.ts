@@ -1,6 +1,6 @@
 import { TGraph } from "../../../../entities/graph/model/interface"
 
-export type TGraphContext = {
+export type TGraphStore = {
   graph: TGraph[]
   coloredGraph: string[]
   setGraphRegistry: (graph: TGraph[]) => void

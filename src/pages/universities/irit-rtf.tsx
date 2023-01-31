@@ -1,16 +1,16 @@
-import React, { useContext, useEffect } from "react"
+import React, { useEffect } from "react"
 import { Layer, Line } from "react-konva"
 import { Auditorium } from "../../entities/auditorium/ui/auditorium"
 import { MapStage } from "../../entities/map-stage/ui/map-stage"
 import { Graph } from "../../entities/graph/ui/graph"
-import { useGraphContext } from "../../shared/providers/graph-context/lib/use-graph-context"
 import { getGraphsFromAuditoriums } from "../../entities/auditorium/lib/get-graphs-from-auditoriums"
-import { ChosenContext } from "../../shared/providers/chosen-context/ui/chosen-provider"
 import { useIritRtfEntities } from "./use-irit-rtf-entities"
+import { useChosenStore } from "../../shared/stores/chosen/lib/use-chosen-store"
+import { useGraphStore } from "../../shared/stores/graph-context/lib/use-graph-store"
 
 export const IritRtf: React.FC = () => {
-  const { setGraphRegistry } = useGraphContext()
-  const { floor } = useContext(ChosenContext)
+  const { setGraphRegistry } = useGraphStore()
+  const floor = useChosenStore((st) => st.floor)
 
   const {
     everyFloorSections,

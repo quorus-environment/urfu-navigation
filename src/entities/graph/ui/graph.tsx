@@ -1,12 +1,12 @@
 import { Circle, Group, Line } from "react-konva"
 import React, { memo, useMemo } from "react"
 import { TGraph } from "../model/interface"
-import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
 import { useSearchParams } from "react-router-dom"
 import { unsecuredCopyToClipboard } from "../../../shared/utils/copyToClipboard"
+import { useGraphStore } from "../../../shared/stores/graph-context/lib/use-graph-store"
 
 const CGraph: React.FC<{ graph: TGraph }> = ({ graph }) => {
-  const { coloredGraph } = useGraphContext()
+  const { coloredGraph } = useGraphStore()
   const [params] = useSearchParams()
   const color = useMemo(() => {
     if (params.get("dev") === "true") {
