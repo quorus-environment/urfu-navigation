@@ -18,6 +18,8 @@ type TMapStageProps = {
   children: React.ReactNode
 }
 
+// todo: короче тут очень много повторения кода и было бы славно во-первых вынести это
+//  все в отдельны файл и разбить это все по функциям
 export const useGraphSelecting = (
   graph: TGraph[],
   setColoredGraph: (v: string[]) => void,
@@ -88,6 +90,7 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
   const { pinching, setIsPinching, handleTouchEnd, handleTouch } =
     useTouchZooming(stageRef)
 
+  // todo: в отдельный хук
   useEffect(() => {
     const stage = stageRef.current
     if (!stage) {
@@ -137,6 +140,7 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
     setNewAuditoriums()
   }, [endId, graph, setColoredGraph, setEndId, setNewAuditoriums, startId])
 
+  // todo: в отдельный хук и отрефачить
   useEffect(() => {
     const startFloor = graph.find((gr) => gr.id === startId)?.floor
     const endFloor = graph.find((gr) => gr.id === endId)?.floor
