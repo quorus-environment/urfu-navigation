@@ -26,10 +26,12 @@ li, li a {
     cursor: pointer;
 }
 .floor:nth-child(1){
-    border-radius: 8px 8px 0 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 .floor:last-child{
-    border-radius: 0 0 8px 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 .floors-container{
     position: absolute;
@@ -41,7 +43,6 @@ li, li a {
     height: auto;
     flex-direction: column;
     background: white;
-    border-radius: 5px;
 }
 
 .active-link{
