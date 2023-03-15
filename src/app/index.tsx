@@ -1,7 +1,7 @@
 import React from "react"
 import { Routes, Route } from "react-router-dom"
 import { Main } from "../pages/main/main"
-import { IritRtf } from "../pages/universities/irit-rtf"
+import { IritRtf } from "../pages/universities/irit-rtf/irit-rtf"
 import "./app.css"
 import { findPathThroughSection } from "../shared/pathFinding/find-path-through-section"
 import { TestUniv } from "../pages/universities/test/test-univ"

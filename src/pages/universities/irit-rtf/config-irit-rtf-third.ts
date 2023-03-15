@@ -1,6 +1,9 @@
-import { TAuditorium } from "../../entities/auditorium/model/interface"
-import { Side } from "../../shared/model/geometry"
-import { GraphDestination, TGraph } from "../../entities/graph/model/interface"
+import { TAuditorium } from "../../../entities/auditorium/model/interface"
+import { Side } from "../../../shared/model/geometry"
+import {
+  GraphDestination,
+  TGraph,
+} from "../../../entities/graph/model/interface"
 
 const leftWing3: TAuditorium[] = [
   {
