@@ -130,6 +130,7 @@
     "ignorePatterns": [
         "build/*",
         "cypress/*",
-        "cypress.config.ts"
+        "cypress.config.ts",
+        "vite.config.ts"
     ]
 }
