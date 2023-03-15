@@ -24,7 +24,8 @@
   "scripts": {
     "build": "react-scripts build",
     "start": "react-scripts start",
-    "test": "react-scripts test",
+    "test": "npx cypress run --record --key 68008b54-3324-4255-97fb-c3b56c449b1c",
+    "test:comp": "npx cypress run --record --key 68008b54-3324-4255-97fb-c3b56c449b1c --component",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -46,8 +47,10 @@
     ]
   },
   "devDependencies": {
+    "@types/chai": "^4.3.4",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",
+    "cypress": "^12.6.0",
     "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-react-app": "7.0.0",
