@@ -1,6 +1,6 @@
-import { FC, useContext, useEffect, useMemo, useState } from "react"
+import { FC, useEffect, useMemo, useState } from "react"
 import "./chooseFloor.css"
-import { ChosenContext } from "../../providers/chosen-context/ui/chosen-provider"
+import { useChosenStore } from "../../stores/chosen/lib/use-chosen-store"
 
 interface IFloorChosingProps {
   actions: { label: string; onClick: () => void }[]
@@ -15,7 +15,7 @@ export const FloorChosing: FC<IFloorChosingProps> = ({
   actions,
   size = 32,
 }) => {
-  const { floor } = useContext(ChosenContext)
+  const floor = useChosenStore((st) => st.floor)
   const [activeIndex, setActiveIndex] = useState(0)
   useEffect(() => {
     if (floor) {
