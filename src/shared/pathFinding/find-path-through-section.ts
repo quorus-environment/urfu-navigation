@@ -1,12 +1,14 @@
 import { TCoords } from "../model/geometry"
 
+export type RectangleVector = [
+  [TCoords, TCoords],
+  [TCoords, TCoords],
+  [TCoords, TCoords],
+  [TCoords, TCoords],
+]
+
 export type TCorridor = {
-  vectors: [
-    [TCoords, TCoords],
-    [TCoords, TCoords],
-    [TCoords, TCoords],
-    [TCoords, TCoords],
-  ]
+  vectors: RectangleVector
   transition: "vertical" | "horizontal"
 }
 

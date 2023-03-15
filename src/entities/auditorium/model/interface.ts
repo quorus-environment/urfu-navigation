@@ -27,7 +27,7 @@ export type TAuditoriumReborn = {
   //[[{x: 0, y: 0},{x: 0, y:4}], [{x: 0, y: 4},{x: 4, y:4}], [{x: 4, y: 4},{x: 4, y:0}], [{x: 4, y: 0},{x: 0, y:4}]]
   vectors: [TCoords, TCoords][]
   startPoint: TCoords
-  entryPoint: TCoords
+  entryPoint?: TCoords
   section: string
 }
 

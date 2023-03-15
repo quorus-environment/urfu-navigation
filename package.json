@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "react-scripts build",
-    "start": "react-scripts start",
+    "start": "vite",
     "test": "npx cypress run --record --key 68008b54-3324-4255-97fb-c3b56c449b1c",
     "test:comp": "npx cypress run --record --key 68008b54-3324-4255-97fb-c3b56c449b1c --component",
     "eject": "react-scripts eject"
@@ -48,6 +48,9 @@
     ]
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^3.1.0",
+    "vite-plugin-svgr" :"^2.4.0",
+    "vite": "^4.1.4",
     "@types/chai": "^4.3.4",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",

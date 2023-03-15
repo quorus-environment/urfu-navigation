@@ -4,6 +4,7 @@ import { Main } from "../pages/main/main"
 import { IritRtf } from "../pages/universities/irit-rtf"
 import "./app.css"
 import { findPathThroughSection } from "../shared/pathFinding/find-path-through-section"
+import { TestUniv } from "../pages/universities/test/test-univ"
 
 /**
  * Основная компонента приложения
@@ -42,6 +43,7 @@ export const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/irit-rtf" element={<IritRtf />} />
+        <Route path="/test" element={<TestUniv />} />
       </Routes>
     </div>
   )
