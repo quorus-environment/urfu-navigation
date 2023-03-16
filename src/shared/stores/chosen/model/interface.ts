@@ -1,3 +1,5 @@
+import { TAuditoriumReborn } from "../../../../entities/auditorium/model/interface"
+
 export type TChosenStore = {
   startId: string | null
   setStartId: (v: string | null) => void
@@ -9,4 +11,8 @@ export type TChosenStore = {
   setEndName: (v: string | null) => void
   floor: number
   setFloor: (v: number) => void
+  startAud?: TAuditoriumReborn
+  setStartAud: (v: TAuditoriumReborn) => void
+  endAud?: TAuditoriumReborn
+  setEndAud: (v: TAuditoriumReborn) => void
 }

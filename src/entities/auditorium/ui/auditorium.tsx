@@ -1,6 +1,6 @@
-import React, { memo, useCallback, useMemo } from "react"
-import { Circle, Group, Rect } from "react-konva"
-import { TAuditorium } from "../model/interface"
+import React, { memo, useCallback, useEffect, useMemo } from "react"
+import { Circle, Group, Line, Rect } from "react-konva"
+import { TAuditorium, TAuditoriumReborn } from "../model/interface"
 import { TCoords } from "../../../shared/model/geometry"
 import { Graph } from "../../graph/ui/graph"
 import { GraphDestination } from "../../graph/model/interface"
@@ -157,6 +157,75 @@ const CAuditorium: React.FC<TAuditorium> = ({
         descriptionColor={description?.descriptionColor}
       />
       <Graph graph={auditoriumGraph} />
+    </Group>
+  )
+}
+
+export const ShapedAuditorium: React.FC<
+  TAuditoriumReborn & { fill?: string }
+> = ({ id, startPoint, entryPoint, section, vectors }) => {
+  const { setStartId, setEndId, setStartAud, setEndAud, startId, endId } =
+    useChosenStore()
+  useEffect(() => {
+    console.log(startId)
+  })
+
+  const colors = useMemo(() => {
+    if (id === endId) {
+      return Colors.LightGreen
+    }
+    if (id === startId) {
+      return Colors.LightOrange
+    }
+    return "black"
+  }, [endId, id, startId])
+  return (
+    <Group
+      globalCompositeOperation="destination-over"
+      onClick={() => {
+        if (!startId) {
+          setStartAud({ entryPoint, startPoint, vectors, section, id })
+          setStartId(id || "")
+        } else {
+          setEndAud({ entryPoint, startPoint, vectors, section, id })
+          setEndId(id || "")
+        }
+      }}
+    >
+      {entryPoint && (
+        <Circle
+          width={6}
+          height={6}
+          fill="none"
+          x={startPoint.x + entryPoint?.x}
+          y={startPoint.y + entryPoint?.y}
+        />
+      )}
+
+      {vectors.map((v) => {
+        return (
+          <Line
+            points={[
+              v[0].x + startPoint.x,
+              v[0].y + startPoint.y,
+              v[1].x + startPoint.x,
+              v[1].y + startPoint.y,
+            ]}
+            stroke={colors}
+            strokeWidth={3}
+            fillEnabled
+            key={`${v[0]} ${v[1]}`}
+          />
+        )
+      })}
+
+      {/* <AuditoriumTitle */}
+      {/*   title={name} */}
+      {/*   x={textCoords.x} */}
+      {/*   y={textCoords.y} */}
+      {/*   description={description?.description} */}
+      {/*   descriptionColor={description?.descriptionColor} */}
+      {/* /> */}
     </Group>
   )
 }
