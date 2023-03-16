@@ -20,7 +20,8 @@ const AuditoriumEditor = () => {
           {auditoriumEdited?.name}
         </li>
         <li>
-          <span>Координаты: </span> {JSON.stringify(auditoriumEdited?.coords)}
+          <span>Координаты: </span>{" "}
+          {JSON.stringify(auditoriumEdited?.coords, null, "\t")}
         </li>
         <li>
           <span>Этаж: </span>

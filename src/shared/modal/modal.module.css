@@ -10,9 +10,9 @@
     flex-direction: column;
     width: 600px;
     min-height: 500px;
-    border-radius: 40px;
+    border-radius: 30px;
     animation-name: changeOpacity;
-    animation-duration: 0.7s;
+    animation-duration: 0.5s;
 }
 .closeBtn {
     cursor: pointer;
