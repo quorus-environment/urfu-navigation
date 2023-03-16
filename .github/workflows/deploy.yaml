@@ -1,12 +1,28 @@
 name: Deploy
 
-on:
-  push:
-    branches: [main]
+on: [push]
 
 jobs:
+  tests:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' }}
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 15.x]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Eslinter code style test
+    - runs: |
+        yarn install
+        node_modules/eslint/bin/eslint.js .
+
   build:
     runs-on: self-hosted
+    if: ${{ github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v2
       - run: yarn install
