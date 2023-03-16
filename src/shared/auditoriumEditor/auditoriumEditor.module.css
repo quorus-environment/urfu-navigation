@@ -1,0 +1,33 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.config{
+    margin: 25px 0 50px 0;
+    justify-content: center;
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+}
+
+.config li{
+    font-size: 25px;
+}
+.config span{
+    font-weight: 500;
+}
+
+.btn{
+    /*margin-top: 40px;*/
+    background: #242424;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    font-weight: 500;
+    font-size: 30px;
+}

@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import styles from "./modal-overlay.module.css"
+import styles from "./modalOverlay.module.css"
 
 type TModalOverlay = {
   handleClose: () => void
