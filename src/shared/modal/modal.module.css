@@ -7,7 +7,8 @@
     z-index: 200;
     background: white;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex: 1;
     width: 600px;
     min-height: 500px;
     border-radius: 30px;
@@ -40,13 +41,16 @@
     font-size: 40px;
     display: inline-block;
 }
-.body {
+.children {
     min-height: 100%;
     max-width: 600px;
     width: 100%;
     flex: 1;
     display: flex;
     flex-direction: row;
+}
+.body{
+    width: 100%;
 }
 
 .overlay {
@@ -57,4 +61,28 @@
     height: 100%;
     width: 100%;
     background: rgba(0, 0, 0, 0.6);
+}
+.checker{
+    align-self: center;
+    text-align: center;
+}
+.title{
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+.btn{
+    cursor: pointer;
+    background: #242424;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    font-weight: 500;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.btn:hover{
+    background: #2c2c2c;
 }

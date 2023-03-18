@@ -1,38 +1,52 @@
-import React, { useMemo } from "react"
+import React, { useMemo, FC, SyntheticEvent } from "react"
 import styles from "./auditoriumEditor.module.css"
 import { useSearchParams } from "react-router-dom"
 import { useIritRtfEntities } from "../../pages/universities/irit-rtf/use-irit-rtf-entities"
 
-const AuditoriumEditor = () => {
+type TAuditoriumEditor = {
+  children?: React.ReactNode
+  isExit?: boolean
+  setIsExit: (v: boolean) => void
+}
+
+const AuditoriumEditor: FC<TAuditoriumEditor> = ({
+  children,
+  isExit,
+  setIsExit,
+}) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { everyFloorAuds } = useIritRtfEntities()
-  console.log(searchParams.get("id"))
   const auditoriumEdited = useMemo(
     () => everyFloorAuds.find((el) => el.name === searchParams.get("id")),
     [everyFloorAuds, searchParams],
   )
-  console.log(auditoriumEdited)
+  const onSubmit = (e: SyntheticEvent) => {
+    e.preventDefault()
+    setIsExit(true)
+  }
   return (
     <div className={styles.body}>
-      <ul className={styles.config}>
-        <li>
+      <form onSubmit={onSubmit} className={styles.config}>
+        <div>
           <span>Название: </span>
           {auditoriumEdited?.name}
-        </li>
-        <li>
+        </div>
+        <div>
           <span>Координаты: </span>{" "}
           {JSON.stringify(auditoriumEdited?.coords, null, "\t")}
-        </li>
-        <li>
+        </div>
+        <div>
           <span>Этаж: </span>
           {auditoriumEdited?.floor}
-        </li>
-        <li>
+        </div>
+        <div>
           <span>Секция: </span>
           {auditoriumEdited?.section}
-        </li>
-      </ul>
-      <div className={styles.btn}>Изменить</div>
+        </div>
+        <button inputMode="text" type="submit" className={styles.btn}>
+          Изменить
+        </button>
+      </form>
     </div>
   )
 }
