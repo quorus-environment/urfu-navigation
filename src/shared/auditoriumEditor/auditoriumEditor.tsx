@@ -2,19 +2,16 @@ import React, { useMemo, FC, SyntheticEvent } from "react"
 import styles from "./auditoriumEditor.module.css"
 import { useSearchParams } from "react-router-dom"
 import { useIritRtfEntities } from "../../pages/universities/irit-rtf/use-irit-rtf-entities"
+import { useModalStore } from "../stores/admin/lib/use-modal-store"
 
 type TAuditoriumEditor = {
   children?: React.ReactNode
-  isExit?: boolean
-  setIsExit: (v: boolean) => void
 }
 
-const AuditoriumEditor: FC<TAuditoriumEditor> = ({
-  children,
-  isExit,
-  setIsExit,
-}) => {
+const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
   const [searchParams, setSearchParams] = useSearchParams()
+  const { checkerSeen, setCheckerSeen, setExitAllowed, exitAllowed } =
+    useModalStore()
   const { everyFloorAuds } = useIritRtfEntities()
   const auditoriumEdited = useMemo(
     () => everyFloorAuds.find((el) => el.name === searchParams.get("id")),
@@ -22,7 +19,7 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = ({
   )
   const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
-    setIsExit(true)
+    setExitAllowed(false)
   }
   return (
     <div className={styles.body}>

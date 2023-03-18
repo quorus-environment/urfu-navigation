@@ -3,6 +3,7 @@ import ModalOverlay from "../modalOverlay/modalOverlay"
 import { createPortal } from "react-dom"
 import styles from "./modal.module.css"
 import { Exit } from "../ui/exit/exit"
+import { useModalStore } from "../stores/admin/lib/use-modal-store"
 
 //non-null assertion
 const portal = document.getElementById("portal")!
@@ -13,49 +14,53 @@ type TModal = {
   title: string
 }
 const Modal: FC<TModal> = ({ children, handleClose, title }) => {
-  const [exitAllowed, setExitAllowed] = useState(true)
-  const [checkerVisible, setCheckerVisible] = useState(false)
-
+  const { checkerSeen, setCheckerSeen, exitAllowed, setExitAllowed } =
+    useModalStore()
   useEffect(() => {
     const escClosing: any = (e: React.KeyboardEvent) =>
-      e.key === "Escape" ? (!checkerVisible ? handleClose() : null) : null
+      e.key === "Escape"
+        ? exitAllowed
+          ? handleClose()
+          : setCheckerSeen(true)
+        : null
     document.body.addEventListener("keydown", escClosing)
     return () => document.body.removeEventListener("keydown", escClosing)
-  }, [handleClose, checkerVisible])
+  }, [handleClose, exitAllowed])
 
-  const onClose = !checkerVisible ? handleClose : () => console.log("exit")
+  const onClose = exitAllowed ? handleClose : () => setCheckerSeen(true)
+  const confirmExit = () => {
+    setCheckerSeen(false)
+    setExitAllowed(true)
+    handleClose()
+  }
+
+  //todo: сделать hoc с конфирмацией для модалки для ее переиспользования либо оставить опциональность
   return createPortal(
     <>
       <ModalOverlay handleClose={onClose} />
       <div className={`${styles.modal}`}>
-        {!checkerVisible ? (
+        {!checkerSeen ? (
           <div className={styles.body}>
             <div className={styles.header}>
               <p>{title}</p>
               <Exit size={40} strokeWidth={0.5} onClick={onClose} />
             </div>
-            <div className="">
-              {React.cloneElement(children, {
-                isExit: checkerVisible,
-                setIsExit: setCheckerVisible,
-              }) || ""}
-            </div>
+            <div>{children}</div>
           </div>
         ) : (
           <div className={styles.checker}>
-            <p className={styles.title}>
-              Вы хотите выйти, оставив изменения без сохранения?
-            </p>
-            <button className={styles.btn} onClick={handleClose}>
-              Выйти
-            </button>
-            <button
-              className={styles.btn}
-              style={{ marginLeft: 15 }}
-              onClick={() => setCheckerVisible(false)}
-            >
-              Остаться
-            </button>
+            <p className={styles.title}>Вы точно хотитите выйти?</p>
+            <div className={styles.checkerButtons}>
+              <button className={styles.btn} onClick={confirmExit}>
+                Да
+              </button>
+              <button
+                className={styles.btn}
+                onClick={() => setCheckerSeen(false)}
+              >
+                Нет
+              </button>
+            </div>
           </div>
         )}
       </div>

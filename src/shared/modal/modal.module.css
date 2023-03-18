@@ -63,12 +63,19 @@
     background: rgba(0, 0, 0, 0.6);
 }
 .checker{
+    width: 100%;
     align-self: center;
     text-align: center;
 }
 .title{
     font-size: 30px;
     margin-bottom: 30px;
+}
+.checkerButtons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
 }
 .btn{
     cursor: pointer;
@@ -82,7 +89,6 @@
     font-size: 20px;
     border-radius: 5px;
 }
-
 .btn:hover{
     background: #2c2c2c;
 }
