@@ -1,5 +1,5 @@
 .modal {
-    padding: 40px;
+    padding: 35px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -11,7 +11,7 @@
     flex: 1;
     width: 600px;
     min-height: 500px;
-    border-radius: 30px;
+    border-radius: 20px;
     animation-name: changeOpacity;
     animation-duration: 0.5s;
 }
@@ -30,7 +30,6 @@
 }
 
 .header {
-    margin: 20px 0 0 0;
     min-height: 64px;
     display: flex;
     justify-content: space-between;
@@ -38,7 +37,7 @@
 }
 .header p {
     font-weight: 300;
-    font-size: 40px;
+    font-size: 30px;
     display: inline-block;
 }
 .children {
@@ -68,6 +67,9 @@
     text-align: center;
 }
 .title{
+    font-size: 10px;
+}
+.checkerTitle{
     font-size: 30px;
     margin-bottom: 30px;
 }

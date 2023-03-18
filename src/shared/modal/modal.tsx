@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react"
+import React, { FC, useEffect } from "react"
 import ModalOverlay from "../modalOverlay/modalOverlay"
 import { createPortal } from "react-dom"
 import styles from "./modal.module.css"
@@ -42,14 +42,14 @@ const Modal: FC<TModal> = ({ children, handleClose, title }) => {
         {!checkerSeen ? (
           <div className={styles.body}>
             <div className={styles.header}>
-              <p>{title}</p>
-              <Exit size={40} strokeWidth={0.5} onClick={onClose} />
+              <p className={styles.title}>{title}</p>
+              <Exit size={30} strokeWidth={0.5} onClick={onClose} />
             </div>
             <div>{children}</div>
           </div>
         ) : (
           <div className={styles.checker}>
-            <p className={styles.title}>Вы точно хотитите выйти?</p>
+            <p className={styles.checkerTitle}>Вы точно хотитите выйти?</p>
             <div className={styles.checkerButtons}>
               <button className={styles.btn} onClick={confirmExit}>
                 Да

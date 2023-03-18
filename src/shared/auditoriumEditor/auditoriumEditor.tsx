@@ -3,6 +3,7 @@ import styles from "./auditoriumEditor.module.css"
 import { useSearchParams } from "react-router-dom"
 import { useIritRtfEntities } from "../../pages/universities/irit-rtf/use-irit-rtf-entities"
 import { useModalStore } from "../stores/admin/lib/use-modal-store"
+import { TextField } from "@mui/material"
 
 type TAuditoriumEditor = {
   children?: React.ReactNode
@@ -10,8 +11,7 @@ type TAuditoriumEditor = {
 
 const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const { checkerSeen, setCheckerSeen, setExitAllowed, exitAllowed } =
-    useModalStore()
+  const { setExitAllowed } = useModalStore()
   const { everyFloorAuds } = useIritRtfEntities()
   const auditoriumEdited = useMemo(
     () => everyFloorAuds.find((el) => el.name === searchParams.get("id")),
@@ -21,25 +21,34 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
     e.preventDefault()
     setExitAllowed(false)
   }
+  //todo: замапить инпуты
   return (
     <div className={styles.body}>
       <form onSubmit={onSubmit} className={styles.config}>
-        <div>
-          <span>Название: </span>
-          {auditoriumEdited?.name}
-        </div>
-        <div>
-          <span>Координаты: </span>{" "}
-          {JSON.stringify(auditoriumEdited?.coords, null, "\t")}
-        </div>
-        <div>
-          <span>Этаж: </span>
-          {auditoriumEdited?.floor}
-        </div>
-        <div>
-          <span>Секция: </span>
-          {auditoriumEdited?.section}
-        </div>
+        <TextField
+          name="name"
+          label="Название"
+          variant="outlined"
+          value={auditoriumEdited?.name}
+        />
+        <TextField
+          name="coords"
+          label="Координаты"
+          variant="outlined"
+          value={JSON.stringify(auditoriumEdited?.coords)}
+        />
+        <TextField
+          name="floor"
+          label="Этаж"
+          variant="outlined"
+          value={auditoriumEdited?.floor}
+        />
+        <TextField
+          name="section"
+          label="Секция"
+          variant="outlined"
+          value={auditoriumEdited?.section}
+        />
         <button inputMode="text" type="submit" className={styles.btn}>
           Изменить
         </button>
