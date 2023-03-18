@@ -1,11 +1,5 @@
 import { create } from "zustand"
-
-type TModalStore = {
-  exitAllowed: boolean
-  setExitAllowed: (v: boolean) => void
-  checkerSeen: boolean
-  setCheckerSeen: (v: boolean) => void
-}
+import { TModalStore } from "../model/interface"
 
 export const useModalStore = create<TModalStore>()((set) => ({
   checkerSeen: false,

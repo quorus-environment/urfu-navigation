@@ -33,7 +33,6 @@ const Modal: FC<TModal> = ({ children, handleClose, title }) => {
     setExitAllowed(true)
     handleClose()
   }
-
   //todo: сделать hoc с конфирмацией для модалки для ее переиспользования либо оставить опциональность
   return createPortal(
     <>

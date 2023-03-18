@@ -4,6 +4,8 @@ import { useSearchParams } from "react-router-dom"
 import { useIritRtfEntities } from "../../pages/universities/irit-rtf/use-irit-rtf-entities"
 import { useModalStore } from "../stores/admin/lib/use-modal-store"
 import { TextField } from "@mui/material"
+import { useForm } from "../utils/use-form"
+import { OrdinarySearch } from "../ui/ordinarySearch/ordinarySearch"
 
 type TAuditoriumEditor = {
   children?: React.ReactNode
@@ -17,6 +19,15 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
     () => everyFloorAuds.find((el) => el.name === searchParams.get("id")),
     [everyFloorAuds, searchParams],
   )
+  console.log(auditoriumEdited)
+  const { values, handleChange } = useForm({
+    name: auditoriumEdited?.name,
+    coords: JSON.stringify(auditoriumEdited?.coords),
+    floor: auditoriumEdited?.floor,
+    section: auditoriumEdited?.section,
+    destination: auditoriumEdited?.destination,
+  })
+
   const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
     setExitAllowed(false)
@@ -24,30 +35,47 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
   //todo: замапить инпуты
   return (
     <div className={styles.body}>
+      {/*на сабмит пока меняем значение exitAllowed*/}
       <form onSubmit={onSubmit} className={styles.config}>
         <TextField
           name="name"
+          onChange={handleChange}
           label="Название"
           variant="outlined"
-          value={auditoriumEdited?.name}
+          value={values.name}
+          size="medium"
         />
         <TextField
           name="coords"
+          onChange={handleChange}
           label="Координаты"
           variant="outlined"
-          value={JSON.stringify(auditoriumEdited?.coords)}
+          value={values.coords}
+          size="medium"
+        />
+        <TextField
+          name="destination"
+          onChange={handleChange}
+          label="Назначение"
+          variant="outlined"
+          value={values.destination}
+          size="medium"
         />
         <TextField
           name="floor"
+          onChange={handleChange}
           label="Этаж"
           variant="outlined"
-          value={auditoriumEdited?.floor}
+          value={values.floor}
+          size="medium"
         />
         <TextField
           name="section"
+          onChange={handleChange}
           label="Секция"
           variant="outlined"
-          value={auditoriumEdited?.section}
+          value={values.section}
+          size="medium"
         />
         <button inputMode="text" type="submit" className={styles.btn}>
           Изменить
