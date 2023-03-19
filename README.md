@@ -1,3 +1,4 @@
+![Workflow](https://github.com/quorus-environment/urfu-navigation/actions/workflows/deploy.yml/badge.svg)
 # Навигатор по аудиториям УрФУ
 
 Карта - гид по аудиториям всех корпусов и кампусов УрФУ с возможностью нахождения кратчайшего пути от точки до точки<br/>
