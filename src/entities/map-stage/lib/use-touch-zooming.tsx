@@ -68,7 +68,6 @@ export const useTouchZooming = (ref: RefObject<Stage>) => {
         }
 
         stage.position(newPos)
-        stage.batchDraw()
 
         lastDist.current = dist
         lastCenter.current = newCenter

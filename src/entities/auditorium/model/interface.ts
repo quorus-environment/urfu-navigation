@@ -1,5 +1,5 @@
 // Настройки аудитории
-import { Side } from "../../../shared/model/geometry"
+import { Side, TCoords } from "../../../shared/model/geometry"
 import { GraphDestination } from "../../graph/model/interface"
 
 export type TAuditorium = {
@@ -20,4 +20,20 @@ export type TAuditorium = {
   destination: GraphDestination
   entryOffset?: number
   graphHeight?: number
+}
+
+export type TAuditoriumReborn = {
+  id?: string
+  //[[{x: 0, y: 0},{x: 0, y:4}], [{x: 0, y: 4},{x: 4, y:4}], [{x: 4, y: 4},{x: 4, y:0}], [{x: 4, y: 0},{x: 0, y:4}]]
+  vectors: [TCoords, TCoords][]
+  startPoint: TCoords
+  entryPoint?: TCoords
+  section: string
+}
+
+export type TSectionReborn = {
+  auds: TAuditoriumReborn[]
+  id: string
+  corridor: [TCoords, TCoords][]
+  floor: number
 }

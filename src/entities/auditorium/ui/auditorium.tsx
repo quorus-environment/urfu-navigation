@@ -1,16 +1,16 @@
-import React, { memo, useCallback, useContext, useMemo } from "react"
-import { Circle, Group, Rect } from "react-konva"
-import { TAuditorium } from "../model/interface"
+import React, { memo, useCallback, useEffect, useMemo } from "react"
+import { Circle, Group, Line, Rect } from "react-konva"
+import { TAuditorium, TAuditoriumReborn } from "../model/interface"
 import { TCoords } from "../../../shared/model/geometry"
 import { Graph } from "../../graph/ui/graph"
 import { GraphDestination } from "../../graph/model/interface"
-import { ChosenContext } from "../../../shared/providers/chosen-context/ui/chosen-provider"
 import { AuditoriumTitle } from "./auditorium-title"
 import { useEntryCoords } from "../lib/use-entry-coords"
 import { Colors } from "../../../shared/constants"
 import { usePointsDeclaration } from "../lib/use-points-declaration"
 import { useGraph } from "../../graph/lib/use-graph"
-import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
+import { useChosenStore } from "../../../shared/stores/chosen/lib/use-chosen-store"
+import { useGraphStore } from "../../../shared/stores/graph-context/lib/use-graph-store"
 
 /**
  * компонент аудитории: пока это просто квадратик с названием и входом, дальше будем расширять до
@@ -43,14 +43,14 @@ const CAuditorium: React.FC<TAuditorium> = ({
   // Получаем выбранные элементы
   const {
     startId,
+    setStartId,
     endId,
     setEndId,
-    setStartId,
-    setStartName,
     setEndName,
+    setStartName,
     endName,
-  } = useContext(ChosenContext)
-  const { coloredGraph, setColoredGraph } = useGraphContext()
+  } = useChosenStore()
+  const { coloredGraph, setColoredGraph } = useGraphStore()
 
   // Координаты текста (по центру)
   // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается
@@ -157,6 +157,75 @@ const CAuditorium: React.FC<TAuditorium> = ({
         descriptionColor={description?.descriptionColor}
       />
       <Graph graph={auditoriumGraph} />
+    </Group>
+  )
+}
+
+export const ShapedAuditorium: React.FC<
+  TAuditoriumReborn & { fill?: string }
+> = ({ id, startPoint, entryPoint, section, vectors }) => {
+  const { setStartId, setEndId, setStartAud, setEndAud, startId, endId } =
+    useChosenStore()
+  useEffect(() => {
+    console.log(startId)
+  })
+
+  const colors = useMemo(() => {
+    if (id === endId) {
+      return Colors.LightGreen
+    }
+    if (id === startId) {
+      return Colors.LightOrange
+    }
+    return "black"
+  }, [endId, id, startId])
+  return (
+    <Group
+      globalCompositeOperation="destination-over"
+      onClick={() => {
+        if (!startId) {
+          setStartAud({ entryPoint, startPoint, vectors, section, id })
+          setStartId(id || "")
+        } else {
+          setEndAud({ entryPoint, startPoint, vectors, section, id })
+          setEndId(id || "")
+        }
+      }}
+    >
+      {entryPoint && (
+        <Circle
+          width={6}
+          height={6}
+          fill="none"
+          x={startPoint.x + entryPoint?.x}
+          y={startPoint.y + entryPoint?.y}
+        />
+      )}
+
+      {vectors.map((v) => {
+        return (
+          <Line
+            points={[
+              v[0].x + startPoint.x,
+              v[0].y + startPoint.y,
+              v[1].x + startPoint.x,
+              v[1].y + startPoint.y,
+            ]}
+            stroke={colors}
+            strokeWidth={3}
+            fillEnabled
+            key={`${v[0]} ${v[1]}`}
+          />
+        )
+      })}
+
+      {/* <AuditoriumTitle */}
+      {/*   title={name} */}
+      {/*   x={textCoords.x} */}
+      {/*   y={textCoords.y} */}
+      {/*   description={description?.description} */}
+      {/*   descriptionColor={description?.descriptionColor} */}
+      {/* /> */}
     </Group>
   )
 }

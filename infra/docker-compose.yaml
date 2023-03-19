@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13.0-alpine
+    volumes:
+      - db_value:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+  web:
+    image: quorus/urfu-navigation:v1
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+volumes:
+  db_value:

@@ -1,13 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
     "allowJs": true,
-    "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -16,13 +15,18 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "types": ["vite/client","vite-plugin-svgr/client","cypress", "node"],
+    "skipLibCheck": false,
   },
   "include": [
     "src",
-    "./svg.d.ts"
+    "./svg.d.ts",
+    "node_modules/cypress/types/cypress-global-vars.d.ts",
+    "cypress",
+    "./cypress.d.ts"
   ]
 }

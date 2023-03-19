@@ -1,13 +1,12 @@
 import { GraphDestination, TGraph } from "../model/interface"
 import { useMemo } from "react"
 import { Side, TCoords } from "../../../shared/model/geometry"
-import { useGraphContext } from "../../../shared/providers/graph-context/lib/use-graph-context"
+import { useGraphStore } from "../../../shared/stores/graph-context/lib/use-graph-store"
 
 export const checkIfPointInGraph = (
   graphPoints: [number, number, number, number],
   pointCoords: [number, number],
 ) => {
-  console.log(graphPoints, pointCoords)
   const list = [pointCoords[0], graphPoints[0], graphPoints[2]].sort(
     (first, second) => first - second,
   )
@@ -79,7 +78,7 @@ export const useGraph = (
   floor: number,
   neighbors: string[] = [],
 ) => {
-  const { coloredGraph } = useGraphContext()
+  const { coloredGraph } = useGraphStore()
   const resultPoint: TCoords = useMemo(() => {
     return getResultPoint(direction, points, height)
   }, [direction, height, points])

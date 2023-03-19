@@ -1,9 +1,9 @@
 import { OrdinarySearch } from "../ordinarySearch/ordinarySearch"
 import "./doubleSearch.css"
-import { useCallback, useContext, useMemo } from "react"
-import { ChosenContext } from "../../providers/chosen-context/ui/chosen-provider"
-import { useGraphContext } from "../../providers/graph-context/lib/use-graph-context"
+import { useCallback, useMemo } from "react"
+import { useGraphStore } from "../../stores/graph-context/lib/use-graph-store"
 import { GraphDestination } from "../../../entities/graph/model/interface"
+import { useChosenStore } from "../../stores/chosen/lib/use-chosen-store"
 
 export enum Closest {
   ClosestManToilet = "closest_man_toilet",
@@ -11,10 +11,9 @@ export enum Closest {
 }
 
 export const HeaderSearch = () => {
-  const { endName, setEndName, setEndId, setStartName, startName, setStartId } =
-    useContext(ChosenContext)
-  const { setColoredGraph } = useGraphContext()
-  const { graph } = useGraphContext()
+  const { setStartId, setEndId, setStartName, setEndName, startName, endName } =
+    useChosenStore()
+  const { graph, setColoredGraph } = useGraphStore()
   const graphIds = useMemo(() => {
     return graph
       .filter((g) => g.destination === GraphDestination.AUDITORIUM)
