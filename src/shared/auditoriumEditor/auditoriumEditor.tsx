@@ -6,6 +6,8 @@ import { useModalStore } from "../stores/admin/lib/use-modal-store"
 import { TextField } from "@mui/material"
 import { useForm } from "../utils/use-form"
 import { OrdinarySearch } from "../ui/ordinarySearch/ordinarySearch"
+import Dropdown, { IOption } from "../ui/dropdown/dropdown"
+import { GraphDestination } from "../../entities/graph/model/interface"
 
 type TAuditoriumEditor = {
   children?: React.ReactNode
@@ -32,6 +34,22 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
     e.preventDefault()
     setExitAllowed(false)
   }
+  const keys = Object.values(GraphDestination)
+  const graphDestinationOptions: IOption[] = []
+  // TODO разобраться с архитектурой
+  keys.forEach((key) => {
+    const option: IOption = {
+      value: key,
+      label: key,
+    }
+    graphDestinationOptions.push(option)
+  })
+  const floorsOptions: IOption[] = [
+    { value: "1", label: "1" },
+    { value: "2", label: "2" },
+    { value: "3", label: "3" },
+    { value: "4", label: "4" },
+  ]
   //todo: замапить инпуты
   return (
     <div className={styles.body}>
@@ -45,6 +63,13 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
           value={values.name}
           size="medium"
         />
+        <OrdinarySearch
+          placeholder="placeholder"
+          items={[{ value: "valueArr" }]}
+          value="value"
+          setValue={() => console.log("Привет")}
+          setId={() => console.log("Привет для ID")}
+        />
         <TextField
           name="coords"
           onChange={handleChange}
@@ -53,6 +78,13 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
           value={values.coords}
           size="medium"
         />
+        <Dropdown
+          placeHolder={values.destination}
+          options={graphDestinationOptions}
+          isMulti={false}
+          isSearchable={true}
+          onChange={(value: any) => console.log(value)}
+        />
         <TextField
           name="destination"
           onChange={handleChange}
@@ -60,6 +92,13 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
           variant="outlined"
           value={values.destination}
           size="medium"
+        />
+        <Dropdown
+          placeHolder={values.floor}
+          options={floorsOptions}
+          isMulti={false}
+          isSearchable={true}
+          onChange={(value: any) => console.log(value)}
         />
         <TextField
           name="floor"
@@ -84,5 +123,7 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
     </div>
   )
 }
+
+// TODO вынести все секции в отдельный enum, чтобы их прокинуть в дропдаун
 
 export default AuditoriumEditor
