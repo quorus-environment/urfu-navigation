@@ -3,7 +3,6 @@ import styles from "./auditoriumEditor.module.css"
 import { useSearchParams } from "react-router-dom"
 import { useIritRtfEntities } from "../../pages/universities/irit-rtf/use-irit-rtf-entities"
 import { useModalStore } from "../stores/admin/lib/use-modal-store"
-import { TextField } from "@mui/material"
 import { useForm } from "../utils/use-form"
 import { OrdinarySearch } from "../ui/ordinarySearch/ordinarySearch"
 import { IOption } from "../ui/dropdown/dropdown"
@@ -11,6 +10,7 @@ import {
   GraphDestination,
   SectionName,
 } from "../../entities/graph/model/interface"
+import { Input } from "../ui/input/input"
 
 type TAuditoriumEditor = {
   children?: ReactNode
@@ -76,21 +76,17 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
     <div className={styles.body}>
       {/*на сабмит пока меняем значение exitAllowed*/}
       <form onSubmit={onSubmit} className={styles.config}>
-        <TextField
+        <Input
           name="name"
-          onChange={handleChange}
           label="Название"
-          variant="outlined"
+          onChange={handleChange}
           value={values.name}
-          size="medium"
         />
-        <TextField
+        <Input
           name="coords"
           onChange={handleChange}
           label="Координаты"
-          variant="outlined"
           value={values.coords}
-          size="medium"
         />
         <OrdinarySearch
           placeholder="Назначение"
