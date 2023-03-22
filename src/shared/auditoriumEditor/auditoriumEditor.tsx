@@ -7,7 +7,10 @@ import { TextField } from "@mui/material"
 import { useForm } from "../utils/use-form"
 import { OrdinarySearch } from "../ui/ordinarySearch/ordinarySearch"
 import Dropdown, { IOption } from "../ui/dropdown/dropdown"
-import { GraphDestination } from "../../entities/graph/model/interface"
+import {
+  GraphDestination,
+  SectionName,
+} from "../../entities/graph/model/interface"
 
 type TAuditoriumEditor = {
   children?: React.ReactNode
@@ -34,15 +37,26 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
     e.preventDefault()
     setExitAllowed(false)
   }
-  const keys = Object.values(GraphDestination)
+  const graphDestinationKeys = Object.values(GraphDestination)
   const graphDestinationOptions: IOption[] = []
   // TODO разобраться с архитектурой
-  keys.forEach((key) => {
+  graphDestinationKeys.forEach((key) => {
     const option: IOption = {
       value: key,
       label: key,
     }
     graphDestinationOptions.push(option)
+  })
+
+  const sectionNameKeys = Object.values(SectionName)
+  const sectionNameOptions: IOption[] = []
+  // TODO разобраться с архитектурой
+  sectionNameKeys.forEach((key) => {
+    const option: IOption = {
+      value: key,
+      label: key,
+    }
+    sectionNameOptions.push(option)
   })
   const floorsOptions: IOption[] = [
     { value: "1", label: "1" },
@@ -107,6 +121,13 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
           variant="outlined"
           value={values.floor}
           size="medium"
+        />
+        <Dropdown
+          placeHolder={values.section}
+          options={sectionNameOptions}
+          isMulti={false}
+          isSearchable={true}
+          onChange={(value: any) => console.log(value)}
         />
         <TextField
           name="section"
