@@ -112,7 +112,7 @@ const CAuditorium: React.FC<TAuditorium> = ({
     if (coloredGraph.includes(id || name)) {
       return Colors.LightYellow
     }
-    if (destination === GraphDestination.FOODCORT) {
+    if (destination === GraphDestination.FOOD_CORT) {
       return Colors.LightOrange
     }
     if (
