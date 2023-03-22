@@ -1,4 +1,4 @@
-import React, { useMemo, FC, SyntheticEvent } from "react"
+import { FC, ReactNode, SyntheticEvent, useMemo } from "react"
 import styles from "./auditoriumEditor.module.css"
 import { useSearchParams } from "react-router-dom"
 import { useIritRtfEntities } from "../../pages/universities/irit-rtf/use-irit-rtf-entities"
@@ -6,14 +6,14 @@ import { useModalStore } from "../stores/admin/lib/use-modal-store"
 import { TextField } from "@mui/material"
 import { useForm } from "../utils/use-form"
 import { OrdinarySearch } from "../ui/ordinarySearch/ordinarySearch"
-import Dropdown, { IOption } from "../ui/dropdown/dropdown"
+import { IOption } from "../ui/dropdown/dropdown"
 import {
   GraphDestination,
   SectionName,
 } from "../../entities/graph/model/interface"
 
 type TAuditoriumEditor = {
-  children?: React.ReactNode
+  children?: ReactNode
 }
 
 const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
@@ -24,13 +24,19 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
     () => everyFloorAuds.find((el) => el.name === searchParams.get("id")),
     [everyFloorAuds, searchParams],
   )
-  console.log(auditoriumEdited)
-  const { values, handleChange } = useForm({
-    name: auditoriumEdited?.name,
+  // console.log(auditoriumEdited)
+  const { values, handleChange, setValue } = useForm<{
+    name: string
+    coords: string
+    floor: number
+    section: SectionName
+    destination: GraphDestination
+  }>({
+    name: auditoriumEdited?.name || "",
     coords: JSON.stringify(auditoriumEdited?.coords),
-    floor: auditoriumEdited?.floor,
-    section: auditoriumEdited?.section,
-    destination: auditoriumEdited?.destination,
+    floor: auditoriumEdited?.floor || 0,
+    section: auditoriumEdited?.section || SectionName.MAIN_SECTION1,
+    destination: auditoriumEdited?.destination || GraphDestination.AUDITORIUM,
   })
 
   const onSubmit = (e: SyntheticEvent) => {
@@ -64,6 +70,7 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
     { value: "3", label: "3" },
     { value: "4", label: "4" },
   ]
+  // TODO: добавить валидацию
   //todo: замапить инпуты
   return (
     <div className={styles.body}>
@@ -77,13 +84,6 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
           value={values.name}
           size="medium"
         />
-        <OrdinarySearch
-          placeholder="placeholder"
-          items={[{ value: "valueArr" }]}
-          value="value"
-          setValue={() => console.log("Привет")}
-          setId={() => console.log("Привет для ID")}
-        />
         <TextField
           name="coords"
           onChange={handleChange}
@@ -92,59 +92,35 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
           value={values.coords}
           size="medium"
         />
-        <Dropdown
-          placeHolder={values.destination}
-          options={graphDestinationOptions}
-          isMulti={false}
-          isSearchable={true}
-          onChange={(value: any) => console.log(value)}
+        <OrdinarySearch
+          placeholder="Назначение"
+          defaultValue={values.destination}
+          items={graphDestinationOptions}
+          onChange={(value) => setValue("destination", value)}
         />
-        <TextField
-          name="destination"
-          onChange={handleChange}
-          label="Назначение"
-          variant="outlined"
-          value={values.destination}
-          size="medium"
+        <OrdinarySearch
+          placeholder="Этаж"
+          defaultValue={`${values.floor}`}
+          items={floorsOptions}
+          onChange={(value) => setValue("floor", value)}
         />
-        <Dropdown
-          placeHolder={values.floor}
-          options={floorsOptions}
-          isMulti={false}
-          isSearchable={true}
-          onChange={(value: any) => console.log(value)}
+        <OrdinarySearch
+          placeholder="Секция"
+          defaultValue={values.section}
+          items={sectionNameOptions}
+          onChange={(value) => setValue("section", value)}
         />
-        <TextField
-          name="floor"
-          onChange={handleChange}
-          label="Этаж"
-          variant="outlined"
-          value={values.floor}
-          size="medium"
-        />
-        <Dropdown
-          placeHolder={values.section}
-          options={sectionNameOptions}
-          isMulti={false}
-          isSearchable={true}
-          onChange={(value: any) => console.log(value)}
-        />
-        <TextField
-          name="section"
-          onChange={handleChange}
-          label="Секция"
-          variant="outlined"
-          value={values.section}
-          size="medium"
-        />
-        <button inputMode="text" type="submit" className={styles.btn}>
+        <button
+          inputMode="text"
+          type="submit"
+          className={styles.btn}
+          onClick={() => console.log(values)}
+        >
           Изменить
         </button>
       </form>
     </div>
   )
 }
-
-// TODO вынести все секции в отдельный enum, чтобы их прокинуть в дропдаун
 
 export default AuditoriumEditor

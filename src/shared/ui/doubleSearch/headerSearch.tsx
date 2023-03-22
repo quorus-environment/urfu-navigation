@@ -39,18 +39,14 @@ export const HeaderSearch = () => {
         </div>
         <div className="search__inner">
           <OrdinarySearch
-            value={startName || ""}
-            setId={setStartId}
-            setValue={setStartName}
+            onChange={setStartId}
             items={graphIds}
             placeholder="Начальная точка"
           />
         </div>
         <div className="search__inner">
           <OrdinarySearch
-            setId={setEndId}
-            value={endName || ""}
-            setValue={setEndName}
+            onChange={setEndId}
             items={[...graphIds]}
             preflightFields={[
               {

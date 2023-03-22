@@ -12,9 +12,8 @@ import {
 interface IOrdinarySearch {
   placeholder: string
   items: { value: string; label?: string }[]
-  value: string
-  setValue: (v: string) => void
-  setId: (v: string) => void
+  onChange: (v: string) => void
+  defaultValue?: string
   preflightFields?: { value: string; label?: string }[]
 }
 
@@ -89,11 +88,11 @@ const useKeyboardManagement = (
 export const OrdinarySearch: FC<IOrdinarySearch> = ({
   placeholder,
   items,
-  value,
-  setValue,
   preflightFields,
-  setId,
+  onChange,
+  defaultValue,
 }) => {
+  const [value, setValue] = useState(defaultValue ?? "")
   const [isOpenedBar, setOpenedBar] = useState(false)
 
   // Закрытие модалки на клик извне
@@ -106,7 +105,7 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
     }
     return items
       .filter((auditorium) =>
-        auditorium.label?.toLowerCase().includes(value.toLowerCase()),
+        auditorium.label?.toLowerCase().includes(value?.toLowerCase()),
       )
       .slice(0, 5)
       .concat(preflightFields || [])
@@ -117,7 +116,7 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
     ref,
     filtered,
     setValue,
-    setId,
+    onChange,
     setOpenedBar,
   )
 
@@ -129,7 +128,7 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
           currentIndex === index ? " hovered" : undefined
         }`}
         onClick={() => {
-          setId(item.value)
+          onChange(item.value)
           setValue(item.label || "")
           setOpenedBar(false)
         }}
@@ -137,7 +136,7 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
         {item.label}
       </li>
     ))
-  }, [currentIndex, filtered, setId, setValue])
+  }, [currentIndex, filtered, onChange, setValue])
 
   return (
     <div className="body">
