@@ -16,6 +16,14 @@ type TAuditoriumEditor = {
   children?: ReactNode
 }
 
+type TEditorForm = {
+  name: string
+  coords: string
+  floor: number
+  section: SectionName
+  destination: GraphDestination
+}
+
 const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { setExitAllowed } = useModalStore()
@@ -24,14 +32,7 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
     () => everyFloorAuds.find((el) => el.name === searchParams.get("id")),
     [everyFloorAuds, searchParams],
   )
-  // console.log(auditoriumEdited)
-  const { values, handleChange, setValue } = useForm<{
-    name: string
-    coords: string
-    floor: number
-    section: SectionName
-    destination: GraphDestination
-  }>({
+  const { values, handleChange, setValue } = useForm<TEditorForm>({
     name: auditoriumEdited?.name || "",
     coords: JSON.stringify(auditoriumEdited?.coords),
     floor: auditoriumEdited?.floor || 0,
@@ -43,6 +44,7 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
     e.preventDefault()
     setExitAllowed(false)
   }
+
   const graphDestinationKeys = Object.values(GraphDestination)
   const graphDestinationOptions: IOption[] = []
   // TODO разобраться с архитектурой
@@ -90,17 +92,20 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
         />
         <OrdinarySearch
           placeholder="Назначение"
+          type="select"
           defaultValue={values.destination}
           items={graphDestinationOptions}
           onChange={(value) => setValue("destination", value)}
         />
         <OrdinarySearch
+          type="select"
           placeholder="Этаж"
           defaultValue={`${values.floor}`}
           items={floorsOptions}
           onChange={(value) => setValue("floor", value)}
         />
         <OrdinarySearch
+          type="select"
           placeholder="Секция"
           defaultValue={values.section}
           items={sectionNameOptions}
