@@ -24,6 +24,12 @@ type TEditorForm = {
   destination: GraphDestination
 }
 
+class EditorView {
+  static validationDestination(value: string) {
+    return Object.values(GraphDestination).some((v) => v === value)
+  }
+}
+
 const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { setExitAllowed, exitAllowed } = useModalStore()
@@ -75,6 +81,7 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
     { value: "3", label: "3" },
     { value: "4", label: "4" },
   ]
+  console.log(values)
   // TODO: добавить валидацию
   //todo: замапить инпуты
   return (
@@ -100,6 +107,9 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
           items={graphDestinationOptions}
           onChange={(value) => setValue("destination", value)}
         />
+        {!EditorView.validationDestination(values.destination) && (
+          <p>Тут типо валидация</p>
+        )}
         <OrdinarySearch
           type="select"
           placeholder="Этаж"
