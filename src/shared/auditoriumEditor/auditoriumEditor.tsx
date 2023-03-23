@@ -1,4 +1,4 @@
-import { FC, ReactNode, SyntheticEvent, useMemo } from "react"
+import { FC, ReactNode, SyntheticEvent, useEffect, useMemo } from "react"
 import styles from "./auditoriumEditor.module.css"
 import { useSearchParams } from "react-router-dom"
 import { useIritRtfEntities } from "../../pages/universities/irit-rtf/use-irit-rtf-entities"
@@ -26,23 +26,26 @@ type TEditorForm = {
 
 const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const { setExitAllowed } = useModalStore()
+  const { setExitAllowed, exitAllowed } = useModalStore()
   const { everyFloorAuds } = useIritRtfEntities()
   const auditoriumEdited = useMemo(
     () => everyFloorAuds.find((el) => el.name === searchParams.get("id")),
     [everyFloorAuds, searchParams],
   )
-  const { values, handleChange, setValue } = useForm<TEditorForm>({
+  const initialForm = {
     name: auditoriumEdited?.name || "",
     coords: JSON.stringify(auditoriumEdited?.coords),
     floor: auditoriumEdited?.floor || 0,
     section: auditoriumEdited?.section || SectionName.MAIN_SECTION1,
     destination: auditoriumEdited?.destination || GraphDestination.AUDITORIUM,
-  })
-
+  }
+  const { values, handleChange, setValue } = useForm<TEditorForm>(initialForm)
+  useEffect(() => {
+    setExitAllowed(JSON.stringify(initialForm) === JSON.stringify(values))
+  }, [JSON.stringify(initialForm), JSON.stringify(values)])
   const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault()
-    setExitAllowed(false)
+    setExitAllowed(true)
   }
 
   const graphDestinationKeys = Object.values(GraphDestination)
@@ -114,8 +117,9 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
         <button
           inputMode="text"
           type="submit"
+          disabled={exitAllowed}
           className={styles.btn}
-          onClick={() => console.log(values)}
+          onClick={() => setExitAllowed(true)}
         >
           Изменить
         </button>
