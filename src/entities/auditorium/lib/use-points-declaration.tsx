@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import { useChosenStore } from "../../../shared/stores/chosen/lib/use-chosen-store"
+import { useChosenStore } from "../../../widgets/renderer/model/chosen/lib/use-chosen-store"
 
 export const usePointsDeclaration = (name: string) => {
   const { startId, endId } = useChosenStore((st) => ({

@@ -9,8 +9,8 @@ import { useEntryCoords } from "../lib/use-entry-coords"
 import { Colors } from "../../../shared/constants"
 import { usePointsDeclaration } from "../lib/use-points-declaration"
 import { useGraph } from "../../graph/lib/use-graph"
-import { useChosenStore } from "../../../shared/stores/chosen/lib/use-chosen-store"
-import { useGraphStore } from "../../../shared/stores/graph-context/lib/use-graph-store"
+import { useChosenStore } from "../../../widgets/renderer/model/chosen/lib/use-chosen-store"
+import { useGraphStore } from "../../../widgets/renderer/model/graph-context/lib/use-graph-store"
 
 /**
  * компонент аудитории: пока это просто квадратик с названием и входом, дальше будем расширять до

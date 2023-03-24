@@ -1,4 +1,4 @@
-import { InstituteLogo } from "../../../shared/ui/institute-logo/institute-logo"
+import { InstituteLogo } from "../../../shared/ui-kit/institute-logo/institute-logo"
 import "./institutes-grid.css"
 
 type Institute = {

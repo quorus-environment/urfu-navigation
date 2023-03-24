@@ -1,13 +1,13 @@
 import { testSection } from "./config-test"
-import { MapStage } from "../../../entities/map-stage/ui/map-stage"
+import { MapStage } from "../../../widgets/renderer/ui/map-stage/ui/map-stage"
 import { Layer, Line } from "react-konva"
 import { ShapedAuditorium } from "../../../entities/auditorium/ui/auditorium"
-import { useChosenStore } from "../../../shared/stores/chosen/lib/use-chosen-store"
+import { useChosenStore } from "../../../widgets/renderer/model/chosen/lib/use-chosen-store"
 import { useEffect, useState } from "react"
 import {
   findPathThroughSection,
   RectangleVector,
-} from "../../../shared/pathFinding/find-path-through-section"
+} from "../../../features/path-finding/find-path-through-section"
 import { TCoords } from "../../../shared/model/geometry"
 
 export const TestUniv: React.FC = () => {

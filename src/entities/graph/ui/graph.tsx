@@ -2,8 +2,8 @@ import { Circle, Group, Line } from "react-konva"
 import React, { memo, useMemo } from "react"
 import { TGraph } from "../model/interface"
 import { useSearchParams } from "react-router-dom"
-import { unsecuredCopyToClipboard } from "../../../shared/utils/copyToClipboard"
-import { useGraphStore } from "../../../shared/stores/graph-context/lib/use-graph-store"
+import { unsecuredCopyToClipboard } from "../../../shared/utils/copy-to-clipboard"
+import { useGraphStore } from "../../../widgets/renderer/model/graph-context/lib/use-graph-store"
 
 const CGraph: React.FC<{ graph: TGraph }> = ({ graph }) => {
   const { coloredGraph } = useGraphStore()

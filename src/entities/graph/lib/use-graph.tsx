@@ -1,7 +1,7 @@
 import { GraphDestination, TGraph } from "../model/interface"
 import { useMemo } from "react"
 import { Side, TCoords } from "../../../shared/model/geometry"
-import { useGraphStore } from "../../../shared/stores/graph-context/lib/use-graph-store"
+import { useGraphStore } from "../../../widgets/renderer/model/graph-context/lib/use-graph-store"
 
 export const checkIfPointInGraph = (
   graphPoints: [number, number, number, number],

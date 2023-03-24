@@ -1,8 +1,8 @@
 import React, { useEffect } from "react"
 import { getGraphsFromAuditoriums } from "../../../entities/auditorium/lib/get-graphs-from-auditoriums"
 import { useIritRtfEntities } from "./use-irit-rtf-entities"
-import { useGraphStore } from "../../../shared/stores/graph-context/lib/use-graph-store"
-import { Renderer } from "../../../entities/renderer/renderer"
+import { useGraphStore } from "../../../widgets/renderer/model/graph-context/lib/use-graph-store"
+import { Renderer } from "../../../widgets/renderer/ui/renderer"
 
 export const IritRtf: React.FC = () => {
   const { setGraphRegistry } = useGraphStore()

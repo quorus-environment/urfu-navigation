@@ -1,5 +1,5 @@
 import "./header.css"
-import { HeaderSearch } from "../../../shared/ui/doubleSearch/headerSearch"
+import { HeaderSearch } from "./header-search/header-search"
 
 export const Header = () => {
   return (
