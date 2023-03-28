@@ -28,12 +28,6 @@ interface IOption {
   label: string
 }
 
-class EditorView {
-  static validationDestination(value: string) {
-    return Object.values(GraphDestination).some((v) => v === value)
-  }
-}
-
 const floorsOptions: IOption[] = [
   { value: "1", label: "1" },
   { value: "2", label: "2" },
@@ -112,9 +106,6 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
           items={graphDestinationOptions}
           onChange={(value) => setValue("destination", value)}
         />
-        {!EditorView.validationDestination(values.destination) && (
-          <p>Тут типо валидация</p>
-        )}
         <OrdinarySearch
           type="select"
           placeholder="Этаж"
