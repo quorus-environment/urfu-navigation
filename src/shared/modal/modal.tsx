@@ -12,6 +12,8 @@ type TModal = {
   handleClose: () => void
   title: string
 }
+
+// todo сделать модалку иммутабельной
 const Modal: FC<TModal> = ({ children, handleClose, title }) => {
   const { checkerSeen, setCheckerSeen, exitAllowed, setExitAllowed } =
     useModalStore()
