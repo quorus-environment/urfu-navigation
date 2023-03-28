@@ -4,15 +4,19 @@ interface ExitProps {
   size?: number
   color?: string
   strokeWidth?: number
+  onClick?: () => void
 }
 
 export const Exit: FC<ExitProps> = ({
   size = 14,
   color = "black",
   strokeWidth = 2,
+  onClick,
 }) => {
   return (
     <svg
+      style={{ cursor: "pointer" }}
+      onClick={onClick}
       width={size}
       height={size}
       viewBox="0 0 14 13"

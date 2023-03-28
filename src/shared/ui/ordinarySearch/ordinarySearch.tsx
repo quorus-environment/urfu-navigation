@@ -9,15 +9,6 @@ import {
   useState,
 } from "react"
 
-interface IOrdinarySearch {
-  placeholder: string
-  items: { value: string; label?: string }[]
-  value: string
-  setValue: (v: string) => void
-  setId: (v: string) => void
-  preflightFields?: { value: string; label?: string }[]
-}
-
 // Закрываем дропдаун при нажатии на любое пространство
 const useAutocompleteClosingByRef = (setOpened: (v: boolean) => void) => {
   const ref = useRef<HTMLDivElement | null>(null)
@@ -86,14 +77,33 @@ const useKeyboardManagement = (
   return currentIndex
 }
 
+const checkType = (type: string) => {
+  //пока так
+  if (type === "select") {
+    return "selectSearch"
+  } else {
+    return "searchbar"
+  }
+}
+
+interface IOrdinarySearch {
+  placeholder: string
+  items: { value: string; label?: string }[]
+  onChange: (v: string) => void
+  defaultValue?: string
+  preflightFields?: { value: string; label?: string }[]
+  type?: "default" | "select"
+}
+
 export const OrdinarySearch: FC<IOrdinarySearch> = ({
   placeholder,
   items,
-  value,
-  setValue,
   preflightFields,
-  setId,
+  onChange,
+  defaultValue,
+  type = "default",
 }) => {
+  const [value, setValue] = useState(defaultValue ?? "")
   const [isOpenedBar, setOpenedBar] = useState(false)
 
   // Закрытие модалки на клик извне
@@ -106,7 +116,7 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
     }
     return items
       .filter((auditorium) =>
-        auditorium.label?.toLowerCase().includes(value.toLowerCase()),
+        auditorium.label?.toLowerCase().includes(value?.toLowerCase()),
       )
       .slice(0, 5)
       .concat(preflightFields || [])
@@ -117,7 +127,7 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
     ref,
     filtered,
     setValue,
-    setId,
+    onChange,
     setOpenedBar,
   )
 
@@ -129,7 +139,7 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
           currentIndex === index ? " hovered" : undefined
         }`}
         onClick={() => {
-          setId(item.value)
+          onChange(item.value)
           setValue(item.label || "")
           setOpenedBar(false)
         }}
@@ -137,37 +147,34 @@ export const OrdinarySearch: FC<IOrdinarySearch> = ({
         {item.label}
       </li>
     ))
-  }, [currentIndex, filtered, setId, setValue])
+  }, [currentIndex, filtered, onChange, setValue])
 
   return (
-    <div className="body">
-      <div
-        className="searchbar"
-        style={{
-          borderRadius:
-            isOpenedBar && filtered.length ? "15px 15px 0 0" : "15px",
+    <div
+      className={checkType(type)}
+      style={{
+        borderRadius: isOpenedBar && filtered.length ? "15px 15px 0 0" : "15px",
+      }}
+      ref={ref}
+    >
+      {type === "default" && <img className="icon" src={Lens} alt="" />}
+      <input
+        className="search"
+        type="text"
+        placeholder={placeholder}
+        value={value}
+        onKeyDown={(e) => {
+          e.stopPropagation()
         }}
-        ref={ref}
-      >
-        <img className="lens" src={Lens} alt="" />
-        <input
-          className="search"
-          type="text"
-          placeholder={placeholder}
-          value={value}
-          onKeyDown={(e) => {
-            e.stopPropagation()
-          }}
-          onChange={(event) => {
-            setOpenedBar(true)
-            setValue(event.target.value)
-          }}
-          onClick={() => setOpenedBar(true)}
-        />
-        {value && isOpenedBar && filtered.length ? (
-          <ul className="auto-complete">{listItem}</ul>
-        ) : null}
-      </div>
+        onChange={(event) => {
+          setOpenedBar(true)
+          setValue(event.target.value)
+        }}
+        onClick={() => setOpenedBar(true)}
+      />
+      {value && isOpenedBar && filtered.length ? (
+        <ul className="auto-complete">{listItem}</ul>
+      ) : null}
     </div>
   )
 }
