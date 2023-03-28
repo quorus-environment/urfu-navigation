@@ -5,8 +5,7 @@ import styles from "./modal.module.css"
 import { Exit } from "../ui/exit/exit"
 import { useModalStore } from "../stores/admin/lib/use-modal-store"
 
-//non-null assertion
-const portal = document.getElementById("portal")!
+const portal = document.querySelector("body") as HTMLBodyElement
 
 type TModal = {
   children?: React.ReactNode

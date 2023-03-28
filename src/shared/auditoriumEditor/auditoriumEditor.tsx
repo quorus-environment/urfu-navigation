@@ -5,7 +5,6 @@ import { useIritRtfEntities } from "../../pages/universities/irit-rtf/use-irit-r
 import { useModalStore } from "../stores/admin/lib/use-modal-store"
 import { useForm } from "../utils/use-form"
 import { OrdinarySearch } from "../ui/ordinarySearch/ordinarySearch"
-import { IOption } from "../ui/dropdown/dropdown"
 import {
   GraphDestination,
   SectionName,
@@ -24,11 +23,23 @@ type TEditorForm = {
   destination: GraphDestination
 }
 
+interface IOption {
+  value: string
+  label: string
+}
+
 class EditorView {
   static validationDestination(value: string) {
     return Object.values(GraphDestination).some((v) => v === value)
   }
 }
+
+const floorsOptions: IOption[] = [
+  { value: "1", label: "1" },
+  { value: "2", label: "2" },
+  { value: "3", label: "3" },
+  { value: "4", label: "4" },
+]
 
 const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -75,13 +86,7 @@ const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
     }
     sectionNameOptions.push(option)
   })
-  const floorsOptions: IOption[] = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-  ]
-  console.log(values)
+
   // TODO: добавить валидацию
   //todo: замапить инпуты
   return (

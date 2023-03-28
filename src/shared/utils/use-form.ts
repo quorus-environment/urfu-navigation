@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from "react"
 
-//todo: затипизировать
 export function useForm<T extends object>(inputValues: T) {
   const [values, setValues] = useState<T>(inputValues)
   const setValue = (name: string, value: string) => {
