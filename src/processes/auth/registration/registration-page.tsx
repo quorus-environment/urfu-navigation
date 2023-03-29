@@ -23,7 +23,7 @@ export const RegistrationPage = () => {
   return (
     <main>
       <div>
-        <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
+        <h1>Регистрация</h1>
         <input
           type="text"
           placeholder="Имя"
