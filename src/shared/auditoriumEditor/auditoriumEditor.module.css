@@ -1,0 +1,44 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.config{
+    margin: 25px 0 0 0;
+    justify-content: center;
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+}
+
+.config{
+    font-size: 25px;
+}
+.config span{
+    font-weight: 500;
+}
+
+.btn{
+    cursor: pointer;
+    background: #242424;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
+    font-weight: 500;
+    font-size: 24px;
+    border-radius: 7px;
+}
+.btn:disabled{
+    background: #888888;
+}
+.btn:disabled{
+    cursor: auto;
+    background: #888888;
+}
+.btn:not(:disabled):hover{
+    background: #151515;
+}

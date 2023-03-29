@@ -1,6 +1,6 @@
 // Настройки аудитории
 import { Side, TCoords } from "../../../shared/model/geometry"
-import { GraphDestination } from "../../graph/model/interface"
+import { GraphDestination, SectionName } from "../../graph/model/interface"
 
 export type TAuditorium = {
   id?: string
@@ -8,7 +8,7 @@ export type TAuditorium = {
   height: number
   width: number
   floor: number
-  section: string
+  section: SectionName
   /** Только для лестниц */
   linkedAuditoriums?: { id: string; floor: number }[]
   coords: {

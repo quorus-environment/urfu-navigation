@@ -11,6 +11,7 @@ import { usePointsDeclaration } from "../lib/use-points-declaration"
 import { useGraph } from "../../graph/lib/use-graph"
 import { useChosenStore } from "../../../shared/stores/chosen/lib/use-chosen-store"
 import { useGraphStore } from "../../../shared/stores/graph-context/lib/use-graph-store"
+import { useSearchParams } from "react-router-dom"
 
 /**
  * компонент аудитории: пока это просто квадратик с названием и входом, дальше будем расширять до
@@ -41,6 +42,8 @@ const CAuditorium: React.FC<TAuditorium> = ({
   graphHeight = 25,
 }) => {
   // Получаем выбранные элементы
+  const [searchParams, setSearchParams] = useSearchParams()
+  const role = searchParams.get("role") || ""
   const {
     startId,
     setStartId,
@@ -51,7 +54,6 @@ const CAuditorium: React.FC<TAuditorium> = ({
     endName,
   } = useChosenStore()
   const { coloredGraph, setColoredGraph } = useGraphStore()
-
   // Координаты текста (по центру)
   // Изначально крайняя верхняя-левая позиция ставится на центр и отнимается
   // половина от сторон, чтобы x и y подстроились под размеры текста
@@ -62,8 +64,18 @@ const CAuditorium: React.FC<TAuditorium> = ({
   // Вычисляем координаты входа
   const entryCoords = useEntryCoords(entry, coords, width, height, entryOffset)
 
+  const changeParam = (type: string, value: string) => {
+    const search: any = {}
+    for (const entry of searchParams.entries()) {
+      search[entry[0]] = entry[1]
+    }
+    setSearchParams({ ...search, [type]: value })
+  }
+
+  //todo:
   const onClick = useCallback(
     (startId: string | null) => {
+      changeParam("id", id || "")
       if (!startId) {
         setStartId(id || name)
         setStartName(name)
@@ -74,7 +86,7 @@ const CAuditorium: React.FC<TAuditorium> = ({
         setEndName(name)
       }
     },
-    [id, setStartId, name, setStartName, setEndId, setEndName],
+    [changeParam, id, setStartId, name, setStartName, setEndId, setEndName],
   )
 
   // Описание начальной и конечной точки
@@ -100,7 +112,7 @@ const CAuditorium: React.FC<TAuditorium> = ({
     if (coloredGraph.includes(id || name)) {
       return Colors.LightYellow
     }
-    if (destination === GraphDestination.FOODCORT) {
+    if (destination === GraphDestination.FOOD_CORT) {
       return Colors.LightOrange
     }
     if (
@@ -118,46 +130,48 @@ const CAuditorium: React.FC<TAuditorium> = ({
   }, [coloredGraph, destination, endId, id, name, startId])
 
   return (
-    <Group
-      onClick={() => onClick(startId)}
-      onDblClick={() => {
-        if (startId === name) {
-          setStartId(endId)
-          setStartName(endName)
-          setEndName(null)
-          setEndId(null)
-          setColoredGraph([])
-        }
-      }}
-      onTap={() => onClick(startId)}
-      globalCompositeOperation="destination-over"
-    >
-      <Circle
-        width={6}
-        height={6}
-        fill="none"
-        x={entryCoords.x}
-        y={entryCoords.y}
-      />
-      <Rect
-        width={width}
-        x={coords.x}
-        y={coords.y}
-        height={height}
-        fill={color}
-        stroke="black"
-        strokeWidth={3}
-        strokeEnabled
-      />
-      <AuditoriumTitle
-        title={name}
-        x={textCoords.x}
-        y={textCoords.y}
-        description={description?.description}
-        descriptionColor={description?.descriptionColor}
-      />
-      <Graph graph={auditoriumGraph} />
-    </Group>
+    <>
+      <Group
+        onClick={() => onClick(startId)}
+        onDblClick={() => {
+          // if (startId === name) {
+          //   setStartId(endId)
+          //   setStartName(endName)
+          //   setEndName(null)
+          //   setEndId(null)
+          //   setColoredGraph([])
+          // }
+        }}
+        onTap={() => onClick(startId)}
+        globalCompositeOperation="destination-over"
+      >
+        <Circle
+          width={6}
+          height={6}
+          fill="none"
+          x={entryCoords.x}
+          y={entryCoords.y}
+        />
+        <Rect
+          width={width}
+          x={coords.x}
+          y={coords.y}
+          height={height}
+          fill={color}
+          stroke={role === "admin" ? "#fc7f03" : "black"}
+          strokeWidth={3}
+          strokeEnabled
+        />
+        <AuditoriumTitle
+          title={name}
+          x={textCoords.x}
+          y={textCoords.y}
+          description={description?.description}
+          descriptionColor={description?.descriptionColor}
+        />
+        <Graph graph={auditoriumGraph} />
+      </Group>
+    </>
   )
 }
 
