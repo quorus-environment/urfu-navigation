@@ -17,18 +17,13 @@ export const RegistrationPage = () => {
   const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
     setPasswordValue(e.target.value)
 
-  const [userName, setUserName] = useState("")
-  const onNameChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setUserName(e.target.value)
-
   const onRegistrationClick = () =>
-    AuthService.signUp(emailValue, userName, passwordValue)
+    AuthService.signUp(emailValue, inputValue, passwordValue)
 
   return (
     <main>
       <div>
         <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
-        <input onChange={onNameChange} value={userName} name="name" />
         <input
           type="text"
           placeholder="Имя"
