@@ -1,24 +1,26 @@
 import { useNavigate } from "react-router-dom"
-import { ChangeEvent, useRef, useState } from "react"
 import { AuthService } from "../lib/auth-service"
+import { useForm } from "../../../shared/utils/use-form"
+
+type TSignUpForm = {
+  name: string
+  email: string
+  password: string
+}
 
 export const RegistrationPage = () => {
+  const initialForm: TSignUpForm = {
+    name: "",
+    email: "",
+    password: "",
+  }
+  const { values, handleChange } = useForm<TSignUpForm>(initialForm)
+
   const navigate = useNavigate()
   const onLoginClick = () => navigate("/login", { replace: true })
 
-  const [inputValue, setInputValue] = useState("")
-  const inputRef = useRef(null)
-
-  const [emailValue, setEmailValue] = useState("")
-  const onEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setEmailValue(e.target.value)
-
-  const [passwordValue, setPasswordValue] = useState("")
-  const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setPasswordValue(e.target.value)
-
   const onRegistrationClick = () =>
-    AuthService.signUp(emailValue, inputValue, passwordValue)
+    AuthService.signUp(values.email, values.name, values.password)
 
   return (
     <main>
@@ -27,15 +29,14 @@ export const RegistrationPage = () => {
         <input
           type="text"
           placeholder="Имя"
-          onChange={(e) => setInputValue(e.target.value)}
-          value={inputValue}
+          onChange={handleChange}
+          value={values.name}
           name="name"
-          ref={inputRef}
         />
-        <input onChange={onEmailChange} value={emailValue} name="email" />
+        <input onChange={handleChange} value={values.email} name="email" />
         <input
-          onChange={onPasswordChange}
-          value={passwordValue}
+          onChange={handleChange}
+          value={values.password}
           name="password"
         />
         <button onClick={onRegistrationClick}>Зарегистрироваться</button>
