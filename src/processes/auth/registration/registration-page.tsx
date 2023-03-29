@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { ChangeEvent, useRef, useState } from "react"
+import { AuthService } from "../lib/auth-service"
 
 export const RegistrationPage = () => {
   const navigate = useNavigate()
@@ -16,12 +17,18 @@ export const RegistrationPage = () => {
   const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
     setPasswordValue(e.target.value)
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const onRegistrationClick = () => {}
+  const [userName, setUserName] = useState("")
+  const onNameChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setUserName(e.target.value)
+
+  const onRegistrationClick = () =>
+    AuthService.signUp(emailValue, userName, passwordValue)
+
   return (
     <main>
       <div>
         <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
+        <input onChange={onNameChange} value={userName} name="name" />
         <input
           type="text"
           placeholder="Имя"
