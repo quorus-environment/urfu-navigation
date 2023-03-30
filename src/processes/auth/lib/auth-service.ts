@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios"
 import sha256 from "crypto-js/sha256"
 
 export const AuthInstance: AxiosInstance = axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: "http://localhost:8080/users",
 })
 
 export class AuthService {
@@ -15,7 +15,7 @@ export class AuthService {
       "/sign-up",
       {
         email,
-        password: sha256(password),
+        password: sha256(password).toString(),
         username,
       },
     )
@@ -23,8 +23,7 @@ export class AuthService {
 
   static async signIn(email: string, username: string, password: string) {
     return await AuthInstance.post("/sign-in", {
-      email,
-      password: sha256(password),
+      password: sha256(password).toString(),
       username,
     })
   }

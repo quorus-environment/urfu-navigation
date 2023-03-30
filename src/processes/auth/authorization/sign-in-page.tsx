@@ -19,9 +19,9 @@ export const SignInPage = () => {
   const onRegistrationClick = () => navigate("/register")
   const onResetPasswordClick = () => navigate("/forgot-password")
 
-  const onLoginClick = () =>
+  const onLoginClick = () => {
     AuthService.signIn(values.email, values.name, values.password)
-
+  }
   return (
     <main>
       <div>

@@ -41,10 +41,8 @@ export const RegistrationPage = () => {
         />
         <button onClick={onRegistrationClick}>Зарегистрироваться</button>
         <div>
-          <div>
-            <span>Уже зарегистрированы?</span>
-            <button onClick={onLoginClick}>Войти</button>
-          </div>
+          <span>Уже зарегистрированы?</span>
+          <button onClick={onLoginClick}>Войти</button>
         </div>
       </div>
     </main>
