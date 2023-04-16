@@ -2,7 +2,6 @@ import { Circle, Group, Line } from "react-konva"
 import React, { memo, useMemo } from "react"
 import { TGraph } from "../model/interface"
 import { useSearchParams } from "react-router-dom"
-import { unsecuredCopyToClipboard } from "../../../shared/utils/copy-to-clipboard"
 import { useGraphStore } from "../../../widgets/renderer/model/graph-context/lib/use-graph-store"
 
 const CGraph: React.FC<{ graph: TGraph }> = ({ graph }) => {
@@ -21,7 +20,6 @@ const CGraph: React.FC<{ graph: TGraph }> = ({ graph }) => {
       globalCompositeOperation="destination-over"
       onClick={async () => {
         if (params.get("dev") === "true") {
-          unsecuredCopyToClipboard(graph.id)
           console.log(graph.id)
         }
       }}

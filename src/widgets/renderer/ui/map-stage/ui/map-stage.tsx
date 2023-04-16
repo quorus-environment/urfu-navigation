@@ -7,7 +7,6 @@ import { FloorChosing } from "../../chooseFloor/floorChosing"
 import { findPaths } from "../../../../../features/path-finding/findPaths"
 import { useGraphStore } from "../../../model/graph-context/lib/use-graph-store"
 import { useTouchZooming } from "../lib/use-touch-zooming"
-import { PopupButton } from "../../popup-button/popup-button"
 import { Closest } from "../../../../header/ui/header-search/header-search"
 import { findPathToDestination } from "../../../../../features/path-finding/LinkedListProcessing"
 import {
@@ -16,6 +15,7 @@ import {
 } from "../../../../../entities/graph/model/interface"
 import KonvaEventObject = Konva.KonvaEventObject
 import { useChosenStore } from "../../../model/chosen/lib/use-chosen-store"
+import { Button, PopupButton } from "@quorus/quorus-ui-kit"
 
 type TMapStageProps = {
   children: React.ReactNode
@@ -184,6 +184,7 @@ export const MapStage: React.FC<TMapStageProps> = ({ children }) => {
       >
         {children}
       </Stage>
+      <Button />
       <PopupButton
         onClick={() => {
           if (differentFloor) {

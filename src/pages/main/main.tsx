@@ -2,6 +2,7 @@ import "./main.css"
 import { Institutes } from "./institutes-grid/institutes-grid"
 import { MainPageHeader } from "../../widgets/header/ui/header"
 import React, { Suspense } from "react"
+import { Button } from "@quorus/quorus-ui-kit"
 
 const MainMap = React.lazy(() => import("../../widgets/map/ui/map"))
 
