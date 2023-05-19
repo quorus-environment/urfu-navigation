@@ -1,3 +1,5 @@
+import { TCoords } from "./model/geometry"
+
 export enum Colors {
   LightRed = "#ff000010",
   LightYellow = "#ffff0030",
@@ -9,7 +11,121 @@ export enum Colors {
   LightGray = "rgba(49,49,49,0.10)",
 }
 
-export const testJson = {
+export const jsonTestCorrect = {
+  bodys: [
+    {
+      model: "main.body",
+      pk: 1,
+      fields: { name: "Test_body", pub_date: "2023-05-12T20:34:19.023Z" },
+    },
+  ],
+  floors: [
+    {
+      model: "main.floor",
+      pk: 1,
+      fields: { body: 1, name: "TEst", pub_date: "2023-05-12T20:34:19.028Z" },
+    },
+  ],
+  sections: [
+    {
+      model: "main.section",
+      pk: 2,
+      fields: { floor: 1, body: 1, pub_date: "2023-05-12T20:34:19.118Z" },
+    },
+    {
+      model: "main.section",
+      pk: 1,
+      fields: { floor: 1, body: 1, pub_date: "2023-05-12T20:34:19.034Z" },
+    },
+  ],
+  neighbors: [],
+  hallways: [
+    {
+      model: "main.hallway",
+      pk: 2,
+      fields: {
+        x: "471",
+        y: "53",
+        w: "23",
+        h: "663",
+        x_end: "",
+        y_end: "",
+        height: "",
+        pub_date: "2023-05-12T20:34:19.123Z",
+      },
+    },
+    {
+      model: "main.hallway",
+      pk: 1,
+      fields: {
+        x: "343",
+        y: "721",
+        w: "221",
+        h: "24",
+        x_end: "",
+        y_end: "",
+        height: "",
+        pub_date: "2023-05-12T20:34:19.039Z",
+      },
+    },
+  ],
+  offices: [
+    {
+      model: "main.office",
+      pk: 36,
+      fields: {
+        section: 2,
+        name: "Name",
+        x: "494",
+        y: "53",
+        w: "64",
+        h: "57",
+        pub_date: "2023-05-12T20:34:19.238Z",
+      },
+    },
+    {
+      model: "main.office",
+      pk: 35,
+      fields: {
+        section: 2,
+        name: "Name",
+        x: "410",
+        y: "110",
+        w: "61",
+        h: "57",
+        pub_date: "2023-05-12T20:34:19.233Z",
+      },
+    },
+    {
+      model: "main.office",
+      pk: 34,
+      fields: {
+        section: 2,
+        name: "Name",
+        x: "494",
+        y: "166",
+        w: "64",
+        h: "38",
+        pub_date: "2023-05-12T20:34:19.228Z",
+      },
+    },
+    {
+      model: "main.office",
+      pk: 33,
+      fields: {
+        section: 2,
+        name: "Name",
+        x: "410",
+        y: "195",
+        w: "61",
+        h: "29",
+        pub_date: "2023-05-12T20:34:19.223Z",
+      },
+    },
+  ],
+}
+
+export const testUniv = {
   bodys: [
     {
       model: "main.body",
@@ -537,4 +653,240 @@ export const testJson = {
       },
     },
   ],
+}
+
+export const testUnivUpdated = {
+  bodys: [
+    {
+      model: "main.body",
+      pk: 1,
+      fields: { name: "Test_body", pub_date: "2023-05-12T20:34:19.023Z" },
+    },
+  ],
+  floors: [
+    {
+      model: "main.floor",
+      pk: 1,
+      fields: { body: 1, name: "TEst", pub_date: "2023-05-12T20:34:19.028Z" },
+    },
+  ],
+  sections: [
+    {
+      model: "main.section",
+      pk: 2,
+      fields: { floor: 1, body: 1, pub_date: "2023-05-12T20:34:19.118Z" },
+    },
+    {
+      model: "main.section",
+      pk: 1,
+      fields: { floor: 1, body: 1, pub_date: "2023-05-12T20:34:19.034Z" },
+    },
+  ],
+  neighbors: [],
+  hallways: [
+    {
+      model: "main.hallway",
+      id: "1",
+      coords: [
+        [
+          { x: 343, y: 721 },
+          { x: 564, y: 721 },
+        ],
+        [
+          { x: 564, y: 721 },
+          { x: 564, y: 745 },
+        ],
+        [
+          { x: 564, y: 745 },
+          { x: 343, y: 745 },
+        ],
+        [
+          { x: 343, y: 745 },
+          { x: 343, y: 721 },
+        ],
+      ],
+      fields: {
+        x: "343",
+        y: "721",
+        w: "221",
+        h: "24",
+        x_end: "",
+        y_end: "",
+        height: "",
+        pub_date: "2023-05-12T20:34:19.039Z",
+      },
+    },
+  ],
+  offices: [
+    {
+      model: "main.office",
+      id: "3",
+      vectors: [
+        [
+          { x: 531, y: 657 },
+          { x: 564, y: 657 },
+        ],
+        [
+          { x: 564, y: 657 },
+          { x: 564, y: 721 },
+        ],
+        [
+          { x: 564, y: 721 },
+          { x: 531, y: 721 },
+        ],
+        [
+          { x: 531, y: 721 },
+          { x: 531, y: 657 },
+        ],
+      ],
+      startPoint: { x: 531, y: 657 },
+      section: "1",
+      // fields: {
+      //   section: 1,
+      //   name: "Name",
+      //   x: "531",
+      //   y: "657",
+      //   w: "33",
+      //   h: "64",
+      //   pub_date: "2023-05-12T20:34:19.054Z",
+      // },
+    },
+    {
+      model: "main.office",
+      id: "2",
+      vectors: [
+        [
+          { x: 378, y: 745 },
+          { x: 408, y: 745 },
+        ],
+        [
+          { x: 408, y: 745 },
+          { x: 408, y: 806 },
+        ],
+        [
+          { x: 408, y: 806 },
+          { x: 378, y: 806 },
+        ],
+        [
+          { x: 378, y: 806 },
+          { x: 378, y: 745 },
+        ],
+      ],
+      startPoint: { x: 378, y: 745 },
+      section: 1,
+      fields: {
+        section: 1,
+        name: "Name",
+        x: "378",
+        y: "745",
+        w: "30",
+        h: "61",
+        pub_date: "2023-05-12T20:34:19.049Z",
+      },
+    },
+    {
+      model: "main.office",
+      pk: 1,
+      fields: {
+        section: 1,
+        name: "Name",
+        x: "443",
+        y: "745",
+        w: "57",
+        h: "61",
+        pub_date: "2023-05-12T20:34:19.044Z",
+      },
+    },
+  ],
+}
+
+// {
+//   model: "main.office",
+//     pk: 1,
+//   fields: {
+//   section: 1,
+//     name: "Name",
+//     x: "443",
+//     y: "745",
+//     w: "57",
+//     h: "61",
+//     pub_date: "2023-05-12T20:34:19.044Z",
+// },
+// },
+
+// export type TAuditoriumReborn = {
+//   id?: string
+//   //[[{x: 0, y: 0},{x: 0, y:4}], [{x: 0, y: 4},{x: 4, y:4}], [{x: 4, y: 4},{x: 4, y:0}], [{x: 4, y: 0},{x: 0, y:4}]]
+//   vectors: [TCoords, TCoords][]
+//   startPoint: TCoords
+//   entryPoint?: TCoords
+//   section: string
+// }
+const parseOffice = (data: any) => {
+  const { pk, fields } = data
+  let { section, x, y, w, h } = fields
+  x = Number(x)
+  y = Number(y)
+  w = Number(w)
+  h = Number(h)
+  section = String(section)
+  return {
+    id: String(pk),
+    section: section,
+    startPoint: { x, y },
+    vectors: [
+      [
+        { x: x, y: y },
+        { x: x + w, y: y },
+      ],
+      [
+        { x: x + w, y: y },
+        { x: x + w, y: y + h },
+      ],
+      [
+        { x: x + w, y: y + h },
+        { x: x, y: y + h },
+      ],
+      [
+        { x: x, y: y + h },
+        { x: x, y: y },
+      ],
+    ],
+  }
+}
+const parseHallway = (data: any) => {
+  const { pk, fields } = data
+  let { x, y, w, h } = fields
+  x = Number(x)
+  y = Number(y)
+  w = Number(w)
+  h = Number(h)
+  return {
+    id: String(pk),
+    coords: [
+      [
+        { x: x, y: y },
+        { x: x + w, y: y },
+      ],
+      [
+        { x: x + w, y: y },
+        { x: x + w, y: y + h },
+      ],
+      [
+        { x: x + w, y: y + h },
+        { x: x, y: y + h },
+      ],
+      [
+        { x: x, y: y + h },
+        { x: x, y: y },
+      ],
+    ],
+  }
+}
+
+export const parseToCorrData = (data: any) => {
+  const { hallways, offices } = data
+  const newOffices = offices.map((office: any) => parseOffice(office))
+  const newHallways = hallways.map((hallway: any) => parseHallway(hallway))
+  return { ...data, hallways: newHallways, offices: newOffices }
 }

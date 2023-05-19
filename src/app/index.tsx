@@ -7,6 +7,7 @@ import { findPathThroughSection } from "../shared/pathFinding/find-path-through-
 import { TestUniv } from "../pages/universities/test/test-univ"
 import { SignInPage } from "../processes/auth/authorization/sign-in-page"
 import { RegistrationPage } from "../processes/auth/registration/registration-page"
+import { NewTest } from "../pages/universities/new-test/new-test"
 
 /**
  * Основная компонента приложения
@@ -47,6 +48,7 @@ export const App: React.FC = () => {
         <Route path="/" element={<Main />} />
         <Route path="/irit-rtf" element={<IritRtf />} />
         <Route path="/test" element={<TestUniv />} />
+        <Route path="/new" element={<NewTest />} />
         <Route path="/login" element={<SignInPage />} />
         <Route path="/register" element={<RegistrationPage />} />
       </Routes>

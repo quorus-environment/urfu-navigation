@@ -232,7 +232,6 @@ export const ShapedAuditorium: React.FC<
           />
         )
       })}
-
       {/* <AuditoriumTitle */}
       {/*   title={name} */}
       {/*   x={textCoords.x} */}
