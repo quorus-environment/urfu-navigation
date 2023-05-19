@@ -223,6 +223,7 @@ export const testUniv = {
         pub_date: "2023-05-12T20:34:19.228Z",
       },
     },
+    //
     {
       model: "main.office",
       pk: 33,
@@ -392,6 +393,7 @@ export const testUniv = {
         pub_date: "2023-05-12T20:34:19.168Z",
       },
     },
+    //
     {
       model: "main.office",
       pk: 20,
@@ -597,6 +599,19 @@ export const testUniv = {
         y: "657",
         w: "67",
         h: "64",
+        pub_date: "2023-05-12T20:34:19.063Z",
+      },
+    },
+    {
+      model: "main.office",
+      pk: 5,
+      fields: {
+        section: 1,
+        name: "Name",
+        x: "306",
+        y: "745",
+        w: "37",
+        h: "61",
         pub_date: "2023-05-12T20:34:19.063Z",
       },
     },

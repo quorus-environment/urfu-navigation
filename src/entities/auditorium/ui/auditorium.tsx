@@ -218,13 +218,20 @@ export const ShapedAuditorium: React.FC<
 
       {vectors.map((v) => {
         return (
+          // <Line
+          //   points={[
+          //     v[0].x + startPoint.x,
+          //     v[0].y + startPoint.y,
+          //     v[1].x + startPoint.x,
+          //     v[1].y + startPoint.y,
+          //   ]}
+          //   stroke={colors}
+          //   strokeWidth={3}
+          //   fillEnabled
+          //   key={`${v[0]} ${v[1]}`}
+          // />
           <Line
-            points={[
-              v[0].x + startPoint.x,
-              v[0].y + startPoint.y,
-              v[1].x + startPoint.x,
-              v[1].y + startPoint.y,
-            ]}
+            points={[v[0].x, v[0].y, v[1].x, v[1].y]}
             stroke={colors}
             strokeWidth={3}
             fillEnabled
