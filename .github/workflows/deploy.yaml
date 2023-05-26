@@ -57,6 +57,7 @@ jobs:
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
+          cp ./infra/docker-compose.yaml ./docker-compose.yaml
           sudo docker-compose stop
           sudo docker-compose rm web
           touch .env
