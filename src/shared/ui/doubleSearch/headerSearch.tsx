@@ -11,8 +11,14 @@ export enum Closest {
 }
 
 export const HeaderSearch = () => {
-  const { setStartId, setEndId, setStartName, setEndName, startName, endName } =
-    useChosenStore()
+  const {
+    setStartId,
+    setEndId,
+    setStartName,
+    setEndName,
+    setStartAud,
+    setEndAud,
+  } = useChosenStore()
   const { graph, setColoredGraph } = useGraphStore()
   const graphIds = useMemo(() => {
     return graph
@@ -29,6 +35,8 @@ export const HeaderSearch = () => {
     setStartName(null)
     setEndName(null)
     setColoredGraph([])
+    setStartAud(undefined)
+    setEndAud(undefined)
   }, [setEndId, setEndName, setColoredGraph, setStartId, setStartName])
 
   return (

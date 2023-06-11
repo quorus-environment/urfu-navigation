@@ -1,4 +1,4 @@
-import { Group, Line } from "react-konva"
+import { Group, Layer, Line, Text } from "react-konva"
 import { FC, useEffect, useState } from "react"
 import { TCoords } from "../../shared/model/geometry"
 import { v1 as uuid } from "uuid"
@@ -42,28 +42,35 @@ export const Section: FC<ISection> = ({
 }) => {
   const [path, setPath] = useState<[TCoords, TCoords][]>()
 
-  const { startAud, endAud } = useChosenStore()
+  const { startAud, endAud, startId, endId } = useChosenStore()
+  console.log(startAud, endAud, "!!!")
+  useEffect(() => {
+    if (!startId && !endId) setPath([])
+  }, [startId, endId])
+
+  console.log(path)
   useEffect(() => {
     if (startAud?.entryPoint && endAud?.entryPoint && corridor.length === 4) {
       const path = findPathThroughSection(
         {
-          x: startAud?.startPoint.x + startAud?.entryPoint.x,
-          y: startAud?.entryPoint.y + startAud?.startPoint.y,
+          x: startAud?.entryPoint.x,
+          y: startAud?.entryPoint.y,
         },
         {
-          x: endAud?.startPoint.x + endAud?.entryPoint.x,
-          y: endAud?.entryPoint.y + endAud?.startPoint.y,
+          x: endAud?.entryPoint.x,
+          y: endAud?.entryPoint.y,
         },
         {
-          vectors: corridor as RectangleVector,
-          transition: "vertical",
+          //переворачиваем тк в алгоритме рисовка происходит по часовой стрелке
+          vectors: [...corridor].reverse() as RectangleVector,
+          transition: position === "ver" ? "vertical" : "horizontal",
         },
       )
       setPath([
         [
           {
-            x: startAud?.startPoint.x + startAud?.entryPoint.x,
-            y: startAud?.entryPoint.y + startAud?.startPoint.y,
+            x: startAud?.entryPoint.x,
+            y: startAud?.entryPoint.y,
           },
           path.firstDistance,
         ],
@@ -71,8 +78,8 @@ export const Section: FC<ISection> = ({
         [
           path.secondDistance,
           {
-            x: endAud?.startPoint.x + endAud?.entryPoint.x,
-            y: endAud?.entryPoint.y + endAud?.startPoint.y,
+            x: endAud?.entryPoint.x,
+            y: endAud?.entryPoint.y,
           },
         ],
       ])
@@ -92,18 +99,34 @@ export const Section: FC<ISection> = ({
     <Group>
       {/* {auditoriums} */}
       {auds.map((aud) => {
-        return <TestShapedAud key={uuid()} {...aud} />
+        return (
+          <TestShapedAud
+            position={position === "ver" ? "vertical" : "horizontal"}
+            corridor={corridor}
+            sectionId={id}
+            key={uuid()}
+            {...aud}
+          />
+        )
       })}
       {/* {corridor} */}
-      <TestShapedAud strokeWidth={0.5} fill="black" vectors={corridor} />
-      {/* {path} */}
-      {path?.map((v) => (
-        <Line
-          key={uuid()}
-          points={v.map((coords) => [coords.x, coords.y]).flat()}
-          stroke="red"
-        />
-      ))}
+      <TestShapedAud
+        sectionId={id}
+        position={position === "ver" ? "vertical" : "horizontal"}
+        strokeWidth={0.5}
+        fill="black"
+        vectors={corridor}
+      />
+      {/* {path} (условия проверки на то что обе аудитории находятся в одной секции) */}
+      {startAud?.id === id &&
+        endAud?.id === id &&
+        path?.map((v, i) => (
+          <Line
+            key={uuid()}
+            points={v.map((coords) => [coords.x, coords.y]).flat()}
+            stroke="green"
+          />
+        ))}
     </Group>
   )
 }
