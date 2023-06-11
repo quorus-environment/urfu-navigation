@@ -4,10 +4,10 @@ import { Main } from "../pages/main/main"
 import { IritRtf } from "../pages/universities/irit-rtf/irit-rtf"
 import "./app.css"
 import { findPathThroughSection } from "../shared/pathFinding/find-path-through-section"
-import { TestUniv } from "../pages/universities/test/test-univ"
 import { SignInPage } from "../processes/auth/authorization/sign-in-page"
 import { RegistrationPage } from "../processes/auth/registration/registration-page"
 import { NewTest } from "../pages/universities/new-test/new-test"
+import { TestUniv } from "../pages/universities/test-univ/test-univ"
 
 /**
  * Основная компонента приложения
@@ -47,10 +47,11 @@ export const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/irit-rtf" element={<IritRtf />} />
-        <Route path="/test" element={<TestUniv />} />
+        {/* <Route path="/test" element={<TestUniv />} /> */}
         <Route path="/new" element={<NewTest />} />
         <Route path="/login" element={<SignInPage />} />
         <Route path="/register" element={<RegistrationPage />} />
+        <Route path="/test-univ" element={<TestUniv />} />
       </Routes>
     </div>
   )

@@ -11,8 +11,8 @@ export type TChosenStore = {
   setEndName: (v: string | null) => void
   floor: number
   setFloor: (v: number) => void
-  startAud?: TAuditoriumReborn
-  setStartAud: (v: TAuditoriumReborn) => void
-  endAud?: TAuditoriumReborn
-  setEndAud: (v: TAuditoriumReborn) => void
+  startAud?: any
+  setStartAud: (v: any) => void
+  endAud?: any
+  setEndAud: (v: any) => void
 }
