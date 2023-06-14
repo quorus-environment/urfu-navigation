@@ -7,6 +7,7 @@ import { TAuditorium } from "../../../../entities/section/section"
 import { getEntryPoints } from "../../../../entities/graph/lib/use-graph"
 import { getEntryPointBySection } from "../utils/helpers"
 import { TCoords } from "../../../../shared/model/geometry"
+import { useSearchParams } from "react-router-dom"
 
 export const TestShapedAud: React.FC<
   Partial<TAuditorium> & {
@@ -27,6 +28,15 @@ export const TestShapedAud: React.FC<
   sectionId,
   vectors,
 }) => {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const role = searchParams.get("role") || ""
+  const changeParam = (type: string, value: string) => {
+    const search: any = {}
+    for (const entry of searchParams.entries()) {
+      search[entry[0]] = entry[1]
+    }
+    setSearchParams({ ...search, [type]: value })
+  }
   const { setStartId, setEndId, setStartAud, setEndAud, startId, endId } =
     useChosenStore()
   const colors = useMemo(() => {
@@ -38,42 +48,42 @@ export const TestShapedAud: React.FC<
     }
     return "white"
   }, [endId, id, startId])
+
+  const onClick = () => {
+    changeParam("id", String(id) || "")
+    if (!vectors || !section || !id) return
+    const start = vectors[0][0]
+    if (!startId) {
+      setStartAud({
+        entryPoint: getEntryPointBySection({
+          position: position,
+          auditoriumCoords: vectors,
+          corridorCoords: corridor,
+        }),
+        startPoint: start,
+        vectors: vectors,
+        section,
+        id: sectionId,
+      })
+      setStartId(String(id) || "")
+    } else {
+      setEndAud({
+        entryPoint: getEntryPointBySection({
+          position: position,
+          auditoriumCoords: vectors,
+          corridorCoords: corridor,
+        }),
+        startPoint: start,
+        vectors: vectors,
+        section,
+        id: sectionId,
+      })
+      setEndId(String(id) || "")
+    }
+  }
+
   return (
-    <Group
-      globalCompositeOperation="destination-over"
-      onClick={() => {
-        if (!vectors || !section || !id) return
-        const start = vectors[0][0]
-        const entryPoint = vectors[1][0]
-        if (!startId) {
-          setStartAud({
-            entryPoint: getEntryPointBySection({
-              position: position,
-              auditoriumCoords: vectors,
-              corridorCoords: corridor,
-            }),
-            startPoint: start,
-            vectors: vectors,
-            section,
-            id: sectionId,
-          })
-          setStartId(String(id) || "")
-        } else {
-          setEndAud({
-            entryPoint: getEntryPointBySection({
-              position: position,
-              auditoriumCoords: vectors,
-              corridorCoords: corridor,
-            }),
-            startPoint: start,
-            vectors: vectors,
-            section,
-            id: sectionId,
-          })
-          setEndId(String(id) || "")
-        }
-      }}
-    >
+    <Group globalCompositeOperation="destination-over" onClick={onClick}>
       {vectors && startPoint && (
         <Group>
           <Rect
@@ -81,7 +91,7 @@ export const TestShapedAud: React.FC<
             y={Number(startPoint?.y)}
             width={Math.floor(Math.abs(vectors[1][1].x - vectors[1][0].x))}
             height={Math.floor(Math.abs(vectors[0][1].y - vectors[0][0].y))}
-            stroke="black"
+            stroke={fill}
             fill={colors}
             name={String(id)}
             strokeWidth={1}
@@ -101,7 +111,7 @@ export const TestShapedAud: React.FC<
           return (
             <Line
               points={[v[0].x, v[0].y, v[1].x, v[1].y]}
-              stroke="black"
+              stroke={fill}
               strokeWidth={strokeWidth}
               key={uuid()}
             />

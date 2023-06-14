@@ -9,6 +9,7 @@ import {
   RectangleVector,
 } from "../../shared/pathFinding/find-path-through-section"
 import { useChosenStore } from "../../shared/stores/chosen/lib/use-chosen-store"
+import { useSearchParams } from "react-router-dom"
 
 type TNeighbor = {
   id: number
@@ -30,6 +31,7 @@ export type TSection = {
   corridor: [TCoords, TCoords][]
   position: "ver" | "hr"
   floor: string
+  entry_points: []
   neighbors: TNeighbor[]
 }
 
@@ -41,14 +43,13 @@ export const Section: FC<ISection> = ({
   data: { auds, floor, neighbors, id, position, corridor },
 }) => {
   const [path, setPath] = useState<[TCoords, TCoords][]>()
-
+  const [searchParams] = useSearchParams()
+  const role = searchParams.get("role") || ""
   const { startAud, endAud, startId, endId } = useChosenStore()
-  console.log(startAud, endAud, "!!!")
   useEffect(() => {
     if (!startId && !endId) setPath([])
   }, [startId, endId])
 
-  console.log(path)
   useEffect(() => {
     if (startAud?.entryPoint && endAud?.entryPoint && corridor.length === 4) {
       const path = findPathThroughSection(
@@ -105,6 +106,7 @@ export const Section: FC<ISection> = ({
             corridor={corridor}
             sectionId={id}
             key={uuid()}
+            fill={role ? "orange" : "black"}
             {...aud}
           />
         )
@@ -114,7 +116,7 @@ export const Section: FC<ISection> = ({
         sectionId={id}
         position={position === "ver" ? "vertical" : "horizontal"}
         strokeWidth={0.5}
-        fill="black"
+        fill={role ? "orange" : "black"}
         vectors={corridor}
       />
       {/* {path} (условия проверки на то что обе аудитории находятся в одной секции) */}

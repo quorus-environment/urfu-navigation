@@ -25,6 +25,12 @@ export const getEntryPointBySection = ({
       }
     }
   } else {
+    // if (corridorCoords[0][0].y > auditoriumCoords[0][0].y) {
+    //   return {
+    //     x: (auditoriumCoords[1][0].x + auditoriumCoords[1][1].x) / 2,
+    //     y: auditoriumCoords[1][0].y,
+    //   }
+    // }
     if (corridorCoords[0][0].x === auditoriumCoords[3][0].x)
       return {
         x: auditoriumCoords[3][0].x,

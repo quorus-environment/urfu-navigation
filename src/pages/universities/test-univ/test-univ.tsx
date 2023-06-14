@@ -2,11 +2,17 @@ import { MapStage } from "../../../entities/map-stage/ui/map-stage"
 import { Layer } from "react-konva"
 import { testData } from "./test-data"
 import { Section, TSection } from "../../../entities/section/section"
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import { useChosenStore } from "../../../shared/stores/chosen/lib/use-chosen-store"
+import { useSearchParams } from "react-router-dom"
+import Modal from "../../../shared/modal/modal"
+import AuditoriumEditor from "../../../shared/auditoriumEditor/auditoriumEditor"
 
 //test-floor
 export const TestUniv = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const role = searchParams.get("role") || ""
+
   const {
     startAud,
     endAud,
@@ -27,13 +33,25 @@ export const TestUniv = () => {
     }
   }, [startAud, endAud, setStartAud, setEndAud])
   return (
-    <MapStage>
-      <Layer height={window.innerHeight - 60}>
-        {testData.map((section: TSection) => (
-          <Section key={section.id} data={section} />
-        ))}
-        {/* <Section key={testData[0].id} data={testData[0]} />  */}
-      </Layer>
-    </MapStage>
+    <>
+      <MapStage>
+        <Layer height={window.innerHeight - 60}>
+          {testData.map((section: TSection) => (
+            <Section key={section.id} data={section} />
+          ))}
+        </Layer>
+      </MapStage>
+      {searchParams.get("role") === "admin" && searchParams.get("id") && (
+        <Modal
+          handleClose={() => {
+            searchParams.delete("id")
+            setSearchParams(searchParams)
+          }}
+          title="Auditorium Editor"
+        >
+          <AuditoriumEditor />
+        </Modal>
+      )}
+    </>
   )
 }

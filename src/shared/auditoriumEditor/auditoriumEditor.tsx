@@ -36,7 +36,7 @@ const floorsOptions: IOption[] = [
 ]
 
 const AuditoriumEditor: FC<TAuditoriumEditor> = () => {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const { setExitAllowed, exitAllowed } = useModalStore()
   const { everyFloorAuds } = useIritRtfEntities()
   const auditoriumEdited = useMemo(
