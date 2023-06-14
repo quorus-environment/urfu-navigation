@@ -11,6 +11,7 @@ export const Header = () => {
 }
 
 export const MainPageHeader = () => {
+  console.log(window.location)
   return (
     <div
       className="header"

@@ -12,7 +12,7 @@ export const SignIn = () => {
     if (!window.location.href.includes("code")) {
       window.location.href =
         "https://oauth.yandex.ru/authorize?response_type=code\n" +
-        "&client_id=5e1d0e87a674494191d7a1c671d1311a"
+        `&client_id=5e1d0e87a674494191d7a1c671d1311a&redirect_url=${window.location.origin}`
     } else {
       axios
         .get<{ token: { access_token: string } | null }>(
