@@ -1,5 +1,6 @@
 import { InstituteLogo } from "../../../shared/ui/institute-logo/institute-logo"
 import "./institutes-grid.css"
+import { useNavigate } from "react-router-dom"
 
 type Institute = {
   instid: string
@@ -11,7 +12,7 @@ const institutes: Institute[] = [
   {
     photourl:
       "https://sun6-21.userapi.com/s/v1/if2/LmVis6Stwa0AsauFzLjxA0A6-yWKNX16fxGqUxUmfG9rhfaj0DLhs9wzFwr1giKqvO9kPM2AzIvTd_MTk0YcTmKX.jpg?size=200x200&quality=96&crop=20,0,200,200&ava=1",
-    instid: "iritrtf",
+    instid: "irit-rtf",
     instname: "ИРИТ-РТФ",
   },
 ]
@@ -25,6 +26,7 @@ export function Institutes() {
   //       setInstitutes(resp.data)
   //     })
   // }, [])
+  const navigate = useNavigate()
 
   return (
     <div className="main__institutes">
@@ -32,6 +34,7 @@ export function Institutes() {
         <InstituteLogo
           photo={institute.photourl}
           key={institute.instid}
+          onClick={() => navigate(institute.instid)}
           title={institute.instname}
         />
       ))}
