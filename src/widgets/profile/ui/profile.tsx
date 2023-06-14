@@ -48,7 +48,7 @@ export const Profile = () => {
   useEffect(() => {
     if (token) {
       axios
-        .get<UserData>(`http://localhost:8000/oauth/user/${token}`)
+        .get<UserData>(`${window.location.origin}:8000/oauth/user/${token}`)
         .then((data) => setUser(data.data))
     }
   }, [setUser, token])
