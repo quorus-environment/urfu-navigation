@@ -16,15 +16,14 @@ export const SignIn = () => {
     } else {
       axios
         .get<{ token: { access_token: string } | null }>(
-          "http://localhost:8000/oauth/token/" + params.get("code"),
+          `${window.location.origin}:8000/oauth/token/` + params.get("code"),
         )
         .then((data) => {
-          console.log(data.data)
           setToken(data.data.token?.access_token || null)
           navigate("/")
         })
     }
-  }, [navigate, params])
+  }, [navigate, params, setToken])
 
   return <div>12312312</div>
 }
