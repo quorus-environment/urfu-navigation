@@ -12,7 +12,7 @@ COPY . ./
 RUN yarn build
 
 FROM nginx:stable-alpine
-COPY /infra/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./infra/nginx/ /etc/nginx/
 COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
